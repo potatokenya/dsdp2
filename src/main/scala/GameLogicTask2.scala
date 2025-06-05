@@ -129,17 +129,6 @@ class GameLogicTask2(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
   io.spriteYPosition(0) := sprite0YReg
   io.spriteFlipHorizontal(0) := sprite0FlipHorizontalReg
 
-  //Two registers holding the sprite sprite X and Y with the sprite initial position
-  val sprite1XReg = RegInit(50.S(11.W))
-  val sprite1YReg = RegInit((360).S(10.W))
-
-  //Making sprite 0 visible
-  io.spriteVisible(1) := true.B
-
-  //Connecting resiters to the graphic engine
-  io.spriteXPosition(1) := sprite1XReg
-  io.spriteYPosition(1) := sprite1YReg
-
   // === SPRITE 1 ===
   val sprite1XReg = RegInit(50.S(11.W))
   val sprite1MovingRight = RegInit(true.B)

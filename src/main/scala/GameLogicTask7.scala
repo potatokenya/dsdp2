@@ -110,6 +110,167 @@ class GameLogicTask7(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
   // (you might need to change the initialization values above)
   /////////////////////////////////////////////////////////////////
 
+  val idle :: compute1 :: done :: Nil = Enum(3)
+  val stateReg = RegInit(idle)
+
+  // === SPRITE 0 ===
+  //Two registers holding the sprite sprite X and Y with the sprite initial position
+  val sprite0XReg = RegInit(32.S(11.W))
+  val sprite0YReg = RegInit((360-32).S(10.W))
+
+  //A registers holding the sprite horizontal flip
+  val sprite0FlipHorizontalReg = RegInit(false.B)
+
+  //Making sprite 0 visible
+  io.spriteVisible(0) := true.B
+
+  //Connecting resiters to the graphic engine
+  io.spriteXPosition(0) := sprite0XReg
+  io.spriteYPosition(0) := sprite0YReg
+  io.spriteFlipHorizontal(0) := sprite0FlipHorizontalReg
+
+  // === SPRITE 1 ===
+  val sprite1XReg = RegInit(50.S(11.W))
+  val sprite1MovingRight = RegInit(true.B)
+
+  io.spriteVisible(1) := true.B
+  io.spriteXPosition(1) := sprite1XReg
+  io.spriteYPosition(1) := 360.S
+  io.spriteFlipHorizontal(1) := !sprite1MovingRight
+
+  // === SPRITE 2 ===
+  val sprite2YReg = RegInit(300.S(10.W))
+  val sprite2MovingDown = RegInit(true.B)
+
+  io.spriteVisible(2) := true.B
+  io.spriteXPosition(2) := 200.S
+  io.spriteYPosition(2) := sprite2YReg
+
+  // === Background Animation ===
+  val animationCounter = RegInit(0.U(8.W))
+  val currentFrame = RegInit(0.U(2.W))
+  val writePhase = RegInit(false.B)
+  val targetIndex = RegInit(0.U(2.W))
+  val targetAddresses = VecInit(Seq(8.U(11.W), 15.U(11.W)))
+
+  // === Bubble ===
+  val bubbleY = RegInit(480.S(10.W))
+  val bubbleVisible = RegInit(true.B)
+  val bubbleX = 320.S
+
+  io.spriteVisible(3) := bubbleVisible
+  io.spriteXPosition(3) := bubbleX
+  io.spriteYPosition(3) := bubbleY
+
+  //FSMD switch
+  switch(stateReg) {
+    is(idle) {
+      when(io.newFrame) {
+        stateReg := compute1
+      }
+    }
+
+    is(compute1) {
+      // === Sprite 0 (player) movement ===
+      when(io.btnD){
+        when(sprite0YReg < (480 - 32 - 24).S) {
+          sprite0YReg := sprite0YReg + 2.S
+        }
+      } .elsewhen(io.btnU){
+        when(sprite0YReg > (96).S) {
+          sprite0YReg := sprite0YReg - 2.S
+        }
+      }
+      when(io.btnR) {
+        when(sprite0XReg < (640 - 32 - 32).S) {
+          sprite0XReg := sprite0XReg + 2.S
+          sprite0FlipHorizontalReg := false.B
+        }
+      } .elsewhen(io.btnL){
+        when(sprite0XReg > 32.S) {
+          sprite0XReg := sprite0XReg - 2.S
+          sprite0FlipHorizontalReg := true.B
+        }
+      }
+
+      // === Sprite 1 move vertically edge to edge ===
+      when(sprite1MovingRight) {
+        sprite1XReg := sprite1XReg + 2.S
+        when(sprite1XReg >= (640 - 32 - 32).S) {
+          sprite1MovingRight := false.B
+        }
+      } .otherwise {
+        sprite1XReg := sprite1XReg - 2.S
+        when(sprite1XReg <= 32.S) {
+          sprite1MovingRight := true.B
+        }
+      }
+
+      // === Sprite 2 move horizontally edge to edge ===
+      when(sprite2MovingDown) {
+        sprite2YReg := sprite2YReg + 2.S
+        when(sprite2YReg >= (480 - 32 - 24).S) {
+          sprite2MovingDown := false.B
+        }
+      } .otherwise {
+        sprite2YReg := sprite2YReg - 2.S
+        when(sprite2YReg <= 96.S) {
+          sprite2MovingDown := true.B
+        }
+      }
+
+      // === Background Animation value logic ===
+      animationCounter := animationCounter + 1.U
+      when(animationCounter === 60.U) {
+        animationCounter := 0.U
+        currentFrame := Mux(currentFrame === 2.U, 0.U, currentFrame + 1.U)
+        writePhase := true.B
+        targetIndex := 0.U
+      }
+
+      when(writePhase) {
+        val newTileId = MuxLookup(currentFrame, 9.U)(Seq(
+          0.U -> 9.U,
+          1.U -> 10.U,
+          2.U -> 11.U
+        ))
+
+        io.backBufferWriteEnable := true.B
+        io.backBufferWriteAddress := targetAddresses(targetIndex)
+        io.backBufferWriteData := newTileId
+
+        when(targetIndex === (targetAddresses.length.U - 1.U)) {
+          writePhase := false.B
+        }.otherwise {
+          targetIndex := targetIndex + 1.U
+        }
+      }
+
+      // Collision between bubble and sprite 0
+      val overlapX = (sprite0XReg < (bubbleX + 32.S)) && (bubbleX < (sprite0XReg + 32.S))
+      val overlapY = (sprite0YReg < (bubbleY + 32.S)) && (bubbleY < (sprite0YReg + 32.S))
+      val collision = overlapX && overlapY
+
+      val nextBubbleY = WireDefault(bubbleY)
+
+      when(collision || bubbleY <= 96.S) {
+        nextBubbleY := 480.S
+      } .otherwise {
+        nextBubbleY := bubbleY - 2.S
+      }
+
+      bubbleY := nextBubbleY
+
+      when(!writePhase) {
+        stateReg := done
+      }
+    }
+
+    is(done) {
+      io.frameUpdateDone := true.B
+      stateReg := idle
+    }
+  }
 
 }
 

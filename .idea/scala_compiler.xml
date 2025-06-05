@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <profile name="sbt 1" modules="code_v3-0_experimental_6774" />
-    <profile name="sbt 2" modules="code_v3-0_experimental">
+    <profile name="sbt 2" modules="code_v3-0_experimental,dsdp2">
       <option name="reflectiveCalls" value="true" />
       <option name="deprecationWarnings" value="true" />
       <option name="uncheckedWarnings" value="true" />

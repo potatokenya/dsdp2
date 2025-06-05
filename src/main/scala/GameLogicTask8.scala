@@ -105,19 +105,18 @@ class GameLogicTask8(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
   io.pauseTune := Seq.fill(TuneNumber)(false.B)
   io.tuneId := 0.U
 
-  /////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
   // Write here your game logic
   // (you might need to change the initialization values above)
-  /////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
 
   val idle :: compute1 :: done :: Nil = Enum(3)
   val stateReg = RegInit(idle)
 
-  //Two registers holding the view box X and Y
   val viewBoxXReg = RegInit(0.U(10.W))
   val viewBoxYReg = RegInit(0.U(9.W))
 
-  //Connecting registers to the graphic engine
+  // Connect to outputs
   io.viewBoxX := viewBoxXReg
   io.viewBoxY := viewBoxYReg
 
@@ -130,26 +129,28 @@ class GameLogicTask8(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
     }
 
     is(compute1) {
-      when(io.btnU) {
-        when(viewBoxYReg > 0.U) {
-          viewBoxYReg := viewBoxYReg - 2.U
-        }
-      }
-      when(io.btnD) {
-        when(viewBoxYReg < 480.U) {
-          viewBoxYReg := viewBoxYReg + 2.U
-        }
-      }
-      when(io.btnL) {
-        when(viewBoxXReg > 0.U) {
-          viewBoxXReg := viewBoxXReg - 2.U
-        }
-      }
+      // Horizontal movement
       when(io.btnR) {
-        when(viewBoxXReg < 640.U) {
-          viewBoxXReg := viewBoxXReg + 2.U
+        when(viewBoxXReg < (640 - 32).U) {
+          viewBoxXReg := viewBoxXReg + 4.U
+        }
+      }.elsewhen(io.btnL) {
+        when(viewBoxXReg > 0.U) {
+          viewBoxXReg := viewBoxXReg - 4.U
         }
       }
+
+      // Vertical movement
+      when(io.btnD) {
+        when(viewBoxYReg < (480 - 32).U) {
+          viewBoxYReg := viewBoxYReg + 4.U
+        }
+      }.elsewhen(io.btnU) {
+        when(viewBoxYReg > 0.U) {
+          viewBoxYReg := viewBoxYReg - 4.U
+        }
+      }
+
       stateReg := done
     }
 
@@ -158,10 +159,9 @@ class GameLogicTask8(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
       stateReg := idle
     }
   }
-
-
 }
 
 //////////////////////////////////////////////////////////////////////////////
 // End of file
 //////////////////////////////////////////////////////////////////////////////
+

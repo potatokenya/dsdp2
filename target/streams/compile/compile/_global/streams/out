@@ -1,0 +1,4 @@
+[0m[[0m[33mwarn[0m] [0m[0mC:\Users\Lukas\OneDrive - esk vysok uen technick v Praze\Dokumenty\Plocha\dsdp2\src\main\scala\GameLogicTask5.scala:223:25: method apply in object MuxLookup is deprecated (since Chisel 3.6): Use MuxLookup(key, default)(mapping) instead[0m
+[0m[[0m[33mwarn[0m] [0m[0m        val newTileId = MuxLookup(currentFrame, 9.U, Seq([0m
+[0m[[0m[33mwarn[0m] [0m[0m                        ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

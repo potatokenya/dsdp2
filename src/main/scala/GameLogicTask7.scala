@@ -135,7 +135,7 @@ class GameLogicTask7(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
 
   io.spriteVisible(1) := true.B
   io.spriteXPosition(1) := sprite1XReg
-  io.spriteYPosition(1) := 360.S
+  io.spriteYPosition(1) := 100.S
   io.spriteFlipHorizontal(1) := !sprite1MovingRight
 
   // === SPRITE 2 ===
@@ -143,7 +143,7 @@ class GameLogicTask7(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
   val sprite2MovingDown = RegInit(true.B)
 
   io.spriteVisible(2) := true.B
-  io.spriteXPosition(2) := 200.S
+  io.spriteXPosition(2) := 450.S
   io.spriteYPosition(2) := sprite2YReg
 
   // === Background Animation ===
@@ -151,12 +151,12 @@ class GameLogicTask7(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
   val currentFrame = RegInit(0.U(2.W))
   val writePhase = RegInit(false.B)
   val targetIndex = RegInit(0.U(2.W))
-  val targetAddresses = VecInit(Seq(8.U(11.W), 15.U(11.W)))
+  val targetAddresses = VecInit(Seq(7.U(11.W), 14.U(11.W)))
 
   // === Bubble ===
-  val bubbleY = RegInit(480.S(10.W))
+  val bubbleY = RegInit(360.S(10.W))
   val bubbleVisible = RegInit(true.B)
-  val bubbleX = 320.S
+  val bubbleX = 350.S
 
   io.spriteVisible(3) := bubbleVisible
   io.spriteXPosition(3) := bubbleX
@@ -193,7 +193,7 @@ class GameLogicTask7(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
         }
       }
 
-      // === Sprite 1 move vertically edge to edge ===
+      // === Sprite 1 move horizontally edge to edge ===
       when(sprite1MovingRight) {
         sprite1XReg := sprite1XReg + 2.S
         when(sprite1XReg >= (640 - 32 - 32).S) {
@@ -206,7 +206,7 @@ class GameLogicTask7(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
         }
       }
 
-      // === Sprite 2 move horizontally edge to edge ===
+      // === Sprite 2 move vertically edge to edge ===
       when(sprite2MovingDown) {
         sprite2YReg := sprite2YReg + 2.S
         when(sprite2YReg >= (480 - 32 - 24).S) {
@@ -253,8 +253,8 @@ class GameLogicTask7(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) ex
 
       val nextBubbleY = WireDefault(bubbleY)
 
-      when(collision || bubbleY <= 96.S) {
-        nextBubbleY := 480.S
+      when(collision || bubbleY <= 86.S) {
+        nextBubbleY := 360.S
       } .otherwise {
         nextBubbleY := bubbleY - 2.S
       }

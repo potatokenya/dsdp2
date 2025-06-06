@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Fri Jun  6 14:13:37 2025
+| Date         : Fri Jun  6 15:03:50 2025
 | Host         : YOGA7 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file Top_control_sets_placed.rpt
 | Design       : Top
@@ -77,8 +77,8 @@ Table of Contents
 |  clock_IBUF_BUFG |                                                       | gameTop/gameTop_reset                                         |                1 |              8 |         8.00 |
 |  clock_IBUF_BUFG | gameTop/gameLogic/sprite0YReg[9]_i_1_n_0              | gameTop/graphicEngineVGA/graphicEngineVGA_reset               |                3 |              9 |         3.00 |
 |  clock_IBUF_BUFG | gameTop/graphicEngineVGA/CounterXReg[4]_i_1_n_0       | gameTop/graphicEngineVGA/graphicEngineVGA_reset               |                3 |             10 |         3.33 |
-|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/graphicEngineVGA_io_newFrame | gameTop/graphicEngineVGA/graphicEngineVGA_reset               |                4 |             10 |         2.50 |
 |  clock_IBUF_BUFG | gameTop/graphicEngineVGA/CounterYReg[4]_i_1_n_0       | gameTop/graphicEngineVGA/graphicEngineVGA_reset               |                4 |             10 |         2.50 |
+|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/graphicEngineVGA_io_newFrame | gameTop/graphicEngineVGA/graphicEngineVGA_reset               |                4 |             10 |         2.50 |
 |  clock_IBUF_BUFG |                                                       | gameTop/graphicEngineVGA/io_vgaRed_REG[3]_i_1_n_0             |                3 |             12 |         4.00 |
 |  clock_IBUF_BUFG | gameTop/graphicEngineVGA/restoreEnabled               | gameTop/graphicEngineVGA/graphicEngineVGA_reset               |                3 |             12 |         4.00 |
 |  clock_IBUF_BUFG |                                                       | gameTop/debounceCounter[0]_i_1_n_0                            |                6 |             21 |         3.50 |

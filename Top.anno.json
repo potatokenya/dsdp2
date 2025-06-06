@@ -2,26 +2,26 @@
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~Top|RamSpWf",
-    "duplicate":"~Top|Top/gameTop:GameTop/graphicEngineVGA:GraphicEngineVGA/backBufferMemory:Memory_32/ramsSpWf:RamSpWf",
-    "index":0.5765765765765766
+    "duplicate":"~Top|Top/gameTop:GameTop/graphicEngineVGA:GraphicEngineVGA/backBufferMemory:Memory_16/ramsSpWf:RamSpWf",
+    "index":0.2882882882882883
   },
   {
     "class":"firrtl.transforms.DedupedResult",
-    "original":"~Top|Memory_32",
-    "duplicate":"~Top|Top/gameTop:GameTop/graphicEngineVGA:GraphicEngineVGA/backBufferMemory:Memory_32",
-    "index":0.5855855855855856
+    "original":"~Top|Memory_16",
+    "duplicate":"~Top|Top/gameTop:GameTop/graphicEngineVGA:GraphicEngineVGA/backBufferMemory:Memory_16",
+    "index":0.2972972972972973
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~Top|RamSpWf_1",
-    "duplicate":"~Top|Top/gameTop:GameTop/graphicEngineVGA:GraphicEngineVGA/backBufferShadowMemory:Memory_32/ramsSpWf:RamSpWf",
-    "index":0.5945945945945946
+    "duplicate":"~Top|Top/gameTop:GameTop/graphicEngineVGA:GraphicEngineVGA/backBufferShadowMemory:Memory_16/ramsSpWf:RamSpWf",
+    "index":0.3063063063063063
   },
   {
     "class":"firrtl.transforms.DedupedResult",
-    "original":"~Top|Memory_33",
-    "duplicate":"~Top|Top/gameTop:GameTop/graphicEngineVGA:GraphicEngineVGA/backBufferShadowMemory:Memory_32",
-    "index":0.6036036036036037
+    "original":"~Top|Memory_17",
+    "duplicate":"~Top|Top/gameTop:GameTop/graphicEngineVGA:GraphicEngineVGA/backBufferShadowMemory:Memory_16",
+    "index":0.3153153153153153
   },
   {
     "class":"firrtl.EmitCircuitAnnotation",
@@ -143,12 +143,6 @@
   },
   {
     "class":"firrtl.transforms.BlackBoxInlineAnno",
-    "target":"Top.RamSpWf",
-    "name":"RamSpWf.v",
-    "text":"//////////////////////////////////////////////////////////////////////////////\n// Authors: Luca Pezzarossa\n// Copyright: Technical University of Denmark - 2025\n// Comments:\n// Single-Port Block RAM Write-First Mode\n// (recommended template from AMD/Xilinx)\n//////////////////////////////////////////////////////////////////////////////\n\n`timescale 1ns / 1ps\n\nmodule RamSpWf ( clk,\n                    we,\n                    en,\n                    addr,\n                    di,\n                    dout);\n\n    parameter\n              ADDR_WIDTH = 8,\n              DATA_WIDTH = 8;\n\n    input clk;\n    input we;\n    input en;\n    input [ADDR_WIDTH-1:0] addr;\n    input [DATA_WIDTH-1:0] di;\n    output [DATA_WIDTH-1:0] dout;\n\n    reg [DATA_WIDTH-1:0] RAM [(2**ADDR_WIDTH)-1:0];\n    reg [DATA_WIDTH-1:0] dout;\n\n    always @(posedge clk)\n        begin\n        if (en)\n            begin\n                if (we)\n                    begin\n                    RAM[addr] <= di;\n                    dout <= di;\n                    end\n                else\n                    dout <= RAM[addr];\n            end\n        end\nendmodule\n\n//////////////////////////////////////////////////////////////////////////////\n// End of file\n//////////////////////////////////////////////////////////////////////////////\n"
-  },
-  {
-    "class":"firrtl.transforms.BlackBoxInlineAnno",
     "target":"Top.RamInitSpWf_31",
     "name":"RamInitSpWf.v",
     "text":"//////////////////////////////////////////////////////////////////////////////\n// Authors: Luca Pezzarossa\n// Copyright: Technical University of Denmark - 2025\n// Comments:\n// Single-Port Block RAM Write-First Mode with initialization form MEM file\n// (recommended template from AMD/Xilinx)\n//////////////////////////////////////////////////////////////////////////////\n\n`timescale 1ns / 1ps\n\nmodule RamInitSpWf ( clk,\n                    we,\n                    en,\n                    addr,\n                    di,\n                    dout);\n\n    parameter\n              ADDR_WIDTH = 8,\n              DATA_WIDTH = 8,\n              LOAD_FILE = \"\";\n\n    input clk;\n    input we;\n    input en;\n    input [ADDR_WIDTH-1:0] addr;\n    input [DATA_WIDTH-1:0] di;\n    output [DATA_WIDTH-1:0] dout;\n\n    reg [DATA_WIDTH-1:0] RAM [(2**ADDR_WIDTH)-1:0];\n    reg [DATA_WIDTH-1:0] dout;\n\n    initial begin\n        $readmemb(LOAD_FILE, RAM);\n    end\n\n    always @(posedge clk)\n        begin\n        if (en)\n            begin\n                if (we)\n                    begin\n                    RAM[addr] <= di;\n                    dout <= di;\n                    end\n                else\n                    dout <= RAM[addr];\n            end\n        end\nendmodule\n\n//////////////////////////////////////////////////////////////////////////////\n// End of file\n//////////////////////////////////////////////////////////////////////////////\n"
@@ -242,6 +236,12 @@
     "target":"Top.RamInitSpWf_16",
     "name":"RamInitSpWf.v",
     "text":"//////////////////////////////////////////////////////////////////////////////\n// Authors: Luca Pezzarossa\n// Copyright: Technical University of Denmark - 2025\n// Comments:\n// Single-Port Block RAM Write-First Mode with initialization form MEM file\n// (recommended template from AMD/Xilinx)\n//////////////////////////////////////////////////////////////////////////////\n\n`timescale 1ns / 1ps\n\nmodule RamInitSpWf ( clk,\n                    we,\n                    en,\n                    addr,\n                    di,\n                    dout);\n\n    parameter\n              ADDR_WIDTH = 8,\n              DATA_WIDTH = 8,\n              LOAD_FILE = \"\";\n\n    input clk;\n    input we;\n    input en;\n    input [ADDR_WIDTH-1:0] addr;\n    input [DATA_WIDTH-1:0] di;\n    output [DATA_WIDTH-1:0] dout;\n\n    reg [DATA_WIDTH-1:0] RAM [(2**ADDR_WIDTH)-1:0];\n    reg [DATA_WIDTH-1:0] dout;\n\n    initial begin\n        $readmemb(LOAD_FILE, RAM);\n    end\n\n    always @(posedge clk)\n        begin\n        if (en)\n            begin\n                if (we)\n                    begin\n                    RAM[addr] <= di;\n                    dout <= di;\n                    end\n                else\n                    dout <= RAM[addr];\n            end\n        end\nendmodule\n\n//////////////////////////////////////////////////////////////////////////////\n// End of file\n//////////////////////////////////////////////////////////////////////////////\n"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxInlineAnno",
+    "target":"Top.RamSpWf",
+    "name":"RamSpWf.v",
+    "text":"//////////////////////////////////////////////////////////////////////////////\n// Authors: Luca Pezzarossa\n// Copyright: Technical University of Denmark - 2025\n// Comments:\n// Single-Port Block RAM Write-First Mode\n// (recommended template from AMD/Xilinx)\n//////////////////////////////////////////////////////////////////////////////\n\n`timescale 1ns / 1ps\n\nmodule RamSpWf ( clk,\n                    we,\n                    en,\n                    addr,\n                    di,\n                    dout);\n\n    parameter\n              ADDR_WIDTH = 8,\n              DATA_WIDTH = 8;\n\n    input clk;\n    input we;\n    input en;\n    input [ADDR_WIDTH-1:0] addr;\n    input [DATA_WIDTH-1:0] di;\n    output [DATA_WIDTH-1:0] dout;\n\n    reg [DATA_WIDTH-1:0] RAM [(2**ADDR_WIDTH)-1:0];\n    reg [DATA_WIDTH-1:0] dout;\n\n    always @(posedge clk)\n        begin\n        if (en)\n            begin\n                if (we)\n                    begin\n                    RAM[addr] <= di;\n                    dout <= di;\n                    end\n                else\n                    dout <= RAM[addr];\n            end\n        end\nendmodule\n\n//////////////////////////////////////////////////////////////////////////////\n// End of file\n//////////////////////////////////////////////////////////////////////////////\n"
   },
   {
     "class":"firrtl.transforms.BlackBoxInlineAnno",

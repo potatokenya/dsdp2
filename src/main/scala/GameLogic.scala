@@ -110,9 +110,51 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // (you might need to change the initialization values above)
   /////////////////////////////////////////////////////////////////
 
-  // Just forwarding the newFrame into the frameUpdateDone with a 2 clock cycle delay
-  // frameUpdateDone will need to be driven by your game logic FSMs
-  io.frameUpdateDone := RegNext(RegNext(io.newFrame))
+  val idle :: compute1 :: done :: Nil = Enum(3)
+  val stateReg = RegInit(idle)
+
+  //Two registers holding the sprite sprite X and Y with the sprite initial position
+  val sprite0XReg = RegInit(32.S(11.W))
+  val sprite0YReg = RegInit((360-32).S(10.W))
+
+  //A registers holding the sprite horizontal flip
+  val sprite0FlipHorizontalReg = RegInit(false.B)
+
+  //Making sprite 0 visible
+  io.spriteVisible(0) := true.B
+
+  //Connecting resiters to the graphic engine
+  io.spriteXPosition(0) := sprite0XReg
+  io.spriteYPosition(0) := sprite0YReg
+  io.spriteFlipHorizontal(0) := sprite0FlipHorizontalReg
+
+  //FSMD switch
+  switch(stateReg) {
+    is(idle) {
+      when(io.newFrame) {
+        stateReg := compute1
+      }
+    }
+
+    is(compute1) {
+      when(io.btnD){
+        when(sprite0YReg < (420).S) {
+          sprite0YReg := sprite0YReg + 2.S
+        }
+      } .elsewhen(io.btnU){
+        when(sprite0YReg > (60).S) {
+          sprite0YReg := sprite0YReg - 2.S
+        }
+      }
+      stateReg := done
+    }
+
+    is(done) {
+      io.frameUpdateDone := true.B
+      stateReg := idle
+    }
+  }
+
 
 }
 

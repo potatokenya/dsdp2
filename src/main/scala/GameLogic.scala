@@ -249,6 +249,38 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
         }
       }
 
+      // =================== Collision Detection ===================
+      val collisionDetected = Wire(Bool())
+      collisionDetected := false.B
+
+      // Ship Size
+      val shipTipX = sprite0XReg + 28.S
+      val shipTipY = sprite0YReg + 16.S
+
+      // --- Ship + Asteroids collision ---
+      for (i <- 0 until numAsteroids) {
+        when(asteroidActive(i)) {
+          val radius = MuxLookup(asteroidSize(i), 16.S)(Seq(
+            0.U -> 16.S,
+            1.U -> 8.S,
+            2.U -> 24.S
+          ))
+          val centerX = asteroidX(i) + 16.S
+          val centerY = asteroidY(i) + 16.S
+
+          val dx = shipTipX - centerX
+          val dy = shipTipY - centerY
+          val distSq = dx * dx + dy * dy
+          val radiusSq = radius * radius
+
+          when(distSq < radiusSq) {
+            collisionDetected := true.B
+          }
+        }
+      }
+
+      io.led(0) := collisionDetected  // for now its there is collision just turn led on
+
       stateReg := done
     }
 

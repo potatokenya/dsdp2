@@ -153,6 +153,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val asteroidY = RegInit(VecInit(Seq.fill(numAsteroids)(100.S(10.W))))
   val asteroidVX = RegInit(VecInit(Seq.fill(numAsteroids)(baseAsteroidVX)))
   val asteroidVY = RegInit(VecInit(Seq.fill(numAsteroids)(baseAsteroidVY)))
+  val asteroidSize = RegInit(VecInit(Seq.fill(numAsteroids)(0.U(2.W))))
 
   for (i <- 0 until numAsteroids) {
     val idx = i + 1
@@ -160,6 +161,12 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     io.spriteXPosition(idx) := asteroidX(i)
     io.spriteYPosition(idx) := asteroidY(i)
     io.spriteFlipHorizontal(idx) := false.B
+
+    // Sprite scaling based on size
+    io.spriteScaleUpHorizontal(idx)   := (asteroidSize(i) === 2.U)
+    io.spriteScaleDownHorizontal(idx) := (asteroidSize(i) === 1.U)
+    io.spriteScaleUpVertical(idx)     := (asteroidSize(i) === 2.U)
+    io.spriteScaleDownVertical(idx)   := (asteroidSize(i) === 1.U)
   }
 
   // --- Asteroid spawn timer ---
@@ -222,6 +229,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
             asteroidY(i) := (100.U + (lfsrReg % 30.U) * 8.U).asSInt
             asteroidVX(i) := baseAsteroidVX
             asteroidVY(i) := baseAsteroidVY
+            asteroidSize(i) := (lfsrReg % 3.U) // 0: normal, 1: small, 2: big
           }
           spawned = spawned || shouldSpawn
         }

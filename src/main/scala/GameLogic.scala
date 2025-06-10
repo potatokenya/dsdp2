@@ -117,8 +117,27 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val sprite0XReg = RegInit(32.S(11.W))
   val sprite0YReg = RegInit((360-32).S(10.W))
 
+  //Rocket sprites
+  val sprite1XReg = RegInit(32.S(11.W))
+  val sprite1YReg = RegInit((360-32).S(10.W))
+  val sprite1VisibleReg = RegInit(false.B)
+
+  val sprite2XReg = RegInit(32.S(11.W))
+  val sprite2YReg = RegInit((360-32).S(10.W))
+  val sprite2VisibleReg = RegInit(false.B)
+
+  val sprite3XReg = RegInit(32.S(11.W))
+  val sprite3YReg = RegInit((360-32).S(10.W))
+  val sprite3VisibleReg = RegInit(false.B)
+
   //A registers holding the sprite horizontal flip
   val sprite0FlipHorizontalReg = RegInit(false.B)
+
+  // A register to track last launched sprite (0 means none launched)
+  val lastLaunchedSpriteReg = RegInit(0.U(2.W))
+
+  // Add button pressed tracker to avoid multiple launches on a single press
+  val btnRPrevReg = RegInit(false.B)
 
   //Making sprite 0 visible
   io.spriteVisible(0) := true.B
@@ -127,6 +146,24 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   io.spriteXPosition(0) := sprite0XReg
   io.spriteYPosition(0) := sprite0YReg
   io.spriteFlipHorizontal(0) := sprite0FlipHorizontalReg
+
+  // Connect rocket sprites registers to outputs
+  io.spriteXPosition(1) := sprite1XReg
+  io.spriteYPosition(1) := sprite1YReg
+  io.spriteVisible(1) := sprite1VisibleReg
+
+
+  io.spriteXPosition(2) := sprite2XReg
+  io.spriteYPosition(2) := sprite2YReg
+  io.spriteVisible(2) := sprite2VisibleReg
+  io.spriteScaleDownHorizontal(2) := true.B  // Scale down horizontally to 50%
+  io.spriteScaleDownVertical(2) := true.B    // Scale down vertically to 50%
+
+  io.spriteXPosition(3) := sprite3XReg
+  io.spriteYPosition(3) := sprite3YReg
+  io.spriteVisible(3) := sprite3VisibleReg
+  io.spriteScaleUpHorizontal(3) := true.B  // Scale up horizontally to 200%
+  io.spriteScaleUpVertical(3) := true.B    // Scale up vertically to 200%
 
   //FSMD switch
   switch(stateReg) {
@@ -137,15 +174,71 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     }
 
     is(compute1) {
-      when(io.btnD){
+      // Save previous button state
+      btnRPrevReg := io.btnR
+
+      // Handle up/down movement
+      when(io.btnD) {
         when(sprite0YReg < (420).S) {
           sprite0YReg := sprite0YReg + 2.S
         }
-      } .elsewhen(io.btnU){
+      } .elsewhen(io.btnU) {
         when(sprite0YReg > (60).S) {
           sprite0YReg := sprite0YReg - 2.S
         }
       }
+
+      // Handle right button press - only on button press (not hold)
+      when(io.btnR && !btnRPrevReg) {
+        // Launch next sprite in sequence
+        when(!sprite1VisibleReg) {
+          // Launch sprite 1
+          sprite1VisibleReg := true.B
+          sprite1XReg := sprite0XReg
+          sprite1YReg := sprite0YReg
+          lastLaunchedSpriteReg := 1.U
+        } .elsewhen(!sprite2VisibleReg) {
+          // Launch sprite 2
+          sprite2VisibleReg := true.B
+          sprite2XReg := sprite0XReg
+          sprite2YReg := sprite0YReg
+          lastLaunchedSpriteReg := 2.U
+        } .elsewhen(!sprite3VisibleReg) {
+          // Launch sprite 3
+          sprite3VisibleReg := true.B
+          sprite3XReg := sprite0XReg
+          sprite3YReg := sprite0YReg
+          lastLaunchedSpriteReg := 3.U
+        }
+      }
+
+      // Move sprite 1 to the right when visible
+      when(sprite1VisibleReg) {
+        sprite1XReg := sprite1XReg + 4.S
+        when(sprite1XReg > 640.S) {
+          sprite1VisibleReg := false.B
+          sprite1XReg := 32.S
+        }
+      }
+
+      // Move sprite 2 to the right when visible
+      when(sprite2VisibleReg) {
+        sprite2XReg := sprite2XReg + 4.S
+        when(sprite2XReg > 640.S) {
+          sprite2VisibleReg := false.B
+          sprite2XReg := 32.S
+        }
+      }
+
+      // Move sprite 3 to the right when visible
+      when(sprite3VisibleReg) {
+        sprite3XReg := sprite3XReg + 4.S
+        when(sprite3XReg > 640.S) {
+          sprite3VisibleReg := false.B
+          sprite3XReg := 32.S
+        }
+      }
+
       stateReg := done
     }
 

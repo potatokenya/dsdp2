@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Wed Jun 11 12:23:58 2025
+| Date         : Wed Jun 11 15:38:54 2025
 | Host         : YOGA7 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file Top_control_sets_placed.rpt
 | Design       : Top
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    43 |
-|    Minimum number of control sets                        |    43 |
+| Total control sets                                       |    42 |
+|    Minimum number of control sets                        |    42 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |   192 |
+| Unused register locations in slices containing registers |   205 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,11 +39,11 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    43 |
+| Total control sets |    42 |
 | >= 0 to < 4        |     2 |
-| >= 4 to < 6        |    10 |
-| >= 6 to < 8        |     2 |
-| >= 8 to < 10       |     6 |
+| >= 4 to < 6        |     2 |
+| >= 6 to < 8        |     3 |
+| >= 8 to < 10       |    12 |
 | >= 10 to < 12      |    13 |
 | >= 12 to < 14      |     4 |
 | >= 14 to < 16      |     0 |
@@ -58,12 +58,12 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             154 |           72 |
+| No           | No                    | No                     |             155 |           73 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |             120 |           44 |
-| Yes          | No                    | No                     |               5 |            2 |
+| No           | Yes                   | No                     |             121 |           46 |
+| Yes          | No                    | No                     |               0 |            0 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |             465 |          169 |
+| Yes          | Yes                   | No                     |             527 |          173 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -73,49 +73,48 @@ Table of Contents
 +------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------+----------------+--------------+
 |   Clock Signal   |                     Enable Signal                     |                         Set/Reset Signal                         | Slice Load Count | Bel Load Count | Bels / Slice |
 +------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------+----------------+--------------+
-|  clock_IBUF_BUFG | gameTop/gameLogic/ledActive_162_out                   | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                1 |              1 |         1.00 |
 |  clock_IBUF_BUFG | gameTop/gameLogic/ledActive_2                         | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                1 |              1 |         1.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_2[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |              4 |         2.00 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/ledActive_161_out                   | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                1 |              1 |         1.00 |
 |  clock_IBUF_BUFG | gameTop/debounceSampleEn                              | gameTop/gameTop_reset                                            |                2 |              4 |         2.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_1[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |              4 |         2.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_3[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                1 |              4 |         4.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_0[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |              4 |         2.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_4[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |              4 |         2.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_5[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                3 |              4 |         1.33 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/collisionAstIndex[3]_i_1_n_0        | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |              4 |         2.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSpawnTimer[9]_i_1_n_0       | gameTop/gameLogic/asteroidSpawnTimer[4]_i_1_n_0                  |                2 |              5 |         2.50 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSpawnTimer[9]_i_1_n_0       |                                                                  |                2 |              5 |         2.50 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/collisionCheckMode[3]_i_1_n_0       | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |              4 |         2.00 |
 |  clock_IBUF_BUFG |                                                       | gameTop/graphicEngineVGA/backTileMemories_15/ramsSpWf/p_0_out[6] |                3 |              6 |         2.00 |
 |  clock_IBUF_BUFG | gameTop/graphicEngineVGA/E[0]                         | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |              7 |         3.50 |
-|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/seeded_reg[0]                | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |              8 |         4.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/lfsrReg[7]_i_1_n_0                  | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |              8 |         4.00 |
+|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/graphicEngineVGA_io_newFrame | gameTop/gameLogic/asteroidSpawnTimer[6]_i_1_n_0                  |                3 |              7 |         2.33 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/lfsrReg[7]_i_1_n_0                  | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                3 |              8 |         2.67 |
+|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/seeded_reg[0]                | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                3 |              8 |         2.67 |
 |  clock_IBUF_BUFG | gameTop/gameLogic/rocketX_2[10]_i_2_n_0               | gameTop/gameLogic/rocketX_2[10]_i_1_n_0                          |                3 |              9 |         3.00 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_4[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                5 |              9 |         1.80 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_0[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                3 |              9 |         3.00 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_5[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                4 |              9 |         2.25 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_1[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                3 |              9 |         3.00 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_3[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                4 |              9 |         2.25 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidSize_2[1]_i_1_n_0           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                6 |              9 |         1.50 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/rocketX_0[10]_i_2_n_0               | gameTop/gameLogic/rocketX_0[10]_i_1_n_0                          |                3 |              9 |         3.00 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/rocketX_1                           | gameTop/gameLogic/rocketX_1[10]_i_1_n_0                          |                3 |              9 |         3.00 |
 |  clock_IBUF_BUFG | gameTop/gameLogic/rocketX_3[10]_i_2_n_0               | gameTop/gameLogic/rocketX_3[10]_i_1_n_0                          |                3 |              9 |         3.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/rocketX_1[10]_i_2_n_0               | gameTop/gameLogic/rocketX_1[10]_i_1_n_0                          |                3 |              9 |         3.00 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/rocketX_0                           | gameTop/gameLogic/rocketX_0[10]_i_1_n_0                          |                3 |              9 |         3.00 |
-|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/CounterXReg[4]_i_1_n_0       | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                4 |             10 |         2.50 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/rocketY_0                           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                4 |             10 |         2.50 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/rocketY_3                           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                4 |             10 |         2.50 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/rocketY_1                           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |             10 |         5.00 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/rocketY_0                           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |             10 |         5.00 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/rocketY_2                           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |             10 |         5.00 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/rocketY_3                           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                2 |             10 |         5.00 |
 |  clock_IBUF_BUFG | gameTop/gameLogic/sprite0YReg[9]_i_1_n_0              | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                4 |             10 |         2.50 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/rocketY_2                           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                4 |             10 |         2.50 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/rocketY_1                           | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                5 |             10 |         2.00 |
-|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/CounterYReg[4]_i_1_n_0       | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                4 |             10 |         2.50 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_3[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_3[10]_i_1_n_0                        |                3 |             11 |         3.67 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_5[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_5[10]_i_1_n_0                        |                3 |             11 |         3.67 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_2[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_2[10]_i_1_n_0                        |                3 |             11 |         3.67 |
+|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/CounterYReg[4]_i_1_n_0       | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                3 |             10 |         3.33 |
+|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/CounterXReg[4]_i_1_n_0       | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                4 |             10 |         2.50 |
 |  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_0[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_0[10]_i_1_n_0                        |                3 |             11 |         3.67 |
-|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_1[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_1[10]_i_1_n_0                        |                2 |             11 |         5.50 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_1[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_1[10]_i_1_n_0                        |                3 |             11 |         3.67 |
 |  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_4[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_4[10]_i_1_n_0                        |                3 |             11 |         3.67 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_2[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_2[10]_i_1_n_0                        |                2 |             11 |         5.50 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_5[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_5[10]_i_1_n_0                        |                2 |             11 |         5.50 |
+|  clock_IBUF_BUFG | gameTop/gameLogic/asteroidX_3[10]_i_2_n_0             | gameTop/gameLogic/asteroidX_3[10]_i_1_n_0                        |                3 |             11 |         3.67 |
+|  clock_IBUF_BUFG |                                                       | gameTop/graphicEngineVGA/io_vgaRed_REG[3]_i_1_n_0                |                4 |             12 |         3.00 |
 |  clock_IBUF_BUFG | gameTop/graphicEngineVGA/_T_7                         | gameTop/graphicEngineVGA/clear                                   |                3 |             12 |         4.00 |
-|  clock_IBUF_BUFG |                                                       | gameTop/gameTop_reset                                            |                4 |             12 |         3.00 |
+|  clock_IBUF_BUFG |                                                       | gameTop/gameTop_reset                                            |                2 |             12 |         6.00 |
 |  clock_IBUF_BUFG | gameTop/graphicEngineVGA/restoreEnabled               | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |                3 |             12 |         4.00 |
-|  clock_IBUF_BUFG |                                                       | gameTop/graphicEngineVGA/io_vgaRed_REG[3]_i_1_n_0                |                3 |             12 |         4.00 |
-|  clock_IBUF_BUFG |                                                       | gameTop/graphicEngineVGA/frameClockCount[0]_i_1_n_0              |                6 |             21 |         3.50 |
 |  clock_IBUF_BUFG |                                                       | gameTop/debounceCounter[0]_i_1_n_0                               |                6 |             21 |         3.50 |
+|  clock_IBUF_BUFG |                                                       | gameTop/graphicEngineVGA/frameClockCount[0]_i_1_n_0              |                6 |             21 |         3.50 |
 |  clock_IBUF_BUFG | gameTop/graphicEngineVGA/graphicEngineVGA_reset       | gameTop/gameTop_reset                                            |                6 |             22 |         3.67 |
-|  clock_IBUF_BUFG |                                                       | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |               22 |             48 |         2.18 |
-|  clock_IBUF_BUFG |                                                       |                                                                  |               72 |            157 |         2.18 |
-|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/graphicEngineVGA_io_newFrame | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |               73 |            185 |         2.53 |
+|  clock_IBUF_BUFG |                                                       | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |               25 |             49 |         1.96 |
+|  clock_IBUF_BUFG |                                                       |                                                                  |               73 |            158 |         2.16 |
+|  clock_IBUF_BUFG | gameTop/graphicEngineVGA/graphicEngineVGA_io_newFrame | gameTop/graphicEngineVGA/graphicEngineVGA_reset                  |               72 |            215 |         2.99 |
 +------------------+-------------------------------------------------------+------------------------------------------------------------------+------------------+----------------+--------------+
 
 

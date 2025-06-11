@@ -126,8 +126,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // =================== FSM States ===================
   val (
     idle :: movePlayer :: spawnAsteroids :: spawnRockets ::
-      moveSprites :: detectCollision :: done :: Nil
-    ) = Enum(7)
+      moveSprites :: detectCollision :: animateEffects:: done :: Nil
+    ) = Enum(8)
   val stateReg = RegInit(idle)
 
   // =================== LEDS ===================
@@ -208,6 +208,27 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     lfsrReg := seedingTimer(7, 0)
   }
 
+  // =================== Sprite 31 - Rockets ===================
+  val sprite31XReg = RegInit(32.S(11.W))
+  val sprite31YReg = RegInit((360-32).S(10.W))
+  val sprite31VisibleReg = RegInit(false.B)
+  val sprite31ScaleStateReg = RegInit(0.U(1.W)) // 0: normal, 1: 0.5x
+
+  // Add registers to store the original position of sprite 31
+  val sprite31OriginalXReg = RegInit(32.S(11.W))
+  val sprite31OriginalYReg = RegInit((360-32).S(10.W))
+
+  // Connect sprite 31 registers to outputs
+  io.spriteXPosition(31) := sprite31XReg
+  io.spriteYPosition(31) := sprite31YReg
+  io.spriteVisible(31) := sprite31VisibleReg
+
+  // Dynamic scaling based on state
+  io.spriteScaleDownHorizontal(31) := sprite31ScaleStateReg === 1.U
+  io.spriteScaleDownVertical(31) := sprite31ScaleStateReg === 1.U
+
+  // Add a frame counter for sprite 31's appearance cycle
+  val sprite31FrameCounter = RegInit(0.U(6.W))  // 6 bits can count to 63 (60 frames)
 
 
   // =================== Timers ===================
@@ -293,7 +314,27 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
           val shouldSpawn = !asteroidActive(i) && !spawned
           when(shouldSpawn) {
             asteroidActive(i) := true.B
-            asteroidX(i) := 640.S
+            // 50% chance to be normal size, 25% large and 25% small
+            val mappedSize = Mux(lfsrReg(1, 0) === 3.U, 0.U, lfsrReg(1, 0))
+            asteroidSize(i) := mappedSize
+
+            // Adjust position based on asteroid size to center them properly
+            val baseX = 640.S
+            val baseY = 224.S
+
+            when(mappedSize === 0.U) {  // Normal size (32x32)
+              asteroidX(i) := baseX
+              asteroidY(i) := baseY
+            }.elsewhen(mappedSize === 1.U) {  // Small size (16x16)
+              asteroidX(i) := baseX + 8.S  // Offset by (32-16)/2
+              asteroidY(i) := baseY + 8.S
+            }.otherwise {  // Large size (64x64)
+              asteroidX(i) := baseX - 16.S  // Offset by (64-32)/2
+              asteroidY(i) := baseY - 16.S
+            }
+
+            asteroidVX(i) := baseAsteroidVX
+            asteroidVY(i) := baseAsteroidVY
 
             // get random Y value between 96 and 320
             /*
@@ -303,15 +344,6 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
             asteroidY(i) := (96.U + safeYOffset).asSInt
              */
-            asteroidY(i) := 224.S
-
-            asteroidVX(i) := baseAsteroidVX
-            asteroidVY(i) := baseAsteroidVY
-
-            // 50% chance to be normal size, 25% 2x and 25% 0.5x
-            val mappedSize = Mux(lfsrReg(1, 0) === 3.U, 0.U, lfsrReg(1, 0))
-            asteroidSize(i) := mappedSize
-
           }
           spawned = spawned || shouldSpawn
         }
@@ -415,16 +447,71 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
             rocketBottom > asteroidTop && rocketTop < asteroidBottom) {
             rocketActive(rocketIdx) := false.B
             asteroidActive(collisionAstIndex) := false.B
+
+            // Calculate collision center point
+            val collisionX = (asteroidLeft + asteroidRight) / 2.S
+            val collisionY = (asteroidTop + asteroidBottom) / 2.S
+
+            // Set up sprite 31 at collision point
+            sprite31VisibleReg := true.B
+            sprite31ScaleStateReg := 0.U  // Start with normal size
+            sprite31FrameCounter := 0.U   // Reset the counter
+
+            // Sprite 31 is 32x32, so offset by 16 to center it on collisionX, collisionY
+            val explosionSpriteCenterOffsetX = 16.S
+            val explosionSpriteCenterOffsetY = 16.S
+
+            sprite31OriginalXReg := collisionX - explosionSpriteCenterOffsetX
+            sprite31XReg := collisionX - explosionSpriteCenterOffsetX // Initial position for normal size
+            sprite31OriginalYReg := collisionY - explosionSpriteCenterOffsetY
+            sprite31YReg := collisionY - explosionSpriteCenterOffsetY // Initial position for normal size
           }
         }
 
         collisionAstIndex := collisionAstIndex + 1.U
         when(collisionAstIndex === (numAsteroids - 1).U) {
           collisionAstIndex := 0.U
-          collisionCheckMode := Mux(collisionCheckMode === numRockets.U, 0.U, collisionCheckMode + 1.U)
-          stateReg := done
+
+          when(collisionCheckMode === numRockets.U) {
+            // We've checked all rockets, reset check mode and go to animate
+            collisionCheckMode := 0.U
+            stateReg := animateEffects
+          }.otherwise {
+            // Move to next rocket
+            collisionCheckMode := collisionCheckMode + 1.U
+          }
         }
       }
+    }
+
+    is(animateEffects) {
+      // Update sprite 31 animation when visible
+      when(sprite31VisibleReg) {
+        sprite31FrameCounter := sprite31FrameCounter + 1.U
+
+        // Toggle scale every 10 frames (approximately 6 cycles in 1 second)
+        when(sprite31FrameCounter % 2.U === 0.U) {
+          val newScaleState = ~sprite31ScaleStateReg
+          sprite31ScaleStateReg := newScaleState
+
+          // Adjust position based on new scale
+          when(newScaleState === 0.U) { // If new state is NORMAL size
+            sprite31XReg := sprite31OriginalXReg
+            sprite31YReg := sprite31OriginalYReg
+          }.otherwise { // If new state is HALF size (newScaleState === 1.U)
+            sprite31XReg := sprite31OriginalXReg + 8.S
+            sprite31YReg := sprite31OriginalYReg + 8.S
+          }
+        }
+
+        // Make sprite invisible after 1 second (60 frames)
+        when(sprite31FrameCounter >= 60.U) {
+          sprite31VisibleReg := false.B
+        }
+      }
+
+      // Move to done state after handling animations
+      stateReg := done
     }
 
     is(done) {

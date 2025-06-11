@@ -130,6 +130,21 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val sprite3YReg = RegInit((360-32).S(10.W))
   val sprite3VisibleReg = RegInit(false.B)
 
+  // Add registers for sprite 31
+  val sprite31XReg = RegInit(32.S(11.W))
+  val sprite31YReg = RegInit((360-32).S(10.W))
+  val sprite31VisibleReg = RegInit(false.B)
+  val sprite31ScaleStateReg = RegInit(0.U(1.W)) // 0: normal, 1: 0.5x
+
+  // Add button pressed tracker for left button
+  val btnLPrevReg = RegInit(false.B)
+  // Add a frame counter for sprite 31's appearance cycle
+  val sprite31FrameCounter = RegInit(0.U(6.W))  // 6 bits can count to 63 (> 60 frames)
+
+  // Add registers to store the original position of sprite 31
+  val sprite31OriginalXReg = RegInit(32.S(11.W))
+  val sprite31OriginalYReg = RegInit((360-32).S(10.W))
+
   //A registers holding the sprite horizontal flip
   val sprite0FlipHorizontalReg = RegInit(false.B)
 
@@ -141,6 +156,17 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
   //Making sprite 0 visible
   io.spriteVisible(0) := true.B
+
+  // Connect sprite 31 registers to outputs
+  io.spriteXPosition(31) := sprite31XReg
+  io.spriteYPosition(31) := sprite31YReg
+  io.spriteVisible(31) := sprite31VisibleReg
+  io.spriteFlipHorizontal(31) := true.B  // Always flipped horizontally
+  io.spriteFlipVertical(31) := true.B    // Always flipped vertically
+
+  // Dynamic scaling based on state
+  io.spriteScaleDownHorizontal(31) := sprite31ScaleStateReg === 1.U
+  io.spriteScaleDownVertical(31) := sprite31ScaleStateReg === 1.U
 
   //Connecting resiters to the graphic engine
   io.spriteXPosition(0) := sprite0XReg
@@ -165,6 +191,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   io.spriteScaleUpHorizontal(3) := true.B  // Scale up horizontally to 200%
   io.spriteScaleUpVertical(3) := true.B    // Scale up vertically to 200%
 
+
+
   //FSMD switch
   switch(stateReg) {
     is(idle) {
@@ -176,6 +204,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     is(compute1) {
       // Save previous button state
       btnRPrevReg := io.btnR
+      btnLPrevReg := io.btnL
 
       // Handle up/down movement
       when(io.btnD) {
@@ -185,6 +214,47 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
       } .elsewhen(io.btnU) {
         when(sprite0YReg > (60).S) {
           sprite0YReg := sprite0YReg - 2.S
+        }
+      }
+
+      // Handle left button press
+      when(io.btnL && !btnLPrevReg) {
+        btnLPrevReg := io.btnL
+
+        // Show sprite 31 at player's position and reset counter
+        sprite31VisibleReg := true.B
+        sprite31OriginalXReg := sprite0XReg  // Store original position
+        sprite31XReg := sprite0XReg          // Initial position
+        sprite31OriginalYReg := sprite0YReg  // Store original position
+        sprite31YReg := sprite0YReg          // Initial position
+        sprite31ScaleStateReg := 0.U         // Start with normal size
+        sprite31FrameCounter := 0.U          // Reset frame counter
+      }
+
+      // Update sprite 31 counter and state when visible
+      // Update sprite 31 counter and state when visible
+      when(sprite31VisibleReg) {
+        sprite31FrameCounter := sprite31FrameCounter + 1.U
+
+        // Toggle scale every 10 frames (approximately 6 cycles in 1 second)
+        when(sprite31FrameCounter % 10.U === 0.U) {
+          sprite31ScaleStateReg := ~sprite31ScaleStateReg
+
+          // Adjust position based on new scale
+          when(~sprite31ScaleStateReg === 0.U) {
+            // Changing to normal size - return to original position
+            sprite31XReg := sprite31OriginalXReg
+            sprite31YReg := sprite31OriginalYReg
+          }.otherwise {
+            // Changing to half size - center it on the normal sprite
+            sprite31XReg := sprite31OriginalXReg + 8.S
+            sprite31YReg := sprite31OriginalYReg + 8.S
+          }
+        }
+
+        // Make sprite invisible after 1 second
+        when(sprite31FrameCounter >= 60.U) {
+          sprite31VisibleReg := false.B
         }
       }
 
@@ -211,6 +281,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
           lastLaunchedSpriteReg := 3.U
         }
       }
+
 
       // Move sprite 1 to the right when visible
       when(sprite1VisibleReg) {

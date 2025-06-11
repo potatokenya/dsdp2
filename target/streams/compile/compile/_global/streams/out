@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\Lukas\OneDrive - esk vysok uen technick v Praze\Dokumenty\Plocha\dsdp2\src\main\scala\GameLogic.scala:288:5: Unmatched closing brace '}' ignored here[0m
-[0m[[0m[31merror[0m] [0m[0m    }[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[33mwarn[0m] [0m[0mC:\Users\Lukas\OneDrive - esk vysok uen technick v Praze\Dokumenty\Plocha\dsdp2\src\main\scala\GameLogic.scala:251:5: method apply in object MuxLookup is deprecated (since Chisel 3.6): Use MuxLookup(key, default)(mapping) instead[0m
+[0m[[0m[33mwarn[0m] [0m[0m    MuxLookup(size, 32.S, Seq([0m
+[0m[[0m[33mwarn[0m] [0m[0m    ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

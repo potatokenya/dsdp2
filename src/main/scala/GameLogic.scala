@@ -109,32 +109,36 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // Write here your game logic
   /////////////////////////////////////////////////////////////
 
-  
   // =================== Game Parameters ===================
   // --- Player ---
-  val basePlayerSpeedY = 1.S     // Speed of the player movement
+  val basePlayerSpeedY = 3.S     // Speed of the player movement
 
   // --- Asteroids ---
-  val baseAsteroidVX = -1.S            // Horizontal velocity of asteroids
-  val baseAsteroidVY = 0.S             // Vertical velocity of asteroids (unused for now)
-  val asteroidMoveInterval = 1.U   // How often should asteroids move (1 = every frame)
-  val asteroidSpawnInterval = 120.U    // Spawn asteroid interval (60 = 1 sec)
+  val baseAsteroidVX = -3.S                // Horizontal velocity of asteroids
+  val baseAsteroidVY = 0.S                 // Vertical velocity of asteroids (unused for now)
+  val baseAsteroidSpawnInterval = 160.U    // Spawn asteroid interval (60 = 1 sec)
 
   // --- Rockets ---
-  val baseRocketVX = 2.S                  // Rocket base horizontal velocity (to the right)
-  val rocketCooldownInterval = 60.U(7.W)  // One rocket per second
+  val baseRocketVX = 5.S                  // Rocket base horizontal velocity (to the right)
+  val rocketCooldownInterval = 60.U       // One rocket per second
 
-  // --- Speed Multiplier ---
-  val baseSpeedMultiplier = 3.S         // Speed starts at 3
-  val maxSpeedMultiplier = 9.S                    // Maximum allowed speed
-  val increaseSpeedMultiplierInterval = 600.U    // Every 600 frames (~10 seconds), speed increases
 
-  
   // =================== FSM States ===================
-  val idle :: compute1 :: done :: Nil = Enum(3)
+  val (
+    idle :: movePlayer :: spawnAsteroids :: spawnRockets ::
+      moveSprites :: detectCollision :: done :: Nil
+    ) = Enum(7)
   val stateReg = RegInit(idle)
 
-  
+  // =================== LEDS ===================
+  val numLEDs = 8
+  val ledActive = RegInit(VecInit(Seq.fill(numLEDs)(false.B)))
+  for (i <- 0 until numLEDs) {
+    val idx = i
+    io.led(idx) := ledActive(i)
+  }
+
+
   // =================== Sprite 0 - Player ===================
   val sprite0XReg = RegInit(32.S(11.W))
   val sprite0YReg = RegInit((360 - 32).S(10.W))
@@ -143,11 +147,11 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   io.spriteXPosition(0) := sprite0XReg
   io.spriteYPosition(0) := sprite0YReg
 
-  
+
   // =================== Sprites 1-10 - Asteroids ===================
-  val numAsteroids = 10
+  val numAsteroids = 6
   val asteroidActive = RegInit(VecInit(Seq.fill(numAsteroids)(false.B)))
-  val asteroidX = RegInit(VecInit(Seq.fill(numAsteroids)(600.S(11.W))))
+  val asteroidX = RegInit(VecInit(Seq.fill(numAsteroids)(640.S(11.W))))
   val asteroidY = RegInit(VecInit(Seq.fill(numAsteroids)(100.S(10.W))))
   val asteroidVX = RegInit(VecInit(Seq.fill(numAsteroids)(baseAsteroidVX)))
   val asteroidVY = RegInit(VecInit(Seq.fill(numAsteroids)(baseAsteroidVY)))
@@ -166,21 +170,12 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     io.spriteScaleDownVertical(idx)   := (asteroidSize(i) === 1.U)
   }
 
-  // --- Asteroid spawn timer ---
+  // --- Asteroid spawn timer and interval ---
   val asteroidSpawnTimer = RegInit(0.U(10.W))
 
-  // --- Asteroid movement rate ---
-  val asteroidMoveTimer = RegInit(0.U(4.W))
-  val moveAsteroids = Wire(Bool())
-  asteroidMoveTimer := Mux(io.newFrame, asteroidMoveTimer + 1.U, asteroidMoveTimer)
-  moveAsteroids := asteroidMoveTimer >= asteroidMoveInterval
-  when(moveAsteroids) {
-    asteroidMoveTimer := 0.U
-  }
 
-  
   // =================== Sprites 11-18 - Rockets ===================
-  val numRockets = 8
+  val numRockets = 4
   val rocketStartIndex = 11
 
   val rocketActive = RegInit(VecInit(Seq.fill(numRockets)(false.B)))
@@ -189,7 +184,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val rocketVX = RegInit(VecInit(Seq.fill(numRockets)(baseRocketVX)))
 
   for (i <- 0 until numRockets) {
-    val idx = rocketStartIndex
+    val idx = rocketStartIndex + i
     io.spriteVisible(idx) := rocketActive(i)
     io.spriteXPosition(idx) := rocketX(i)
     io.spriteYPosition(idx) := rocketY(i)
@@ -198,36 +193,13 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   }
 
   // --- Rocket cooldown ---
-  val rocketCooldownTimer = RegInit(rocketCooldownInterval)
-  val rocketReady = Wire(Bool())
-  rocketReady := rocketCooldownTimer >= rocketCooldownInterval
-
-  when(io.newFrame && !rocketReady) {
-    rocketCooldownTimer := rocketCooldownTimer + 1.U
-  }
-
-  // =================== Speed increase with time ===================
-  // --- Game Timer ---
-  val gameTimer = RegInit(0.U(32.W))
-  when(io.newFrame) {
-    gameTimer := gameTimer + 1.U // increases by 1 every frame
-  }
-
-  // --- Linear speed multiplier ---
-  // starts at 3 and increases by 1 every 600 frames (=10 seconds), capped at 9
-  val multiplierWithoutCap = (gameTimer / increaseSpeedMultiplierInterval).asSInt + baseSpeedMultiplier
-  val speedMultiplier = Wire(SInt(5.W))
-  speedMultiplier := Mux(multiplierWithoutCap > maxSpeedMultiplier, maxSpeedMultiplier, multiplierWithoutCap)
-
+  val rocketCooldownTimer = RegInit(0.U(7.W))  // Timer counts up to interval
+  val rocketReadyReg = RegInit(true.B)         // Whether rocket is ready to fire
 
   // =================== Seeding ===================
   // wait until the middle button is pushed and create a seed based on the time it took
   val seedingTimer = RegInit(0.U(8.W))
   val seeded = RegInit(false.B) // bool if we have created the seed
-
-  when(io.newFrame && !seeded) {
-    seedingTimer := seedingTimer + 1.U
-  }
 
   // if the middle button was pressed, create a LFSR (Linear feedback shift register)
   val lfsrReg = RegInit(1.U(8.W))
@@ -237,85 +209,151 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   }
 
 
+
+  // =================== Timers ===================
+  when(io.newFrame) {
+    // Seeding timer
+    when(!seeded) {
+      seedingTimer := seedingTimer + 1.U
+    }
+
+    // Asteroid spawn timer
+    asteroidSpawnTimer := asteroidSpawnTimer + 1.U
+
+    // Rocket cooldown logic
+    when(!rocketReadyReg) {
+      rocketCooldownTimer := rocketCooldownTimer + 1.U
+      when(rocketCooldownTimer === rocketCooldownInterval - 1.U) {
+        rocketCooldownTimer := 0.U
+        rocketReadyReg := true.B
+      }
+    }
+  }
+
+
+
+
   // =================== Helper Functions ===================
   // radius of asteroid based on its size
   def getAsteroidRadius(size: UInt): SInt = {
     MuxLookup(size, 16.S)(Seq(
       0.U -> 16.S,
       1.U -> 8.S,
-      2.U -> 24.S
+      2.U -> 32.S
     ))
   }
 
+  def getAsteroidSize(size: UInt): SInt = {
+    MuxLookup(size, 16.S)(Seq(
+      0.U -> 32.S,
+      1.U -> 16.S,
+      2.U -> 64.S
+    ))
+  }
 
   // =================== FSM ===================
+
+  // Collision state registers
+  val collisionAstIndex = RegInit(0.U(4.W))
+  val collisionDetected = RegInit(false.B)
+  val collisionCheckMode = RegInit(0.U(4.W)) // 0 = ship, 1~numRockets = rockets
+
   io.frameUpdateDone := false.B
 
   switch(stateReg) {
     is(idle) {
       when(io.newFrame) {
-        stateReg := compute1
+        stateReg := movePlayer
       }
     }
 
-    is(compute1) {
-      // =================== Player Movement ===================
+    // =================== Player Movement ===================
+    is(movePlayer) {
       when(io.btnD && sprite0YReg < (336).S) {
-        sprite0YReg := sprite0YReg + (basePlayerSpeedY * speedMultiplier)
-      } .elsewhen(io.btnU && sprite0YReg > (96).S) {
-        sprite0YReg := sprite0YReg - (basePlayerSpeedY * speedMultiplier)
+        sprite0YReg := sprite0YReg + (basePlayerSpeedY)
+      }.elsewhen(io.btnU && sprite0YReg > (96).S) {
+        sprite0YReg := sprite0YReg - (basePlayerSpeedY)
       }
 
-      // =================== Spawning ===================
+      stateReg := spawnAsteroids
+    }
+
+
+    // =================== Spawning ===================
+    is(spawnAsteroids) {
       // --- Asteroids ---
       asteroidSpawnTimer := asteroidSpawnTimer + 1.U
-      when(asteroidSpawnTimer >= asteroidSpawnInterval && seeded) {
+      when(asteroidSpawnTimer >= baseAsteroidSpawnInterval && seeded) {
+
         asteroidSpawnTimer := 0.U
         lfsrReg := Cat(lfsrReg(6) ^ lfsrReg(5) ^ lfsrReg(4) ^ lfsrReg(0), lfsrReg(7, 1)) //! Move outside asteroid spawner if needed for something else
+
         var spawned = false.B
         for (i <- 0 until numAsteroids) {
           val shouldSpawn = !asteroidActive(i) && !spawned
           when(shouldSpawn) {
             asteroidActive(i) := true.B
-            asteroidX(i) := 600.S
-            asteroidY(i) := (100.U + (lfsrReg % 30.U) * 8.U).asSInt
+            asteroidX(i) := 640.S
+
+            // get random Y value between 96 and 320
+            /*
+            val yOffset = (lfsrReg(4, 0) << 3).asUInt //random number between 0-31 shifted << 3 -> 0-248
+            val maxYOffset = 224.U(9.W) // max should be 224
+            val safeYOffset = Mux(yOffset > maxYOffset, maxYOffset, yOffset) // if above 248 -> 224
+
+            asteroidY(i) := (96.U + safeYOffset).asSInt
+             */
+            asteroidY(i) := 224.S
+
             asteroidVX(i) := baseAsteroidVX
             asteroidVY(i) := baseAsteroidVY
-            asteroidSize(i) := (lfsrReg % 3.U) // 0=normal, 1=small, 2=big
+
+            // 50% chance to be normal size, 25% 2x and 25% 0.5x
+            val mappedSize = Mux(lfsrReg(1, 0) === 3.U, 0.U, lfsrReg(1, 0))
+            asteroidSize(i) := mappedSize
+
           }
           spawned = spawned || shouldSpawn
         }
+        ledActive(1) := !spawned
       }
 
+      stateReg := spawnRockets
+    }
+
+    is(spawnRockets) {
       // --- Rockets ---
-      when(io.btnR && rocketReady) {
+      when(io.btnR && rocketReadyReg) {
         var launched = false.B
         for (i <- 0 until numRockets) {
           val shouldLaunch = !rocketActive(i) && !launched
           when(shouldLaunch) {
             rocketActive(i) := true.B
-            rocketX(i) := sprite0XReg + 26.S
-            rocketY(i) := sprite0YReg + 16.S
+            rocketX(i) := sprite0XReg + 16.S
+            rocketY(i) := sprite0YReg + 10.S
             rocketVX(i) := baseRocketVX
           }
           launched = launched || shouldLaunch
         }
         // Reset the cooldown if successfully launched
         when(launched) {
-          rocketCooldownTimer := 0.U
+          rocketReadyReg := false.B
         }
+        ledActive(2) := !launched
       }
 
-      // =================== Sprite Movement ===================
+      stateReg := moveSprites
+    }
+
+    // =================== Sprite Movement ===================
+    is(moveSprites) {
       // --- Asteroids ---
-      when(moveAsteroids) {
-        for (i <- 0 until numAsteroids) {
-          when(asteroidActive(i)) {
-            asteroidX(i) := asteroidX(i) + (asteroidVX(i) * speedMultiplier)
-            asteroidY(i) := asteroidY(i) + (asteroidVY(i) * speedMultiplier)
-            when(asteroidX(i) < -32.S) {
-              asteroidActive(i) := false.B
-            }
+      for (i <- 0 until numAsteroids) {
+        when(asteroidActive(i)) {
+          asteroidX(i) := asteroidX(i) + (asteroidVX(i))
+          asteroidY(i) := asteroidY(i) + (asteroidVY(i))
+          when(asteroidX(i) < -32.S) {
+            asteroidActive(i) := false.B
           }
         }
       }
@@ -330,63 +368,63 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
         }
       }
 
-      // =================== Collision Detection ===================
-      val collisionDetected = Wire(Bool())
-      collisionDetected := false.B
+      stateReg := detectCollision
+    }
 
-      // --- Ship + Asteroids collision --- (considering both a sphere)
-      for (i <- 0 until numAsteroids) {
-        when(asteroidActive(i)) {
-          val radius = getAsteroidRadius(asteroidSize(i))
-          val centerX = asteroidX(i) + 16.S
-          val centerY = asteroidY(i) + 16.S
-
+    // =================== Collision Detection ===================
+    // =================== Rocket–Asteroid Collision ===================
+    is(detectCollision) {
+      when(collisionCheckMode === 0.U) {
+        // Ship vs all asteroids
+        when(asteroidActive(collisionAstIndex)) {
+          val centerX = asteroidX(collisionAstIndex) + getAsteroidRadius(asteroidSize(collisionAstIndex))
+          val centerY = asteroidY(collisionAstIndex) + getAsteroidRadius(asteroidSize(collisionAstIndex))
           val shipCenterX = sprite0XReg + 16.S
           val shipCenterY = sprite0YReg + 16.S
-          val shipRadius = 12.S
 
           val dx = shipCenterX - centerX
           val dy = shipCenterY - centerY
           val distSq = dx * dx + dy * dy
-          val radiusSum = shipRadius + radius
-          val radiusSq = radiusSum * radiusSum
+          val radiusSumSq = VecInit(Seq(400.S, 784.S, 1936.S))(asteroidSize(collisionAstIndex))
 
-          when(distSq < radiusSq) {
+          when(distSq < radiusSumSq) {
             collisionDetected := true.B
           }
         }
-      }
+        collisionAstIndex := collisionAstIndex + 1.U
+        when(collisionAstIndex === (numAsteroids - 1).U) {
+          collisionAstIndex := 0.U
+          collisionCheckMode := 1.U
+          stateReg := done
+        }
+      } .elsewhen(collisionCheckMode <= numRockets.U) {
+        val rocketIdx = collisionCheckMode - 1.U
+        when(rocketActive(rocketIdx) && asteroidActive(collisionAstIndex)) {
+          val rocketLeft = rocketX(rocketIdx) + 2.S
+          val rocketRight = rocketX(rocketIdx) + 30.S
+          val rocketTop = rocketY(rocketIdx) + 10.S
+          val rocketBottom = rocketY(rocketIdx) + 23.S
 
-      // --- Rockets + Asteroids collision --- (asteroid as sphere, rocket as tip + paddding)
-      for (r <- 0 until numRockets) {
-        when(rocketActive(r)) {
-          val rocketTipX = rocketX(r) + 16.S
-          val rocketTipY = rocketY(r) + 8.S
+          val asteroidSizePx = getAsteroidSize(asteroidSize(collisionAstIndex))
+          val asteroidLeft = asteroidX(collisionAstIndex)
+          val asteroidRight = asteroidX(collisionAstIndex) + asteroidSizePx
+          val asteroidTop = asteroidY(collisionAstIndex)
+          val asteroidBottom = asteroidY(collisionAstIndex) + asteroidSizePx
 
-          for (a <- 0 until numAsteroids) {
-            when(asteroidActive(a)) {
-              val radius = getAsteroidRadius(asteroidSize(a)) + 3.S
-
-              val asteroidCenterX = asteroidX(a) + 16.S
-              val asteroidCenterY = asteroidY(a) + 16.S
-
-              val dx = rocketTipX - asteroidCenterX
-              val dy = rocketTipY - asteroidCenterY
-              val distSq = dx * dx + dy * dy
-              val radiusSq = radius * radius
-
-              when(distSq < radiusSq) {
-                rocketActive(r) := false.B
-                asteroidActive(a) := false.B
-              }
-            }
+          when(rocketRight > asteroidLeft && rocketLeft < asteroidRight &&
+            rocketBottom > asteroidTop && rocketTop < asteroidBottom) {
+            rocketActive(rocketIdx) := false.B
+            asteroidActive(collisionAstIndex) := false.B
           }
         }
+
+        collisionAstIndex := collisionAstIndex + 1.U
+        when(collisionAstIndex === (numAsteroids - 1).U) {
+          collisionAstIndex := 0.U
+          collisionCheckMode := Mux(collisionCheckMode === numRockets.U, 0.U, collisionCheckMode + 1.U)
+          stateReg := done
+        }
       }
-
-      io.led(0) := collisionDetected  // for now its there is collision just turn led on
-
-      stateReg := done
     }
 
     is(done) {

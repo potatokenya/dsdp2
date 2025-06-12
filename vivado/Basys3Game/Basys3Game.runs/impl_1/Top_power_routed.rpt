@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Wed Jun 11 15:39:39 2025
+| Date             : Thu Jun 12 15:02:13 2025
 | Host             : YOGA7 running 64-bit major release  (build 9200)
 | Command          : report_power -file Top_power_routed.rpt -pb Top_power_summary_routed.pb -rpx Top_power_routed.rpx
 | Design           : Top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.094        |
+| Total On-Chip Power (W)  | 0.097        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.021        |
+| Dynamic (W)              | 0.025        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.5         |
@@ -52,18 +52,18 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.004 |        3 |       --- |             --- |
-| Slice Logic             |    <0.001 |     2436 |       --- |             --- |
-|   CARRY4                |    <0.001 |      152 |      8150 |            1.87 |
-|   LUT as Logic          |    <0.001 |     1129 |     20800 |            5.43 |
-|   Register              |    <0.001 |      803 |     41600 |            1.93 |
-|   Others                |     0.000 |       42 |       --- |             --- |
+| Clocks                  |     0.005 |        3 |       --- |             --- |
+| Slice Logic             |    <0.001 |     2803 |       --- |             --- |
+|   CARRY4                |    <0.001 |      177 |      8150 |            2.17 |
+|   LUT as Logic          |    <0.001 |     1277 |     20800 |            6.14 |
+|   Register              |    <0.001 |      944 |     41600 |            2.27 |
+|   Others                |     0.000 |       48 |       --- |             --- |
 |   LUT as Shift Register |     0.000 |        3 |      9600 |            0.03 |
-| Signals                 |    <0.001 |     1978 |       --- |             --- |
-| Block RAM               |     0.017 |        7 |        50 |           14.00 |
+| Signals                 |    <0.001 |     2264 |       --- |             --- |
+| Block RAM               |     0.019 |      8.5 |        50 |           17.00 |
 | I/O                     |    <0.001 |       32 |       106 |           30.19 |
 | Static Power            |     0.072 |          |           |                 |
-| Total                   |     0.094 |          |           |                 |
+| Total                   |     0.097 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,7 +73,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.030 |       0.020 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.033 |       0.023 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -82,7 +82,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.002 |       0.001 |      0.000 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.002 |       0.002 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
@@ -142,10 +142,10 @@ Table of Contents
 +------------------------------+-----------+
 | Name                         | Power (W) |
 +------------------------------+-----------+
-| Top                          |     0.021 |
-|   gameTop                    |     0.021 |
+| Top                          |     0.025 |
+|   gameTop                    |     0.024 |
 |     gameLogic                |     0.002 |
-|     graphicEngineVGA         |     0.019 |
+|     graphicEngineVGA         |     0.022 |
 |       backBufferShadowMemory |     0.001 |
 |       spriteMemories_1       |     0.002 |
 |       spriteMemories_11      |     0.002 |

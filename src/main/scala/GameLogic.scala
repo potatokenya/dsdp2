@@ -110,10 +110,9 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   /////////////////////////////////////////////////////////////
 
   //TODO
-  // improve readability
-  // sometimes with variable Y asteroid spawns outside of viewbox??
   // speed multiplier
   // collision could be slightly optimized
+  // asteroid Y generation is also a bit slow
 
 
   // =================== Game Parameters ===================
@@ -133,8 +132,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // =================== FSM States ===================
   val (
     idle :: movePlayer :: spawnAsteroids :: spawnRockets
-    :: moveSprites :: detectCollisions :: done
-      :: Nil ) = Enum(7)
+      :: moveSprites :: detectCollisions :: animateExplosions :: done
+      :: Nil ) = Enum(8)
   val stateReg = RegInit(idle)
 
 
@@ -206,6 +205,31 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val rocketReadyReg = RegInit(true.B)         // If rocket is ready to fire
 
 
+  // =================== Explosion Sprites (29-31) ===================
+  val explosionStartIndex = 29
+  val explosionSprites = 3
+
+  // same for all
+  val explosionActive = RegInit(VecInit(Seq.fill(explosionSprites)(false.B)))
+  val explosionTimer = RegInit(VecInit(Seq.fill(explosionSprites)(0.U(4.W))))
+  val explosionX = RegInit(VecInit(Seq.fill(explosionSprites)(0.S(11.W))))
+  val explosionY = RegInit(VecInit(Seq.fill(explosionSprites)(0.S(10.W))))
+  val explosionSize = RegInit(VecInit(Seq.fill(explosionSprites)(0.U(2.W))))
+
+  for (i <- 0 until explosionSprites) {
+    val spriteIndex = explosionStartIndex + i
+    io.spriteVisible(spriteIndex) := explosionActive(i)
+
+    io.spriteXPosition(spriteIndex) := explosionX(i)
+    io.spriteYPosition(spriteIndex) := explosionY(i)
+
+    io.spriteScaleUpHorizontal(spriteIndex) := (explosionSize(i) === 2.U)
+    io.spriteScaleDownHorizontal(spriteIndex) := (explosionSize(i) === 1.U)
+    io.spriteScaleUpVertical(spriteIndex) := (explosionSize(i) === 2.U)
+    io.spriteScaleDownVertical(spriteIndex) := (explosionSize(i) === 1.U)
+  }
+
+
   // =================== Seeding ===================
   // wait until the middle button is pushed and create a seed based on the time it took
   val seedingTimer = RegInit(0.U(8.W))
@@ -217,6 +241,16 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     seeded := true.B
     lfsrReg := seedingTimer(7, 0)
   }
+
+
+  // =================== Collision state registers ===================
+  // what collision we are checking next frame
+  val asteroidsToCheckPerFrame = 2.U(2.W)    // how many collisions to check per frame (can be 1, 2 or 3)
+  // make sure that the amount of asteroids is divisible by that number
+  val collisionAstIndex = RegInit(0.U(4.W))
+  val collisionDetected = RegInit(false.B)
+  val collisionCheckMode = RegInit(0.U(4.W)) // 0 = ship, 1+ = index of rockets (subtract 1 to get actual index)
+
 
 
   // =================== Timers ===================
@@ -235,6 +269,13 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
       when(rocketCooldownTimer === rocketCooldownInterval - 1.U) {
         rocketCooldownTimer := 0.U
         rocketReadyReg := true.B
+      }
+    }
+
+    // increase explosion timers
+    for (i <- 0 until explosionSprites) {
+      when(explosionActive(i)) {
+        explosionTimer(i) := explosionTimer(i) + 1.U
       }
     }
   }
@@ -258,14 +299,6 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     ))
   }
 
-  // =================== Collision state registers ===================
-  // what collision we are checking next frame
-  val asteroidsToCheckPerFrame = 2.U(2.W)    // how many collisions to check per frame (can be 1, 2 or 3)
-                                             // make sure that the amount of asteroids is divisible by that number
-  val collisionAstIndex = RegInit(0.U(4.W))
-  val collisionDetected = RegInit(false.B)
-  val collisionCheckMode = RegInit(0.U(4.W)) // 0 = ship, 1+ = index of rockets (subtract 1 to get actual index)
-
 
   // =================== FSM ===================
   io.frameUpdateDone := false.B
@@ -282,7 +315,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     is(movePlayer) {
       when(io.btnD && sprite0YReg < (356).S) {
         sprite0YReg := sprite0YReg + (basePlayerSpeedY)
-      }.elsewhen(io.btnU && sprite0YReg > (96).S) {
+      }.elsewhen(io.btnU && sprite0YReg > (94).S) {
         sprite0YReg := sprite0YReg - (basePlayerSpeedY)
       }
 
@@ -408,8 +441,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
                 collisionDetected := true.B
               }
 
-            // --- Rocket–Asteroid Collision ---
-            // using bounding box logic as the rocket would eventually hit it anyway even if treated as a circle
+              // --- Rocket–Asteroid Collision ---
+              // using bounding box logic as the rocket would eventually hit it anyway even if treated as a circle
             }.elsewhen(collisionCheckMode <= numRockets.U) {
               val rocketIdx = collisionCheckMode - 1.U // index of the rocket we are checking
               when(rocketActive(rocketIdx)) {
@@ -423,12 +456,20 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
                 val rocketLeft = rocketX(rocketIdx) + 2.S
                 val rocketRight = rocketX(rocketIdx) + 30.S
                 val rocketTop = rocketY(rocketIdx) + 5.S
-                val rocketBottom = rocketY(rocketIdx) + 18.S
+                val rocketBottom = rocketY(rocketIdx) + 15.S
 
                 when(rocketRight > asteroidLeft && rocketLeft < asteroidRight &&
                   rocketBottom > asteroidTop && rocketTop < asteroidBottom) {
                   rocketActive(rocketIdx) := false.B
                   asteroidActive(idx) := false.B
+
+                  // Spawn explosion
+                  //when(!explosionActive) { // if we do not want to rewrite the old one
+                  explosionActive(0) := true.B
+                  explosionX(0) := asteroidX(idx)
+                  explosionY(0) := asteroidY(idx)
+                  explosionSize(0) := asteroidSize(idx)
+                  explosionTimer(0) := 0.U
                 }
               }
             }
@@ -440,10 +481,41 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
       when(collisionAstIndex + numChecks >= numAsteroids.U) { // if we checked all asteroids
         collisionAstIndex := 0.U // reset index
         collisionCheckMode := Mux(collisionCheckMode === numRockets.U, 0.U, collisionCheckMode + 1.U) // go to next mode
-        stateReg := done
+        stateReg := animateExplosions
       }
 
       //ledActive(0) := collisionDetected // turn on LED0 if we ship collided with asteroid
+    }
+
+    is(animateExplosions) {
+      // Transition from stage 0 to stage 1
+      when(explosionTimer(0)(3)) { // after 32 frames
+        explosionTimer(0) := 0.U
+        explosionActive(0) := false.B
+
+        explosionTimer(1) := 0.U
+        explosionActive(1) := true.B
+        explosionX(1) := explosionX(0)
+        explosionY(1) := explosionY(0)
+        explosionSize(1) := explosionSize(0)
+
+      } .elsewhen(explosionTimer(1)(3)) {
+        // Transition from stage 1 to stage 2
+        explosionTimer(1) := 0.U
+        explosionActive(1) := false.B
+
+        explosionTimer(2) := 0.U
+        explosionActive(2) := true.B
+        explosionX(2) := explosionX(1)
+        explosionY(2) := explosionY(1)
+        explosionSize(2) := explosionSize(1)
+
+      } .elsewhen(explosionTimer(2)(3)) {
+        // Final stage — end explosion
+        explosionTimer(2) := 0.U
+        explosionActive(2) := false.B
+      }
+      stateReg := done
     }
 
 

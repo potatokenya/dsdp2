@@ -207,6 +207,24 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     seeded := true.B
     lfsrReg := seedingTimer(7, 0)
   }
+  // =================== Sprite 28 - 30 - Hearts ===================
+  val numHearts = 3
+  val heartsVisible = RegInit(VecInit(Seq.fill(numHearts)(true.B)))
+  val heartsX = RegInit(VecInit(Seq.tabulate(numHearts)(i => (32 + i * 48).S(11.W))))  // 48px spacing
+  val heartsY = RegInit(VecInit(Seq.fill(numHearts)(32.S(10.W))))  // Position at top of screen
+
+  // Connect sprite 30 to the heart displays
+  io.spriteVisible(30) := heartsVisible(0)
+  io.spriteXPosition(30) := heartsX(0)
+  io.spriteYPosition(30) := heartsY(0)
+
+  io.spriteVisible(29) := heartsVisible(1)
+  io.spriteXPosition(29) := heartsX(1)
+  io.spriteYPosition(29) := heartsY(1)
+
+  io.spriteVisible(28) := heartsVisible(2)
+  io.spriteXPosition(28) := heartsX(2)
+  io.spriteYPosition(28) := heartsY(2)
 
   // =================== Sprite 31 - Rockets ===================
   val sprite31XReg = RegInit(32.S(11.W))
@@ -229,12 +247,6 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
   // Add a frame counter for sprite 31's appearance cycle
   val sprite31FrameCounter = RegInit(0.U(6.W))  // 6 bits can count to 63 (60 frames)
-
-  // =================== Background Tile 2 - Heart ===================
-
-  io.backBufferWriteData := 2.U
-  io.backBufferWriteAddress := (5.U * 20.U + 10.U)
-  io.backBufferWriteEnable := true.B
 
   // =================== Timers ===================
   when(io.newFrame) {

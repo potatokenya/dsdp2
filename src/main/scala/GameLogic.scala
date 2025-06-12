@@ -213,6 +213,11 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val heartsX = RegInit(VecInit(Seq.tabulate(numHearts)(i => (32 + i * 48).S(11.W))))  // 48px spacing
   val heartsY = RegInit(VecInit(Seq.fill(numHearts)(32.S(10.W))))  // Position at top of screen
 
+  val heartRemovalActive = RegInit(false.B)
+  val heartRemovalIndex = RegInit(0.U(2.W))  // Which heart is being removed (0-2)
+  val heartFlashTimer = RegInit(0.U(6.W))    // Timer for flashing animation
+  val heartFlashCount = RegInit(0.U(3.W))    // How many times the heart has flashed
+
   // Connect sprite 30 to the heart displays
   io.spriteVisible(30) := heartsVisible(0)
   io.spriteXPosition(30) := heartsX(0)
@@ -403,6 +408,25 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
           asteroidY(i) := asteroidY(i) + (asteroidVY(i))
           when(asteroidX(i) < -32.S) {
             asteroidActive(i) := false.B
+            when(!heartRemovalActive) {
+              // Find the leftmost visible heart to remove
+              when(heartsVisible(2)) {
+                heartRemovalActive := true.B
+                heartRemovalIndex := 2.U
+                heartFlashTimer := 0.U
+                heartFlashCount := 0.U
+              }.elsewhen(heartsVisible(1)) {
+                heartRemovalActive := true.B
+                heartRemovalIndex := 1.U
+                heartFlashTimer := 0.U
+                heartFlashCount := 0.U
+              }.elsewhen(heartsVisible(0)) {
+                heartRemovalActive := true.B
+                heartRemovalIndex := 0.U
+                heartFlashTimer := 0.U
+                heartFlashCount := 0.U
+              }
+            }
           }
         }
       }
@@ -438,6 +462,26 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
           when(distSq < radiusSumSq) {
             collisionDetected := true.B
+            // Start heart removal if not already active
+            when(!heartRemovalActive) {
+              // Find the leftmost visible heart to remove
+              when(heartsVisible(2)) {
+                heartRemovalActive := true.B
+                heartRemovalIndex := 2.U
+                heartFlashTimer := 0.U
+                heartFlashCount := 0.U
+              }.elsewhen(heartsVisible(1)) {
+                heartRemovalActive := true.B
+                heartRemovalIndex := 1.U
+                heartFlashTimer := 0.U
+                heartFlashCount := 0.U
+              }.elsewhen(heartsVisible(0)) {
+                heartRemovalActive := true.B
+                heartRemovalIndex := 0.U
+                heartFlashTimer := 0.U
+                heartFlashCount := 0.U
+              }
+            }
           }
         }
         collisionAstIndex := collisionAstIndex + 1.U
@@ -526,6 +570,24 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
           sprite31VisibleReg := false.B
         }
       }
+      when(heartRemovalActive) {
+        heartFlashTimer := heartFlashTimer + 1.U
+
+        // Toggle visibility every 3 frames (keeps the faster flashing)
+        when(heartFlashTimer === 3.U) {
+          heartFlashTimer := 0.U
+          heartsVisible(heartRemovalIndex) := !heartsVisible(heartRemovalIndex)
+          heartFlashCount := heartFlashCount + 1.U
+
+          // After flashing 6 times (3 on/off cycles)
+          when(heartFlashCount === 6.U) {
+            heartsVisible(heartRemovalIndex) := false.B // Ensure heart is invisible
+            heartFlashCount := 0.U
+            heartRemovalActive := false.B // End the animation sequence
+          }
+        }
+      }
+
 
       // Move to done state after handling animations
       stateReg := done

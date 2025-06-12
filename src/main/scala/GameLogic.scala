@@ -230,6 +230,11 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // Add a frame counter for sprite 31's appearance cycle
   val sprite31FrameCounter = RegInit(0.U(6.W))  // 6 bits can count to 63 (60 frames)
 
+  // =================== Background Tile 2 - Heart ===================
+
+  io.backBufferWriteData := 2.U
+  io.backBufferWriteAddress := (5.U * 20.U + 10.U)
+  io.backBufferWriteEnable := true.B
 
   // =================== Timers ===================
   when(io.newFrame) {

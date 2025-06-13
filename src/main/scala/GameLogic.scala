@@ -122,7 +122,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // --- Asteroids ---
   val baseAsteroidVX = -3.S                // Horizontal velocity of asteroids
   val baseAsteroidVY = 0.S                 // Vertical velocity of asteroids (unused for now)
-  val baseAsteroidSpawnInterval = 80.U    // Spawn asteroid interval (60 = 1 sec)
+  val baseAsteroidSpawnInterval = 60.U    // Spawn asteroid interval (60 = 1 sec)
 
   // --- Rockets ---
   val baseRocketVX = 5.S                  // Rocket base horizontal velocity (to the right)
@@ -132,8 +132,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // =================== FSM States ===================
   val (
     idle :: movePlayer :: spawnAsteroids :: spawnRockets
-      :: moveSprites :: detectCollisions :: animateExplosions :: done
-      :: Nil ) = Enum(8)
+      :: moveSprites :: detectCollisions :: animateExplosion :: animateHearts :: done
+      :: Nil ) = Enum(9)
   val stateReg = RegInit(idle)
 
 
@@ -205,6 +205,26 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val rocketReadyReg = RegInit(true.B)         // If rocket is ready to fire
 
 
+  // =================== Sprite 26-29 - Hearts ===================
+  val numHearts = 3
+  val hearthStartIndex = 28
+  val heartsVisible = RegInit(VecInit(Seq.fill(numHearts)(true.B)))
+  val heartsX = RegInit(VecInit(Seq.tabulate(numHearts)(i => (32 + i * 48).S(11.W))))  // 48px spacing
+  val heartsY = RegInit(VecInit(Seq.fill(numHearts)(32.S(10.W))))  // Position at top of screen
+
+  val heartRemovalActive = RegInit(false.B)
+  val heartRemovalIndex = RegInit(0.U(2.W))  // Which heart is being removed (0-2)
+  val heartFlashTimer = RegInit(0.U(5.W))    // Timer for flashing animation
+  val heartFlashCount = RegInit(0.U(5.W))    // How many times the heart has flashed
+
+  for (i <- 0 until numHearts) {
+    val spriteIndex = hearthStartIndex - i
+    io.spriteVisible(spriteIndex) := heartsVisible(i)
+    io.spriteXPosition(spriteIndex) := heartsX(i)
+    io.spriteYPosition(spriteIndex) := heartsY(i)
+  }
+
+
   // =================== Explosion Sprites (29-31) ===================
   val explosionStartIndex = 29
   val explosionSprites = 3
@@ -243,17 +263,23 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   }
 
 
+  // =================== ViewBox ===================
+  val viewBoxXReg = RegInit(0.U(10.W))
+  val viewBoxYReg = RegInit(0.U(9.W))
+
+  io.viewBoxX := viewBoxXReg
+  io.viewBoxY := viewBoxYReg
+
+
   // =================== Collision state registers ===================
   // what collision we are checking next frame
   val asteroidsToCheckPerFrame = 2.U(2.W)    // how many collisions to check per frame (can be 1, 2 or 3)
   // make sure that the amount of asteroids is divisible by that number
   val collisionAstIndex = RegInit(0.U(4.W))
-  val collisionDetected = RegInit(false.B)
   val collisionCheckMode = RegInit(0.U(4.W)) // 0 = ship, 1+ = index of rockets (subtract 1 to get actual index)
 
 
-
-  // =================== Timers ===================
+  // =================== Timers and New Frame logic ===================
   when(io.newFrame) {
     // Seeding timer
     when(!seeded) {
@@ -277,6 +303,17 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
       when(explosionActive(i)) {
         explosionTimer(i) := explosionTimer(i) + 1.U
       }
+    }
+
+    when(heartRemovalActive) {
+      heartFlashTimer := heartFlashTimer + 1.U
+    }
+
+    // viewBox movement
+    when(viewBoxXReg === 639.U) {
+      viewBoxXReg := 0.U
+    }.otherwise {
+      viewBoxXReg := viewBoxXReg + 1.U
     }
   }
 
@@ -427,19 +464,48 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
           when(idx < numAsteroids.U && asteroidActive(idx)) { // if the index is not out of bounds and the asteroid is active
 
             // --- Ship–Asteroid Collision ---
-            // both are treated as a circle, computationally more heavy but should be more accurate which is necessary
             when(collisionCheckMode === 0.U) {
               val shipCenterX = sprite0XReg + 16.S
               val shipCenterY = sprite0YReg + 16.S
-              val centerX = asteroidX(idx) + getAsteroidRadius(asteroidSize(idx))
-              val centerY = asteroidY(idx) + getAsteroidRadius(asteroidSize(idx))
+
+              val size   = asteroidSize(idx)
+              val radius = getAsteroidRadius(size)
+
+              val centerX = asteroidX(idx) + radius
+              val centerY = asteroidY(idx) + radius
+
+              // First do a bounding box check to see if they are close
+              val shipRadius = 12.S
+              val totalRadius = shipRadius + radius
+
               val dx = shipCenterX - centerX
               val dy = shipCenterY - centerY
-              val distSq = dx * dx + dy * dy
-              val radiusSumSq = VecInit(Seq(400.S, 784.S, 1936.S))(asteroidSize(idx))
-              when(distSq < radiusSumSq) {
-                collisionDetected := true.B
+
+              val boxCheck = (dx.abs < totalRadius) && (dy.abs < totalRadius)
+
+              when(boxCheck) {
+                // --- Expensive squared distance check
+                val distSq = dx * dx + dy * dy
+                val radiusSumSq = MuxLookup(size, 400.S)(Seq( //ship radius + asteroid radius ^ 2
+                  0.U -> 400.S,
+                  1.U -> 784.S,
+                  2.U -> 1936.S
+                ))
+
+                when(distSq < radiusSumSq) {
+                  when(!heartRemovalActive) {
+                    for (i <- 0 to 2) {
+                      when(heartsVisible(i) && !heartRemovalActive) {
+                        heartRemovalActive := true.B
+                        heartRemovalIndex := i.U
+                        heartFlashTimer := 0.U
+                        heartFlashCount := 0.U
+                      }
+                    }
+                  }
+                }
               }
+
 
               // --- Rocket–Asteroid Collision ---
               // using bounding box logic as the rocket would eventually hit it anyway even if treated as a circle
@@ -456,7 +522,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
                 val rocketLeft = rocketX(rocketIdx) + 2.S
                 val rocketRight = rocketX(rocketIdx) + 30.S
                 val rocketTop = rocketY(rocketIdx) + 5.S
-                val rocketBottom = rocketY(rocketIdx) + 15.S
+                val rocketBottom = rocketY(rocketIdx) + 12.S
 
                 when(rocketRight > asteroidLeft && rocketLeft < asteroidRight &&
                   rocketBottom > asteroidTop && rocketTop < asteroidBottom) {
@@ -481,13 +547,14 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
       when(collisionAstIndex + numChecks >= numAsteroids.U) { // if we checked all asteroids
         collisionAstIndex := 0.U // reset index
         collisionCheckMode := Mux(collisionCheckMode === numRockets.U, 0.U, collisionCheckMode + 1.U) // go to next mode
-        stateReg := animateExplosions
+        stateReg := animateExplosion
       }
-
-      //ledActive(0) := collisionDetected // turn on LED0 if we ship collided with asteroid
     }
 
-    is(animateExplosions) {
+
+    // ===================  Animations  ===================
+    // --- Explosion animation ---
+    is(animateExplosion) {
       // Transition from stage 0 to stage 1
       when(explosionTimer(0)(3)) { // after 32 frames
         explosionTimer(0) := 0.U
@@ -499,7 +566,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
         explosionY(1) := explosionY(0)
         explosionSize(1) := explosionSize(0)
 
-      } .elsewhen(explosionTimer(1)(3)) {
+      }.elsewhen(explosionTimer(1)(3)) {
         // Transition from stage 1 to stage 2
         explosionTimer(1) := 0.U
         explosionActive(1) := false.B
@@ -510,13 +577,37 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
         explosionY(2) := explosionY(1)
         explosionSize(2) := explosionSize(1)
 
-      } .elsewhen(explosionTimer(2)(3)) {
+      }.elsewhen(explosionTimer(2)(3)) {
         // Final stage — end explosion
         explosionTimer(2) := 0.U
         explosionActive(2) := false.B
       }
+
+      stateReg := animateHearts
+    }
+
+
+    // --- Hearth animation ---
+    is(animateHearts) {
+      when(heartRemovalActive) {
+        // Toggle visibility every 4 frames (keeps the faster flashing)
+        when(heartFlashTimer(2)) {
+          heartFlashTimer := 0.U
+          heartsVisible(heartRemovalIndex) := !heartsVisible(heartRemovalIndex)
+          heartFlashCount := heartFlashCount + 1.U
+          // After flashing 8 times (4 on/off cycles)
+          when(heartFlashCount(3)) {
+            heartsVisible(heartRemovalIndex) := false.B // Ensure heart is invisible
+            heartFlashCount := 0.U
+            heartRemovalActive := false.B // End the animation sequence
+          }
+        }
+      }
+
       stateReg := done
     }
+
+
 
 
     is(done) {

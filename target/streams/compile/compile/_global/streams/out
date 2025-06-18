@@ -1,4 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\Lukas\OneDrive - esk vysok uen technick v Praze\Dokumenty\Plocha\dsdp2\src\main\scala\GameLogic.scala:502:13: Unmatched closing brace '}' ignored here[0m
-[0m[[0m[31merror[0m] [0m[0m            }.elsewhen(collisionCheckMode <= numRockets.U) {[0m
-[0m[[0m[31merror[0m] [0m[0m            ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\Lukas\OneDrive - esk vysok uen technick v Praze\Dokumenty\Plocha\dsdp2\src\main\scala\GameLogic.scala:498:24: not found: value shipCenterX[0m
+[0m[[0m[31merror[0m] [0m[0m              val dx = shipCenterX - centerX[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\Lukas\OneDrive - esk vysok uen technick v Praze\Dokumenty\Plocha\dsdp2\src\main\scala\GameLogic.scala:499:24: not found: value shipCenterY[0m
+[0m[[0m[31merror[0m] [0m[0m              val dy = shipCenterY - centerY[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

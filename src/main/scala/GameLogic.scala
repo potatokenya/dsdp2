@@ -192,6 +192,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // --- Asteroid spawn ---
   val asteroidSpawnTimer = RegInit(0.U(10.W))
 
+  val asteroidYUpdateTimer = RegInit(0.U(4.W)) // counts 0 to 15 (at 16 goes back to 0)
+                                                // could be changed to 32
 
   // =================== Sprites 11-18 - Rockets ===================
   val numRockets = 4
@@ -322,6 +324,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     // Asteroid spawn timer
     asteroidSpawnTimer := asteroidSpawnTimer + 1.U
 
+    asteroidYUpdateTimer := asteroidYUpdateTimer + 1.U
+
     // Rocket cooldown timer and logic
     when(!rocketReadyReg) {
       rocketCooldownTimer := rocketCooldownTimer + 1.U
@@ -413,16 +417,38 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
             val mappedSize = Mux(lfsrReg(1, 0) === 3.U, 0.U, lfsrReg(1, 0))
             asteroidSize(i) := mappedSize
 
-            // get random Y value between 96 and 344 (with step size of 8) (384 would be better but computationally difficult)
+            // get random Y value between 96 and 320 (with step size of 8) (384 would be better but computationally difficult)
             val rawYOffset = (lfsrReg(4, 0) << 3).asUInt   // random number between 0-31 shifted by 3 (= *8) so we get 0-248
             val safeYOffset = Mux(mappedSize === 2.U,rawYOffset & "b1110000".U, rawYOffset)  // if the asteroid is large, we want to limit offset to 224 so part of it cant be outside our "window"
             val sum = (96.U(9.W) + safeYOffset).zext  // explicitly 9 bits
             val yOffset = sum.asSInt
             asteroidY(i) := yOffset   // actual Y of the asteroid
 
+            // ----- Zone thresholds (based on top-left corner Y spawn) -----
+            val zone = Wire(UInt(3.W))
+            when(yOffset < 133.S)       { zone := 0.U }
+              .elsewhen(yOffset < 170.S)  { zone := 1.U }
+              .elsewhen(yOffset < 207.S)  { zone := 2.U }
+              .elsewhen(yOffset < 244.S)  { zone := 3.U }
+              .elsewhen(yOffset < 281.S)  { zone := 4.U }
+              .otherwise                  { zone := 5.U }
+
+            // ----- Safe VY options per zone -----
+            val vyOptions = VecInit(Seq(
+              VecInit(Seq(0, 1, 2, 3, 4).map(_.S(4.W))),              // Zone 0
+              VecInit(Seq(0, 1, 2, 3, 0).map(_.S(4.W))),              // Zone 1
+              VecInit(Seq(-1, 0, 1, 2, 0).map(_.S(4.W))),             // Zone 2
+              VecInit(Seq(-2, -1, 0, 1, 2).map(_.S(4.W))),            // Zone 3
+              VecInit(Seq(-3, -2, -1, 0, 1).map(_.S(4.W))),           // Zone 4
+              VecInit(Seq(-4, -3, -2, -1, 0).map(_.S(4.W)))           // Zone 5
+            ))
+
+            val vyList = vyOptions(zone)
+            val randIndex = lfsrReg(2, 0) % 5.U  // Always 5 entries
+
             // velocities
             asteroidVX(i) := asteroidBaseVXScaled
-            asteroidVY(i) := asteroidVYStatic
+            asteroidVY(i) := vyList(randIndex) * speedMultiplier.zext
 
           }
           spawned = spawned || shouldSpawn // update spawned if we spawned one in the iteration
@@ -462,13 +488,20 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     // =================== Sprite Movement ===================
     is(moveSprites) {
       // --- Asteroids ---
+      val shouldUpdateY = asteroidYUpdateTimer === 0.U
+
       for (i <- 0 until numAsteroids) {
         when(asteroidActive(i)) {
           asteroidX(i) := asteroidX(i) + (asteroidVX(i))
-          asteroidY(i) := asteroidY(i) + (asteroidVY(i))
+
+          when(shouldUpdateY) { // update Y every X frames
+            asteroidY(i) := asteroidY(i) + (asteroidVY(i))
+          }
+
           when(asteroidX(i) < -getAsteroidSize(asteroidSize(i))) { // if the asteroid is of screen, deactivate it
             asteroidActive(i) := false.B
           }
+
         }
       }
 

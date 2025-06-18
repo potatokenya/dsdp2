@@ -113,20 +113,31 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // speed multiplier
   // asteroid Y generation is also a bit slow
 
+  // =================== Speed Multiplier ===================
+  val gameTimer = RegInit(0.U(16.W))
+
+  // === Speed multiplier increases every 1024 frames (~17s) ===
+  // Range: 1 to 8
+  val rawMultiplier = (gameTimer >> 10)(2, 0) + 1.U
+  val speedMultiplier = Mux(rawMultiplier > 8.U, 8.U, rawMultiplier)
+
 
   // =================== Game Parameters ===================
   // --- Player ---
-  val basePlayerSpeedY = 3.S     // Speed of the player movement
+  val playerSpeedYScaled = VecInit(Seq(3.S, 6.S, 9.S, 12.S, 15.S, 18.S, 21.S, 24.S))(speedMultiplier - 1.U)
 
   // --- Asteroids ---
-  val baseAsteroidVX = -3.S                // Horizontal velocity of asteroids
-  val baseAsteroidVY = 0.S                 // Vertical velocity of asteroids (unused for now)
-  val baseAsteroidSpawnInterval = 60.U    // Spawn asteroid interval (60 = 1 sec)
+  val asteroidBaseVXScaled = VecInit(Seq(-3.S, -6.S, -9.S, -12.S, -15.S, -18.S, -21.S, -24.S))(speedMultiplier - 1.U)
+  val asteroidVYStatic = 0.S
+  val asteroidSpawnIntervalScaled = VecInit(Seq(
+    60.U, 30.U, 20.U, 15.U, 12.U, 10.U, 8.U, 7.U
+  ))(speedMultiplier - 1.U)
 
   // --- Rockets ---
-  val baseRocketVX = 5.S                  // Rocket base horizontal velocity (to the right)
-  val rocketCooldownInterval = 40.U       // One rocket per second
-
+  val rocketBaseVXScaled = VecInit(Seq(5.S, 10.S, 15.S, 20.S, 25.S, 30.S, 35.S, 40.S))(speedMultiplier - 1.U)
+  val rocketCooldownScaled = VecInit(Seq(
+    40.U, 20.U, 14.U, 10.U, 8.U, 6.U, 5.U, 4.U
+  ))(speedMultiplier - 1.U)
 
   // =================== FSM States ===================
   val (
@@ -161,8 +172,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val asteroidActive = RegInit(VecInit(Seq.fill(numAsteroids)(false.B)))
   val asteroidX = RegInit(VecInit(Seq.fill(numAsteroids)(640.S(11.W))))
   val asteroidY = RegInit(VecInit(Seq.fill(numAsteroids)(100.S(10.W))))
-  val asteroidVX = RegInit(VecInit(Seq.fill(numAsteroids)(baseAsteroidVX)))
-  val asteroidVY = RegInit(VecInit(Seq.fill(numAsteroids)(baseAsteroidVY)))
+  val asteroidVX = RegInit(VecInit(Seq.fill(numAsteroids)(0.S)))
+  val asteroidVY = RegInit(VecInit(Seq.fill(numAsteroids)(0.S)))
   val asteroidSize = RegInit(VecInit(Seq.fill(numAsteroids)(0.U(2.W))))
 
   for (i <- 0 until numAsteroids) {
@@ -189,7 +200,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val rocketActive = RegInit(VecInit(Seq.fill(numRockets)(false.B)))
   val rocketX = RegInit(VecInit(Seq.fill(numRockets)(0.S(11.W))))
   val rocketY = RegInit(VecInit(Seq.fill(numRockets)(0.S(10.W))))
-  val rocketVX = RegInit(VecInit(Seq.fill(numRockets)(baseRocketVX)))
+  val rocketVX = RegInit(VecInit(Seq.fill(numRockets)(0.S)))
 
   for (i <- 0 until numRockets) {
     val idx = rocketStartIndex + i
@@ -306,13 +317,15 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
       seedingTimer := seedingTimer + 1.U
     }
 
+    gameTimer := gameTimer + 1.U
+
     // Asteroid spawn timer
     asteroidSpawnTimer := asteroidSpawnTimer + 1.U
 
     // Rocket cooldown timer and logic
     when(!rocketReadyReg) {
       rocketCooldownTimer := rocketCooldownTimer + 1.U
-      when(rocketCooldownTimer === rocketCooldownInterval - 1.U) {
+      when(rocketCooldownTimer === rocketCooldownScaled - 1.U) {
         rocketCooldownTimer := 0.U
         rocketReadyReg := true.B
       }
@@ -324,6 +337,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
         explosionTimer(i) := explosionTimer(i) + 1.U
       }
     }
+
 
     when(heartRemovalActive) {
       heartFlashTimer := heartFlashTimer + 1.U
@@ -371,9 +385,9 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     // =================== Player Movement ===================
     is(movePlayer) {
       when(io.btnD && sprite0YReg < (356).S) {
-        sprite0YReg := sprite0YReg + (basePlayerSpeedY)
+        sprite0YReg := sprite0YReg + playerSpeedYScaled
       }.elsewhen(io.btnU && sprite0YReg > (94).S) {
-        sprite0YReg := sprite0YReg - (basePlayerSpeedY)
+        sprite0YReg := sprite0YReg - playerSpeedYScaled
       }
 
       stateReg := spawnAsteroids
@@ -382,7 +396,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
     // =================== Asteroid spawning logic ===================
     is(spawnAsteroids) {
-      when(asteroidSpawnTimer >= baseAsteroidSpawnInterval && seeded) {   // if it is time to spawn next asteroid
+      when(asteroidSpawnTimer >= asteroidSpawnIntervalScaled && seeded) {   // if it is time to spawn next asteroid
         asteroidSpawnTimer := 0.U                      // reset asteroid timer
         lfsrReg := Cat(lfsrReg(6) ^ lfsrReg(5)         // update LFSR (create a new 8-bit pseudorandom number)
           ^ lfsrReg(4) ^ lfsrReg(0), lfsrReg(7, 1))
@@ -407,8 +421,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
             asteroidY(i) := yOffset   // actual Y of the asteroid
 
             // velocities
-            asteroidVX(i) := baseAsteroidVX
-            asteroidVY(i) := baseAsteroidVY
+            asteroidVX(i) := asteroidBaseVXScaled
+            asteroidVY(i) := asteroidVYStatic
 
           }
           spawned = spawned || shouldSpawn // update spawned if we spawned one in the iteration
@@ -430,7 +444,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
             rocketActive(i) := true.B
             rocketX(i) := sprite0XReg + 16.S // position of the rocket
             rocketY(i) := sprite0YReg + 10.S
-            rocketVX(i) := baseRocketVX
+            rocketVX(i) := rocketBaseVXScaled
           }
           launched = launched || shouldLaunch
         }

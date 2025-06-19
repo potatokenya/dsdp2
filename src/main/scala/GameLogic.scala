@@ -109,11 +109,6 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   // Write here your game logic
   /////////////////////////////////////////////////////////////
 
-  //TODO
-  // speed multiplier
-  // asteroid Y generation is also a bit slow
-
-
   // =================== Game Parameters ===================
   // --- Player ---
   val basePlayerSpeedY = 3.S     // Speed of the player movement
@@ -179,6 +174,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
   // --- Asteroid spawn ---
   val asteroidSpawnTimer = RegInit(0.U(10.W))
+
+  val asteroidSpawnIntervalRandomized = RegInit(baseAsteroidSpawnInterval)
 
 
   // =================== Sprites 11-18 - Rockets ===================
@@ -366,7 +363,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
     // =================== Asteroid spawning logic ===================
     is(spawnAsteroids) {
-      when(asteroidSpawnTimer >= baseAsteroidSpawnInterval && seeded) {   // if it is time to spawn next asteroid
+      when(asteroidSpawnTimer >= asteroidSpawnIntervalRandomized && seeded) {   // if it is time to spawn next asteroid
         asteroidSpawnTimer := 0.U                      // reset asteroid timer
         lfsrReg := Cat(lfsrReg(6) ^ lfsrReg(5)         // update LFSR (create a new 8-bit pseudorandom number)
           ^ lfsrReg(4) ^ lfsrReg(0), lfsrReg(7, 1))
@@ -390,9 +387,22 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
             val yOffset = sum.asSInt
             asteroidY(i) := yOffset   // actual Y of the asteroid
 
-            // velocities
-            asteroidVX(i) := baseAsteroidVX
+            // First: update the LFSR and generate speed random multiplier
+            val nextLFSR1 = Cat(lfsrReg(6) ^ lfsrReg(5) ^ lfsrReg(4) ^ lfsrReg(0), lfsrReg(7, 1))
+            val speedOffset = nextLFSR1(5, 0)
+            val speedMultiplier = 90.U + speedOffset
+            val speedScaled = (baseAsteroidVX * speedMultiplier).asSInt >> 7
+            asteroidVX(i) := speedScaled
             asteroidVY(i) := baseAsteroidVY
+
+            // Second: generate the next LFSR and compute spawn interval multiplier
+            val nextLFSR2 = Cat(nextLFSR1(6) ^ nextLFSR1(5) ^ nextLFSR1(4) ^ nextLFSR1(0), nextLFSR1(7, 1))
+            val intervalOffset = nextLFSR2(5, 0)
+            val intervalMultiplier = 90.U + intervalOffset
+            asteroidSpawnIntervalRandomized := (baseAsteroidSpawnInterval * intervalMultiplier) >> 7
+
+            // Finally: update the LFSR state so it continues evolving
+            lfsrReg := nextLFSR2
 
           }
           spawned = spawned || shouldSpawn // update spawned if we spawned one in the iteration

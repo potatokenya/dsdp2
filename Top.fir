@@ -400,70 +400,22 @@ circuit Top :
     ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
     io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
 
-  extmodule RamSpWf :
-    input clk : Clock
-    input we : UInt<1>
-    input en : UInt<1>
-    input addr : UInt<11>
-    input di : UInt<4>
-    output dout : UInt<4>
-    defname = RamSpWf
-    parameter ADDR_WIDTH = 11
-    parameter DATA_WIDTH = 4
-
-  module Memory_16 :
-    input clock : Clock
-    input reset : Reset
-    output io : { flip address : UInt<11>, dataRead : UInt<4>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<4>} @[\\src\\main\\scala\\Memory.scala 48:14]
-
-    inst ramsSpWf of RamSpWf @[\\src\\main\\scala\\Memory.scala 57:26]
-    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 58:21]
-    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 59:20]
-    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 60:20]
-    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 61:22]
-    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 62:20]
-    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 63:17]
-
-  extmodule RamSpWf_1 :
-    input clk : Clock
-    input we : UInt<1>
-    input en : UInt<1>
-    input addr : UInt<11>
-    input di : UInt<4>
-    output dout : UInt<4>
-    defname = RamSpWf
-    parameter ADDR_WIDTH = 11
-    parameter DATA_WIDTH = 4
-
-  module Memory_17 :
-    input clock : Clock
-    input reset : Reset
-    output io : { flip address : UInt<11>, dataRead : UInt<4>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<4>} @[\\src\\main\\scala\\Memory.scala 48:14]
-
-    inst ramsSpWf of RamSpWf_1 @[\\src\\main\\scala\\Memory.scala 57:26]
-    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 58:21]
-    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 59:20]
-    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 60:20]
-    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 61:22]
-    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 62:20]
-    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 63:17]
-
   extmodule RamInitSpWf_16 :
     input clk : Clock
     input we : UInt<1>
     input en : UInt<1>
-    input addr : UInt<11>
-    input di : UInt<4>
-    output dout : UInt<4>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
     defname = RamInitSpWf
-    parameter ADDR_WIDTH = 11
-    parameter DATA_WIDTH = 4
-    parameter LOAD_FILE = "memory_init/backbuffer_init.mem"
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/backtile_init_16.mem"
 
-  module Memory_18 :
+  module Memory_16 :
     input clock : Clock
     input reset : Reset
-    output io : { flip address : UInt<11>, dataRead : UInt<4>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<4>} @[\\src\\main\\scala\\Memory.scala 48:14]
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
 
     inst ramsSpWf of RamInitSpWf_16 @[\\src\\main\\scala\\Memory.scala 65:26]
     ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
@@ -483,9 +435,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_0.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_17.mem"
 
-  module Memory_19 :
+  module Memory_17 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -508,9 +460,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_1.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_18.mem"
 
-  module Memory_20 :
+  module Memory_18 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -533,9 +485,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_2.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_19.mem"
 
-  module Memory_21 :
+  module Memory_19 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -558,9 +510,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_3.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_20.mem"
 
-  module Memory_22 :
+  module Memory_20 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -583,9 +535,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_4.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_21.mem"
 
-  module Memory_23 :
+  module Memory_21 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -608,9 +560,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_5.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_22.mem"
 
-  module Memory_24 :
+  module Memory_22 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -633,9 +585,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_6.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_23.mem"
 
-  module Memory_25 :
+  module Memory_23 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -658,9 +610,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_7.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_24.mem"
 
-  module Memory_26 :
+  module Memory_24 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -683,9 +635,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_8.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_25.mem"
 
-  module Memory_27 :
+  module Memory_25 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -708,9 +660,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_9.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_26.mem"
 
-  module Memory_28 :
+  module Memory_26 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -733,9 +685,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_10.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_27.mem"
 
-  module Memory_29 :
+  module Memory_27 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -758,9 +710,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_11.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_28.mem"
 
-  module Memory_30 :
+  module Memory_28 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -783,9 +735,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_12.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_29.mem"
 
-  module Memory_31 :
+  module Memory_29 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -808,9 +760,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_13.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_30.mem"
 
-  module Memory_32 :
+  module Memory_30 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -833,9 +785,9 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_14.mem"
+    parameter LOAD_FILE = "memory_init/backtile_init_31.mem"
 
-  module Memory_33 :
+  module Memory_31 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
@@ -848,22 +800,70 @@ circuit Top :
     ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
     io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
 
+  extmodule RamSpWf :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<11>
+    input di : UInt<5>
+    output dout : UInt<5>
+    defname = RamSpWf
+    parameter ADDR_WIDTH = 11
+    parameter DATA_WIDTH = 5
+
+  module Memory_32 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<11>, dataRead : UInt<5>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<5>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamSpWf @[\\src\\main\\scala\\Memory.scala 57:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 58:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 59:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 60:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 61:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 62:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 63:17]
+
+  extmodule RamSpWf_1 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<11>
+    input di : UInt<5>
+    output dout : UInt<5>
+    defname = RamSpWf
+    parameter ADDR_WIDTH = 11
+    parameter DATA_WIDTH = 5
+
+  module Memory_33 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<11>, dataRead : UInt<5>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<5>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamSpWf_1 @[\\src\\main\\scala\\Memory.scala 57:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 58:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 59:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 60:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 61:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 62:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 63:17]
+
   extmodule RamInitSpWf_32 :
     input clk : Clock
     input we : UInt<1>
     input en : UInt<1>
-    input addr : UInt<10>
-    input di : UInt<7>
-    output dout : UInt<7>
+    input addr : UInt<11>
+    input di : UInt<5>
+    output dout : UInt<5>
     defname = RamInitSpWf
-    parameter ADDR_WIDTH = 10
-    parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_15.mem"
+    parameter ADDR_WIDTH = 11
+    parameter DATA_WIDTH = 5
+    parameter LOAD_FILE = "memory_init/backbuffer_init.mem"
 
   module Memory_34 :
     input clock : Clock
     input reset : Reset
-    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+    output io : { flip address : UInt<11>, dataRead : UInt<5>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<5>} @[\\src\\main\\scala\\Memory.scala 48:14]
 
     inst ramsSpWf of RamInitSpWf_32 @[\\src\\main\\scala\\Memory.scala 65:26]
     ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
@@ -883,7 +883,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_16.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_0.mem"
 
   module Memory_35 :
     input clock : Clock
@@ -908,7 +908,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_17.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_1.mem"
 
   module Memory_36 :
     input clock : Clock
@@ -933,7 +933,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_18.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_2.mem"
 
   module Memory_37 :
     input clock : Clock
@@ -958,7 +958,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_19.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_3.mem"
 
   module Memory_38 :
     input clock : Clock
@@ -983,7 +983,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_20.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_4.mem"
 
   module Memory_39 :
     input clock : Clock
@@ -1008,7 +1008,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_21.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_5.mem"
 
   module Memory_40 :
     input clock : Clock
@@ -1033,7 +1033,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_22.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_6.mem"
 
   module Memory_41 :
     input clock : Clock
@@ -1058,7 +1058,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_23.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_7.mem"
 
   module Memory_42 :
     input clock : Clock
@@ -1083,7 +1083,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_24.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_8.mem"
 
   module Memory_43 :
     input clock : Clock
@@ -1108,7 +1108,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_25.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_9.mem"
 
   module Memory_44 :
     input clock : Clock
@@ -1133,7 +1133,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_26.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_10.mem"
 
   module Memory_45 :
     input clock : Clock
@@ -1158,7 +1158,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_27.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_11.mem"
 
   module Memory_46 :
     input clock : Clock
@@ -1183,7 +1183,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_28.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_12.mem"
 
   module Memory_47 :
     input clock : Clock
@@ -1208,7 +1208,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_29.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_13.mem"
 
   module Memory_48 :
     input clock : Clock
@@ -1233,7 +1233,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_30.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_14.mem"
 
   module Memory_49 :
     input clock : Clock
@@ -1258,7 +1258,7 @@ circuit Top :
     defname = RamInitSpWf
     parameter ADDR_WIDTH = 10
     parameter DATA_WIDTH = 7
-    parameter LOAD_FILE = "memory_init/sprite_init_31.mem"
+    parameter LOAD_FILE = "memory_init/sprite_init_15.mem"
 
   module Memory_50 :
     input clock : Clock
@@ -1266,6 +1266,406 @@ circuit Top :
     output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
 
     inst ramsSpWf of RamInitSpWf_48 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_49 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_16.mem"
+
+  module Memory_51 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_49 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_50 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_17.mem"
+
+  module Memory_52 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_50 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_51 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_18.mem"
+
+  module Memory_53 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_51 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_52 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_19.mem"
+
+  module Memory_54 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_52 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_53 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_20.mem"
+
+  module Memory_55 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_53 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_54 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_21.mem"
+
+  module Memory_56 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_54 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_55 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_22.mem"
+
+  module Memory_57 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_55 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_56 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_23.mem"
+
+  module Memory_58 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_56 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_57 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_24.mem"
+
+  module Memory_59 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_57 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_58 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_25.mem"
+
+  module Memory_60 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_58 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_59 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_26.mem"
+
+  module Memory_61 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_59 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_60 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_27.mem"
+
+  module Memory_62 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_60 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_61 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_28.mem"
+
+  module Memory_63 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_61 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_62 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_29.mem"
+
+  module Memory_64 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_62 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_63 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_30.mem"
+
+  module Memory_65 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_63 @[\\src\\main\\scala\\Memory.scala 65:26]
+    ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
+    ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
+    ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
+    ramsSpWf.addr <= io.address @[\\src\\main\\scala\\Memory.scala 69:22]
+    ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
+    io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
+
+  extmodule RamInitSpWf_64 :
+    input clk : Clock
+    input we : UInt<1>
+    input en : UInt<1>
+    input addr : UInt<10>
+    input di : UInt<7>
+    output dout : UInt<7>
+    defname = RamInitSpWf
+    parameter ADDR_WIDTH = 10
+    parameter DATA_WIDTH = 7
+    parameter LOAD_FILE = "memory_init/sprite_init_31.mem"
+
+  module Memory_66 :
+    input clock : Clock
+    input reset : Reset
+    output io : { flip address : UInt<10>, dataRead : UInt<7>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<7>} @[\\src\\main\\scala\\Memory.scala 48:14]
+
+    inst ramsSpWf of RamInitSpWf_64 @[\\src\\main\\scala\\Memory.scala 65:26]
     ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
     ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
     ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
@@ -1474,7 +1874,7 @@ circuit Top :
   module GraphicEngineVGA :
     input clock : Clock
     input reset : Reset
-    output io : { flip spriteXPosition : SInt<11>[32], flip spriteYPosition : SInt<10>[32], flip spriteVisible : UInt<1>[32], flip spriteFlipHorizontal : UInt<1>[32], flip spriteFlipVertical : UInt<1>[32], flip spriteScaleUpHorizontal : UInt<1>[32], flip spriteScaleDownHorizontal : UInt<1>[32], flip spriteScaleUpVertical : UInt<1>[32], flip spriteScaleDownVertical : UInt<1>[32], flip viewBoxX : UInt<10>, flip viewBoxY : UInt<9>, flip backBufferWriteData : UInt<4>, flip backBufferWriteAddress : UInt<11>, flip backBufferWriteEnable : UInt<1>, newFrame : UInt<1>, flip frameUpdateDone : UInt<1>, missingFrameError : UInt<1>, backBufferWriteError : UInt<1>, viewBoxOutOfRangeError : UInt<1>, vgaRed : UInt<4>, vgaBlue : UInt<4>, vgaGreen : UInt<4>, Hsync : UInt<1>, Vsync : UInt<1>} @[\\src\\main\\scala\\GraphicEngineVGA.scala 12:14]
+    output io : { flip spriteXPosition : SInt<11>[32], flip spriteYPosition : SInt<10>[32], flip spriteVisible : UInt<1>[32], flip spriteFlipHorizontal : UInt<1>[32], flip spriteFlipVertical : UInt<1>[32], flip spriteScaleUpHorizontal : UInt<1>[32], flip spriteScaleDownHorizontal : UInt<1>[32], flip spriteScaleUpVertical : UInt<1>[32], flip spriteScaleDownVertical : UInt<1>[32], flip viewBoxX : UInt<10>, flip viewBoxY : UInt<9>, flip backBufferWriteData : UInt<5>, flip backBufferWriteAddress : UInt<11>, flip backBufferWriteEnable : UInt<1>, newFrame : UInt<1>, flip frameUpdateDone : UInt<1>, missingFrameError : UInt<1>, backBufferWriteError : UInt<1>, viewBoxOutOfRangeError : UInt<1>, vgaRed : UInt<4>, vgaBlue : UInt<4>, vgaGreen : UInt<4>, Hsync : UInt<1>, Vsync : UInt<1>} @[\\src\\main\\scala\\GraphicEngineVGA.scala 12:14]
 
     reg ScaleCounterReg : UInt<2>, clock with :
       reset => (reset, UInt<2>("h0")) @[\\src\\main\\scala\\GraphicEngineVGA.scala 67:32]
@@ -1961,7 +2361,55 @@ circuit Top :
     inst backTileMemories_15 of Memory_15 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
     backTileMemories_15.clock <= clock
     backTileMemories_15.reset <= reset
-    wire backTileMemoryDataRead : UInt<7>[16] @[\\src\\main\\scala\\GraphicEngineVGA.scala 167:36]
+    inst backTileMemories_16 of Memory_16 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_16.clock <= clock
+    backTileMemories_16.reset <= reset
+    inst backTileMemories_17 of Memory_17 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_17.clock <= clock
+    backTileMemories_17.reset <= reset
+    inst backTileMemories_18 of Memory_18 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_18.clock <= clock
+    backTileMemories_18.reset <= reset
+    inst backTileMemories_19 of Memory_19 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_19.clock <= clock
+    backTileMemories_19.reset <= reset
+    inst backTileMemories_20 of Memory_20 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_20.clock <= clock
+    backTileMemories_20.reset <= reset
+    inst backTileMemories_21 of Memory_21 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_21.clock <= clock
+    backTileMemories_21.reset <= reset
+    inst backTileMemories_22 of Memory_22 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_22.clock <= clock
+    backTileMemories_22.reset <= reset
+    inst backTileMemories_23 of Memory_23 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_23.clock <= clock
+    backTileMemories_23.reset <= reset
+    inst backTileMemories_24 of Memory_24 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_24.clock <= clock
+    backTileMemories_24.reset <= reset
+    inst backTileMemories_25 of Memory_25 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_25.clock <= clock
+    backTileMemories_25.reset <= reset
+    inst backTileMemories_26 of Memory_26 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_26.clock <= clock
+    backTileMemories_26.reset <= reset
+    inst backTileMemories_27 of Memory_27 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_27.clock <= clock
+    backTileMemories_27.reset <= reset
+    inst backTileMemories_28 of Memory_28 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_28.clock <= clock
+    backTileMemories_28.reset <= reset
+    inst backTileMemories_29 of Memory_29 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_29.clock <= clock
+    backTileMemories_29.reset <= reset
+    inst backTileMemories_30 of Memory_30 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_30.clock <= clock
+    backTileMemories_30.reset <= reset
+    inst backTileMemories_31 of Memory_31 @[\\src\\main\\scala\\GraphicEngineVGA.scala 161:32]
+    backTileMemories_31.clock <= clock
+    backTileMemories_31.reset <= reset
+    wire backTileMemoryDataRead : UInt<7>[32] @[\\src\\main\\scala\\GraphicEngineVGA.scala 167:36]
     backTileMemories_0.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
     backTileMemories_0.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
     backTileMemories_0.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
@@ -2154,13 +2602,205 @@ circuit Top :
       reset => (UInt<1>("h0"), backTileMemoryDataRead_15_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
     backTileMemoryDataRead_15_REG <= backTileMemories_15.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
     backTileMemoryDataRead[15] <= backTileMemoryDataRead_15_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
-    inst backBufferMemory of Memory_16 @[\\src\\main\\scala\\GraphicEngineVGA.scala 178:32]
+    backTileMemories_16.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_16.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_16.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_16_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_16_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_16_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_16_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_16_io_address_T_3 = add(_backTileMemories_16_io_address_T, _backTileMemories_16_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_16.io.address <= _backTileMemories_16_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_16_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_16_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_16_REG <= backTileMemories_16.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[16] <= backTileMemoryDataRead_16_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_17.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_17.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_17.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_17_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_17_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_17_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_17_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_17_io_address_T_3 = add(_backTileMemories_17_io_address_T, _backTileMemories_17_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_17.io.address <= _backTileMemories_17_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_17_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_17_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_17_REG <= backTileMemories_17.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[17] <= backTileMemoryDataRead_17_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_18.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_18.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_18.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_18_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_18_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_18_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_18_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_18_io_address_T_3 = add(_backTileMemories_18_io_address_T, _backTileMemories_18_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_18.io.address <= _backTileMemories_18_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_18_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_18_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_18_REG <= backTileMemories_18.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[18] <= backTileMemoryDataRead_18_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_19.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_19.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_19.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_19_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_19_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_19_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_19_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_19_io_address_T_3 = add(_backTileMemories_19_io_address_T, _backTileMemories_19_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_19.io.address <= _backTileMemories_19_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_19_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_19_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_19_REG <= backTileMemories_19.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[19] <= backTileMemoryDataRead_19_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_20.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_20.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_20.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_20_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_20_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_20_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_20_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_20_io_address_T_3 = add(_backTileMemories_20_io_address_T, _backTileMemories_20_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_20.io.address <= _backTileMemories_20_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_20_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_20_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_20_REG <= backTileMemories_20.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[20] <= backTileMemoryDataRead_20_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_21.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_21.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_21.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_21_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_21_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_21_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_21_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_21_io_address_T_3 = add(_backTileMemories_21_io_address_T, _backTileMemories_21_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_21.io.address <= _backTileMemories_21_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_21_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_21_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_21_REG <= backTileMemories_21.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[21] <= backTileMemoryDataRead_21_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_22.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_22.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_22.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_22_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_22_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_22_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_22_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_22_io_address_T_3 = add(_backTileMemories_22_io_address_T, _backTileMemories_22_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_22.io.address <= _backTileMemories_22_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_22_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_22_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_22_REG <= backTileMemories_22.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[22] <= backTileMemoryDataRead_22_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_23.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_23.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_23.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_23_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_23_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_23_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_23_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_23_io_address_T_3 = add(_backTileMemories_23_io_address_T, _backTileMemories_23_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_23.io.address <= _backTileMemories_23_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_23_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_23_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_23_REG <= backTileMemories_23.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[23] <= backTileMemoryDataRead_23_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_24.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_24.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_24.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_24_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_24_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_24_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_24_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_24_io_address_T_3 = add(_backTileMemories_24_io_address_T, _backTileMemories_24_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_24.io.address <= _backTileMemories_24_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_24_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_24_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_24_REG <= backTileMemories_24.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[24] <= backTileMemoryDataRead_24_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_25.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_25.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_25.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_25_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_25_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_25_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_25_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_25_io_address_T_3 = add(_backTileMemories_25_io_address_T, _backTileMemories_25_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_25.io.address <= _backTileMemories_25_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_25_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_25_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_25_REG <= backTileMemories_25.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[25] <= backTileMemoryDataRead_25_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_26.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_26.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_26.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_26_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_26_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_26_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_26_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_26_io_address_T_3 = add(_backTileMemories_26_io_address_T, _backTileMemories_26_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_26.io.address <= _backTileMemories_26_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_26_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_26_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_26_REG <= backTileMemories_26.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[26] <= backTileMemoryDataRead_26_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_27.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_27.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_27.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_27_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_27_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_27_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_27_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_27_io_address_T_3 = add(_backTileMemories_27_io_address_T, _backTileMemories_27_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_27.io.address <= _backTileMemories_27_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_27_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_27_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_27_REG <= backTileMemories_27.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[27] <= backTileMemoryDataRead_27_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_28.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_28.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_28.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_28_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_28_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_28_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_28_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_28_io_address_T_3 = add(_backTileMemories_28_io_address_T, _backTileMemories_28_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_28.io.address <= _backTileMemories_28_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_28_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_28_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_28_REG <= backTileMemories_28.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[28] <= backTileMemoryDataRead_28_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_29.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_29.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_29.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_29_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_29_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_29_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_29_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_29_io_address_T_3 = add(_backTileMemories_29_io_address_T, _backTileMemories_29_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_29.io.address <= _backTileMemories_29_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_29_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_29_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_29_REG <= backTileMemories_29.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[29] <= backTileMemoryDataRead_29_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_30.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_30.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_30.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_30_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_30_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_30_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_30_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_30_io_address_T_3 = add(_backTileMemories_30_io_address_T, _backTileMemories_30_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_30.io.address <= _backTileMemories_30_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_30_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_30_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_30_REG <= backTileMemories_30.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[30] <= backTileMemoryDataRead_30_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    backTileMemories_31.io.enable <= UInt<1>("h1") @[\\src\\main\\scala\\GraphicEngineVGA.scala 169:35]
+    backTileMemories_31.io.dataWrite <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 170:38]
+    backTileMemories_31.io.writeEnable <= UInt<1>("h0") @[\\src\\main\\scala\\GraphicEngineVGA.scala 171:40]
+    node _backTileMemories_31_io_address_T = bits(pixelXBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:49]
+    node _backTileMemories_31_io_address_T_1 = bits(pixelYBack, 4, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:87]
+    node _backTileMemories_31_io_address_T_2 = mul(UInt<6>("h20"), _backTileMemories_31_io_address_T_1) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:75]
+    node _backTileMemories_31_io_address_T_3 = add(_backTileMemories_31_io_address_T, _backTileMemories_31_io_address_T_2) @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:62]
+    backTileMemories_31.io.address <= _backTileMemories_31_io_address_T_3 @[\\src\\main\\scala\\GraphicEngineVGA.scala 172:36]
+    reg backTileMemoryDataRead_31_REG : UInt, clock with :
+      reset => (UInt<1>("h0"), backTileMemoryDataRead_31_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead_31_REG <= backTileMemories_31.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:41]
+    backTileMemoryDataRead[31] <= backTileMemoryDataRead_31_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 173:31]
+    inst backBufferMemory of Memory_32 @[\\src\\main\\scala\\GraphicEngineVGA.scala 178:32]
     backBufferMemory.clock <= clock
     backBufferMemory.reset <= reset
-    inst backBufferShadowMemory of Memory_17 @[\\src\\main\\scala\\GraphicEngineVGA.scala 179:38]
+    inst backBufferShadowMemory of Memory_33 @[\\src\\main\\scala\\GraphicEngineVGA.scala 179:38]
     backBufferShadowMemory.clock <= clock
     backBufferShadowMemory.reset <= reset
-    inst backBufferRestoreMemory of Memory_18 @[\\src\\main\\scala\\GraphicEngineVGA.scala 180:39]
+    inst backBufferRestoreMemory of Memory_34 @[\\src\\main\\scala\\GraphicEngineVGA.scala 180:39]
     backBufferRestoreMemory.clock <= clock
     backBufferRestoreMemory.reset <= reset
     reg backMemoryCopyCounter : UInt<12>, clock with :
@@ -2247,8 +2887,8 @@ circuit Top :
     reg fullBackgroundColor_REG : UInt, clock with :
       reset => (UInt<1>("h0"), fullBackgroundColor_REG) @[\\src\\main\\scala\\GraphicEngineVGA.scala 243:56]
     fullBackgroundColor_REG <= backBufferMemory.io.dataRead @[\\src\\main\\scala\\GraphicEngineVGA.scala 243:56]
-    node _fullBackgroundColor_T = or(fullBackgroundColor_REG, UInt<4>("h0"))
-    node _fullBackgroundColor_T_1 = bits(_fullBackgroundColor_T, 3, 0)
+    node _fullBackgroundColor_T = or(fullBackgroundColor_REG, UInt<5>("h0"))
+    node _fullBackgroundColor_T_1 = bits(_fullBackgroundColor_T, 4, 0)
     fullBackgroundColor <= backTileMemoryDataRead[_fullBackgroundColor_T_1] @[\\src\\main\\scala\\GraphicEngineVGA.scala 243:23]
     node _backgroundColor_T = bits(fullBackgroundColor, 6, 6) @[\\src\\main\\scala\\GraphicEngineVGA.scala 244:45]
     node _backgroundColor_T_1 = bits(fullBackgroundColor, 5, 0) @[\\src\\main\\scala\\GraphicEngineVGA.scala 244:79]
@@ -2257,100 +2897,100 @@ circuit Top :
     reg pixelColorBack : UInt, clock with :
       reset => (UInt<1>("h0"), pixelColorBack) @[\\src\\main\\scala\\GraphicEngineVGA.scala 245:31]
     pixelColorBack <= backgroundColor @[\\src\\main\\scala\\GraphicEngineVGA.scala 245:31]
-    inst spriteMemories_0 of Memory_19 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_0 of Memory_35 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_0.clock <= clock
     spriteMemories_0.reset <= reset
-    inst spriteMemories_1 of Memory_20 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_1 of Memory_36 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_1.clock <= clock
     spriteMemories_1.reset <= reset
-    inst spriteMemories_2 of Memory_21 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_2 of Memory_37 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_2.clock <= clock
     spriteMemories_2.reset <= reset
-    inst spriteMemories_3 of Memory_22 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_3 of Memory_38 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_3.clock <= clock
     spriteMemories_3.reset <= reset
-    inst spriteMemories_4 of Memory_23 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_4 of Memory_39 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_4.clock <= clock
     spriteMemories_4.reset <= reset
-    inst spriteMemories_5 of Memory_24 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_5 of Memory_40 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_5.clock <= clock
     spriteMemories_5.reset <= reset
-    inst spriteMemories_6 of Memory_25 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_6 of Memory_41 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_6.clock <= clock
     spriteMemories_6.reset <= reset
-    inst spriteMemories_7 of Memory_26 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_7 of Memory_42 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_7.clock <= clock
     spriteMemories_7.reset <= reset
-    inst spriteMemories_8 of Memory_27 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_8 of Memory_43 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_8.clock <= clock
     spriteMemories_8.reset <= reset
-    inst spriteMemories_9 of Memory_28 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_9 of Memory_44 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_9.clock <= clock
     spriteMemories_9.reset <= reset
-    inst spriteMemories_10 of Memory_29 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_10 of Memory_45 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_10.clock <= clock
     spriteMemories_10.reset <= reset
-    inst spriteMemories_11 of Memory_30 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_11 of Memory_46 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_11.clock <= clock
     spriteMemories_11.reset <= reset
-    inst spriteMemories_12 of Memory_31 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_12 of Memory_47 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_12.clock <= clock
     spriteMemories_12.reset <= reset
-    inst spriteMemories_13 of Memory_32 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_13 of Memory_48 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_13.clock <= clock
     spriteMemories_13.reset <= reset
-    inst spriteMemories_14 of Memory_33 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_14 of Memory_49 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_14.clock <= clock
     spriteMemories_14.reset <= reset
-    inst spriteMemories_15 of Memory_34 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_15 of Memory_50 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_15.clock <= clock
     spriteMemories_15.reset <= reset
-    inst spriteMemories_16 of Memory_35 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_16 of Memory_51 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_16.clock <= clock
     spriteMemories_16.reset <= reset
-    inst spriteMemories_17 of Memory_36 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_17 of Memory_52 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_17.clock <= clock
     spriteMemories_17.reset <= reset
-    inst spriteMemories_18 of Memory_37 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_18 of Memory_53 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_18.clock <= clock
     spriteMemories_18.reset <= reset
-    inst spriteMemories_19 of Memory_38 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_19 of Memory_54 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_19.clock <= clock
     spriteMemories_19.reset <= reset
-    inst spriteMemories_20 of Memory_39 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_20 of Memory_55 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_20.clock <= clock
     spriteMemories_20.reset <= reset
-    inst spriteMemories_21 of Memory_40 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_21 of Memory_56 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_21.clock <= clock
     spriteMemories_21.reset <= reset
-    inst spriteMemories_22 of Memory_41 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_22 of Memory_57 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_22.clock <= clock
     spriteMemories_22.reset <= reset
-    inst spriteMemories_23 of Memory_42 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_23 of Memory_58 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_23.clock <= clock
     spriteMemories_23.reset <= reset
-    inst spriteMemories_24 of Memory_43 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_24 of Memory_59 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_24.clock <= clock
     spriteMemories_24.reset <= reset
-    inst spriteMemories_25 of Memory_44 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_25 of Memory_60 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_25.clock <= clock
     spriteMemories_25.reset <= reset
-    inst spriteMemories_26 of Memory_45 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_26 of Memory_61 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_26.clock <= clock
     spriteMemories_26.reset <= reset
-    inst spriteMemories_27 of Memory_46 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_27 of Memory_62 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_27.clock <= clock
     spriteMemories_27.reset <= reset
-    inst spriteMemories_28 of Memory_47 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_28 of Memory_63 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_28.clock <= clock
     spriteMemories_28.reset <= reset
-    inst spriteMemories_29 of Memory_48 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_29 of Memory_64 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_29.clock <= clock
     spriteMemories_29.reset <= reset
-    inst spriteMemories_30 of Memory_49 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_30 of Memory_65 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_30.clock <= clock
     spriteMemories_30.reset <= reset
-    inst spriteMemories_31 of Memory_50 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
+    inst spriteMemories_31 of Memory_66 @[\\src\\main\\scala\\GraphicEngineVGA.scala 250:30]
     spriteMemories_31.clock <= clock
     spriteMemories_31.reset <= reset
     wire inSpriteHorizontal : UInt<1>[32] @[\\src\\main\\scala\\GraphicEngineVGA.scala 254:32]
@@ -6814,7 +7454,7 @@ circuit Top :
     io_vgaBlue_REG <= pixelColorBlue @[\\src\\main\\scala\\GraphicEngineVGA.scala 351:24]
     io.vgaBlue <= io_vgaBlue_REG @[\\src\\main\\scala\\GraphicEngineVGA.scala 351:14]
 
-  extmodule RamInitSpWf_49 :
+  extmodule RamInitSpWf_65 :
     input clk : Clock
     input we : UInt<1>
     input en : UInt<1>
@@ -6826,12 +7466,12 @@ circuit Top :
     parameter DATA_WIDTH = 28
     parameter LOAD_FILE = "memory_init/tune_init_0.mem"
 
-  module Memory_51 :
+  module Memory_67 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<8>, dataRead : UInt<28>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<28>} @[\\src\\main\\scala\\Memory.scala 48:14]
 
-    inst ramsSpWf of RamInitSpWf_49 @[\\src\\main\\scala\\Memory.scala 65:26]
+    inst ramsSpWf of RamInitSpWf_65 @[\\src\\main\\scala\\Memory.scala 65:26]
     ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
     ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
     ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
@@ -6839,7 +7479,7 @@ circuit Top :
     ramsSpWf.di <= io.dataWrite @[\\src\\main\\scala\\Memory.scala 70:20]
     io.dataRead <= ramsSpWf.dout @[\\src\\main\\scala\\Memory.scala 71:17]
 
-  extmodule RamInitSpWf_50 :
+  extmodule RamInitSpWf_66 :
     input clk : Clock
     input we : UInt<1>
     input en : UInt<1>
@@ -6851,12 +7491,12 @@ circuit Top :
     parameter DATA_WIDTH = 28
     parameter LOAD_FILE = "memory_init/tune_init_1.mem"
 
-  module Memory_52 :
+  module Memory_68 :
     input clock : Clock
     input reset : Reset
     output io : { flip address : UInt<8>, dataRead : UInt<28>, flip enable : UInt<1>, flip writeEnable : UInt<1>, flip dataWrite : UInt<28>} @[\\src\\main\\scala\\Memory.scala 48:14]
 
-    inst ramsSpWf of RamInitSpWf_50 @[\\src\\main\\scala\\Memory.scala 65:26]
+    inst ramsSpWf of RamInitSpWf_66 @[\\src\\main\\scala\\Memory.scala 65:26]
     ramsSpWf.clk <= clock @[\\src\\main\\scala\\Memory.scala 66:21]
     ramsSpWf.we <= io.writeEnable @[\\src\\main\\scala\\Memory.scala 67:20]
     ramsSpWf.en <= io.enable @[\\src\\main\\scala\\Memory.scala 68:20]
@@ -6869,10 +7509,10 @@ circuit Top :
     input reset : Reset
     output io : { soundOut : UInt<1>, flip startTune : UInt<1>[2], flip stopTune : UInt<1>[2], flip pauseTune : UInt<1>[2], playingTune : UInt<1>[2], flip tuneId : UInt<1>} @[\\src\\main\\scala\\SoundEngine.scala 13:14]
 
-    inst tuneMemories_0 of Memory_51 @[\\src\\main\\scala\\SoundEngine.scala 26:28]
+    inst tuneMemories_0 of Memory_67 @[\\src\\main\\scala\\SoundEngine.scala 26:28]
     tuneMemories_0.clock <= clock
     tuneMemories_0.reset <= reset
-    inst tuneMemories_1 of Memory_52 @[\\src\\main\\scala\\SoundEngine.scala 26:28]
+    inst tuneMemories_1 of Memory_68 @[\\src\\main\\scala\\SoundEngine.scala 26:28]
     tuneMemories_1.clock <= clock
     tuneMemories_1.reset <= reset
     reg counter1msReg : UInt<17>, clock with :
@@ -7139,7 +7779,7 @@ circuit Top :
   module GameLogic :
     input clock : Clock
     input reset : Reset
-    output io : { flip btnC : UInt<1>, flip btnU : UInt<1>, flip btnL : UInt<1>, flip btnR : UInt<1>, flip btnD : UInt<1>, flip sw : UInt<1>[8], led : UInt<1>[8], spriteXPosition : SInt<11>[32], spriteYPosition : SInt<10>[32], spriteVisible : UInt<1>[32], spriteFlipHorizontal : UInt<1>[32], spriteFlipVertical : UInt<1>[32], spriteScaleUpHorizontal : UInt<1>[32], spriteScaleDownHorizontal : UInt<1>[32], spriteScaleUpVertical : UInt<1>[32], spriteScaleDownVertical : UInt<1>[32], viewBoxX : UInt<10>, viewBoxY : UInt<9>, backBufferWriteData : UInt<4>, backBufferWriteAddress : UInt<11>, backBufferWriteEnable : UInt<1>, flip newFrame : UInt<1>, frameUpdateDone : UInt<1>, startTune : UInt<1>[2], stopTune : UInt<1>[2], pauseTune : UInt<1>[2], flip playingTune : UInt<1>[2], tuneId : UInt<1>} @[\\src\\main\\scala\\GameLogic.scala 12:14]
+    output io : { flip btnC : UInt<1>, flip btnU : UInt<1>, flip btnL : UInt<1>, flip btnR : UInt<1>, flip btnD : UInt<1>, flip sw : UInt<1>[8], led : UInt<1>[8], spriteXPosition : SInt<11>[32], spriteYPosition : SInt<10>[32], spriteVisible : UInt<1>[32], spriteFlipHorizontal : UInt<1>[32], spriteFlipVertical : UInt<1>[32], spriteScaleUpHorizontal : UInt<1>[32], spriteScaleDownHorizontal : UInt<1>[32], spriteScaleUpVertical : UInt<1>[32], spriteScaleDownVertical : UInt<1>[32], viewBoxX : UInt<10>, viewBoxY : UInt<9>, backBufferWriteData : UInt<5>, backBufferWriteAddress : UInt<11>, backBufferWriteEnable : UInt<1>, flip newFrame : UInt<1>, frameUpdateDone : UInt<1>, startTune : UInt<1>[2], stopTune : UInt<1>[2], pauseTune : UInt<1>[2], flip playingTune : UInt<1>[2], tuneId : UInt<1>} @[\\src\\main\\scala\\GameLogic.scala 12:14]
 
     io.led[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 61:10]
     io.led[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 61:10]
@@ -7752,1162 +8392,1621 @@ circuit Top :
     io.spriteScaleUpVertical[31] <= _io_spriteScaleUpVertical_31_T @[\\src\\main\\scala\\GameLogic.scala 244:43]
     node _io_spriteScaleDownVertical_31_T = eq(explosionSize[2], UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 245:66]
     io.spriteScaleDownVertical[31] <= _io_spriteScaleDownVertical_31_T @[\\src\\main\\scala\\GameLogic.scala 245:45]
-    reg seedingTimer : UInt<8>, clock with :
-      reset => (reset, UInt<8>("h0")) @[\\src\\main\\scala\\GameLogic.scala 251:29]
-    reg seeded : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 252:23]
-    reg lfsrReg : UInt<8>, clock with :
-      reset => (reset, UInt<8>("h1")) @[\\src\\main\\scala\\GameLogic.scala 255:24]
-    node _T = eq(seeded, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 256:19]
-    node _T_1 = and(io.btnC, _T) @[\\src\\main\\scala\\GameLogic.scala 256:16]
-    when _T_1 : @[\\src\\main\\scala\\GameLogic.scala 256:28]
-      seeded <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 257:12]
-      node _lfsrReg_T = bits(seedingTimer, 7, 0) @[\\src\\main\\scala\\GameLogic.scala 258:28]
-      lfsrReg <= _lfsrReg_T @[\\src\\main\\scala\\GameLogic.scala 258:13]
     reg viewBoxXReg : UInt<10>, clock with :
-      reset => (reset, UInt<10>("h0")) @[\\src\\main\\scala\\GameLogic.scala 263:28]
+      reset => (reset, UInt<10>("h0")) @[\\src\\main\\scala\\GameLogic.scala 250:28]
     reg viewBoxYReg : UInt<9>, clock with :
-      reset => (reset, UInt<9>("h0")) @[\\src\\main\\scala\\GameLogic.scala 264:28]
-    io.viewBoxX <= viewBoxXReg @[\\src\\main\\scala\\GameLogic.scala 266:15]
-    io.viewBoxY <= viewBoxYReg @[\\src\\main\\scala\\GameLogic.scala 267:15]
+      reset => (reset, UInt<9>("h1e0")) @[\\src\\main\\scala\\GameLogic.scala 251:28]
+    io.viewBoxX <= viewBoxXReg @[\\src\\main\\scala\\GameLogic.scala 253:15]
+    io.viewBoxY <= viewBoxYReg @[\\src\\main\\scala\\GameLogic.scala 254:15]
+    reg seedingTimer : UInt<8>, clock with :
+      reset => (reset, UInt<8>("h0")) @[\\src\\main\\scala\\GameLogic.scala 259:29]
+    reg seeded : UInt<1>, clock with :
+      reset => (reset, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 260:23]
+    reg lfsrReg : UInt<8>, clock with :
+      reset => (reset, UInt<8>("h1")) @[\\src\\main\\scala\\GameLogic.scala 263:24]
+    node _T = eq(seeded, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 264:19]
+    node _T_1 = and(io.btnC, _T) @[\\src\\main\\scala\\GameLogic.scala 264:16]
+    when _T_1 : @[\\src\\main\\scala\\GameLogic.scala 264:28]
+      seeded <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 265:12]
+      node _lfsrReg_T = bits(seedingTimer, 7, 0) @[\\src\\main\\scala\\GameLogic.scala 266:28]
+      lfsrReg <= _lfsrReg_T @[\\src\\main\\scala\\GameLogic.scala 266:13]
+      viewBoxXReg <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 267:17]
+      viewBoxYReg <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 268:17]
+      heartsVisible[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 270:24]
+      heartsVisible[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 270:24]
+      heartsVisible[2] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 270:24]
     reg collisionAstIndex : UInt<4>, clock with :
-      reset => (reset, UInt<4>("h0")) @[\\src\\main\\scala\\GameLogic.scala 275:34]
+      reset => (reset, UInt<4>("h0")) @[\\src\\main\\scala\\GameLogic.scala 280:34]
     reg collisionCheckMode : UInt<4>, clock with :
-      reset => (reset, UInt<4>("h0")) @[\\src\\main\\scala\\GameLogic.scala 276:35]
+      reset => (reset, UInt<4>("h0")) @[\\src\\main\\scala\\GameLogic.scala 281:35]
     reg pendingDX : SInt<9>, clock with :
-      reset => (UInt<1>("h0"), pendingDX) @[\\src\\main\\scala\\GameLogic.scala 278:22]
+      reset => (UInt<1>("h0"), pendingDX) @[\\src\\main\\scala\\GameLogic.scala 283:22]
     reg pendingDY : SInt<9>, clock with :
-      reset => (UInt<1>("h0"), pendingDY) @[\\src\\main\\scala\\GameLogic.scala 279:22]
+      reset => (UInt<1>("h0"), pendingDY) @[\\src\\main\\scala\\GameLogic.scala 284:22]
     reg pendingRadiusSq : SInt<12>, clock with :
-      reset => (UInt<1>("h0"), pendingRadiusSq) @[\\src\\main\\scala\\GameLogic.scala 280:28]
+      reset => (UInt<1>("h0"), pendingRadiusSq) @[\\src\\main\\scala\\GameLogic.scala 285:28]
     reg pendingCircleCheck : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 281:35]
-    when io.newFrame : @[\\src\\main\\scala\\GameLogic.scala 284:21]
-      node _T_2 = eq(seeded, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 286:10]
-      when _T_2 : @[\\src\\main\\scala\\GameLogic.scala 286:19]
-        node _seedingTimer_T = add(seedingTimer, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 287:36]
-        node _seedingTimer_T_1 = tail(_seedingTimer_T, 1) @[\\src\\main\\scala\\GameLogic.scala 287:36]
-        seedingTimer <= _seedingTimer_T_1 @[\\src\\main\\scala\\GameLogic.scala 287:20]
-      node _asteroidSpawnTimer_T = add(asteroidSpawnTimer, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 291:46]
-      node _asteroidSpawnTimer_T_1 = tail(_asteroidSpawnTimer_T, 1) @[\\src\\main\\scala\\GameLogic.scala 291:46]
-      asteroidSpawnTimer <= _asteroidSpawnTimer_T_1 @[\\src\\main\\scala\\GameLogic.scala 291:24]
-      node _T_3 = eq(rocketReadyReg, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 294:10]
-      when _T_3 : @[\\src\\main\\scala\\GameLogic.scala 294:27]
-        node _rocketCooldownTimer_T = add(rocketCooldownTimer, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 295:50]
-        node _rocketCooldownTimer_T_1 = tail(_rocketCooldownTimer_T, 1) @[\\src\\main\\scala\\GameLogic.scala 295:50]
-        rocketCooldownTimer <= _rocketCooldownTimer_T_1 @[\\src\\main\\scala\\GameLogic.scala 295:27]
-        node _T_4 = sub(UInt<6>("h28"), UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 296:59]
-        node _T_5 = tail(_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 296:59]
-        node _T_6 = eq(rocketCooldownTimer, _T_5) @[\\src\\main\\scala\\GameLogic.scala 296:32]
-        when _T_6 : @[\\src\\main\\scala\\GameLogic.scala 296:66]
-          rocketCooldownTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 297:29]
-          rocketReadyReg <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 298:24]
-      when explosionActive[0] : @[\\src\\main\\scala\\GameLogic.scala 304:32]
-        node _explosionTimer_0_T = add(explosionTimer[0], UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 305:48]
-        node _explosionTimer_0_T_1 = tail(_explosionTimer_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 305:48]
-        explosionTimer[0] <= _explosionTimer_0_T_1 @[\\src\\main\\scala\\GameLogic.scala 305:27]
-      when explosionActive[1] : @[\\src\\main\\scala\\GameLogic.scala 304:32]
-        node _explosionTimer_1_T = add(explosionTimer[1], UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 305:48]
-        node _explosionTimer_1_T_1 = tail(_explosionTimer_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 305:48]
-        explosionTimer[1] <= _explosionTimer_1_T_1 @[\\src\\main\\scala\\GameLogic.scala 305:27]
-      when explosionActive[2] : @[\\src\\main\\scala\\GameLogic.scala 304:32]
-        node _explosionTimer_2_T = add(explosionTimer[2], UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 305:48]
-        node _explosionTimer_2_T_1 = tail(_explosionTimer_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 305:48]
-        explosionTimer[2] <= _explosionTimer_2_T_1 @[\\src\\main\\scala\\GameLogic.scala 305:27]
-      when heartRemovalActive : @[\\src\\main\\scala\\GameLogic.scala 309:30]
-        node _heartFlashTimer_T = add(heartFlashTimer, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 310:42]
-        node _heartFlashTimer_T_1 = tail(_heartFlashTimer_T, 1) @[\\src\\main\\scala\\GameLogic.scala 310:42]
-        heartFlashTimer <= _heartFlashTimer_T_1 @[\\src\\main\\scala\\GameLogic.scala 310:23]
-      node _T_7 = eq(viewBoxXReg, UInt<10>("h27f")) @[\\src\\main\\scala\\GameLogic.scala 314:22]
-      when _T_7 : @[\\src\\main\\scala\\GameLogic.scala 314:33]
-        viewBoxXReg <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 315:19]
-      else :
-        node _viewBoxXReg_T = add(viewBoxXReg, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 317:34]
-        node _viewBoxXReg_T_1 = tail(_viewBoxXReg_T, 1) @[\\src\\main\\scala\\GameLogic.scala 317:34]
-        viewBoxXReg <= _viewBoxXReg_T_1 @[\\src\\main\\scala\\GameLogic.scala 317:19]
-    io.frameUpdateDone <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 342:22]
-    node _T_8 = eq(UInt<4>("h0"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 344:20]
-    when _T_8 : @[\\src\\main\\scala\\GameLogic.scala 344:20]
-      when io.newFrame : @[\\src\\main\\scala\\GameLogic.scala 346:25]
-        stateReg <= UInt<4>("h1") @[\\src\\main\\scala\\GameLogic.scala 347:18]
+      reset => (reset, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 286:35]
+    when io.newFrame : @[\\src\\main\\scala\\GameLogic.scala 289:21]
+      node _T_2 = eq(seeded, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 291:10]
+      when _T_2 : @[\\src\\main\\scala\\GameLogic.scala 291:19]
+        node _seedingTimer_T = add(seedingTimer, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 292:36]
+        node _seedingTimer_T_1 = tail(_seedingTimer_T, 1) @[\\src\\main\\scala\\GameLogic.scala 292:36]
+        seedingTimer <= _seedingTimer_T_1 @[\\src\\main\\scala\\GameLogic.scala 292:20]
+      node _asteroidSpawnTimer_T = add(asteroidSpawnTimer, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 296:46]
+      node _asteroidSpawnTimer_T_1 = tail(_asteroidSpawnTimer_T, 1) @[\\src\\main\\scala\\GameLogic.scala 296:46]
+      asteroidSpawnTimer <= _asteroidSpawnTimer_T_1 @[\\src\\main\\scala\\GameLogic.scala 296:24]
+      node _T_3 = eq(rocketReadyReg, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 299:10]
+      when _T_3 : @[\\src\\main\\scala\\GameLogic.scala 299:27]
+        node _rocketCooldownTimer_T = add(rocketCooldownTimer, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 300:50]
+        node _rocketCooldownTimer_T_1 = tail(_rocketCooldownTimer_T, 1) @[\\src\\main\\scala\\GameLogic.scala 300:50]
+        rocketCooldownTimer <= _rocketCooldownTimer_T_1 @[\\src\\main\\scala\\GameLogic.scala 300:27]
+        node _T_4 = sub(UInt<6>("h28"), UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 301:59]
+        node _T_5 = tail(_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 301:59]
+        node _T_6 = eq(rocketCooldownTimer, _T_5) @[\\src\\main\\scala\\GameLogic.scala 301:32]
+        when _T_6 : @[\\src\\main\\scala\\GameLogic.scala 301:66]
+          rocketCooldownTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 302:29]
+          rocketReadyReg <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 303:24]
+      when explosionActive[0] : @[\\src\\main\\scala\\GameLogic.scala 309:32]
+        node _explosionTimer_0_T = add(explosionTimer[0], UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 310:48]
+        node _explosionTimer_0_T_1 = tail(_explosionTimer_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 310:48]
+        explosionTimer[0] <= _explosionTimer_0_T_1 @[\\src\\main\\scala\\GameLogic.scala 310:27]
+      when explosionActive[1] : @[\\src\\main\\scala\\GameLogic.scala 309:32]
+        node _explosionTimer_1_T = add(explosionTimer[1], UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 310:48]
+        node _explosionTimer_1_T_1 = tail(_explosionTimer_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 310:48]
+        explosionTimer[1] <= _explosionTimer_1_T_1 @[\\src\\main\\scala\\GameLogic.scala 310:27]
+      when explosionActive[2] : @[\\src\\main\\scala\\GameLogic.scala 309:32]
+        node _explosionTimer_2_T = add(explosionTimer[2], UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 310:48]
+        node _explosionTimer_2_T_1 = tail(_explosionTimer_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 310:48]
+        explosionTimer[2] <= _explosionTimer_2_T_1 @[\\src\\main\\scala\\GameLogic.scala 310:27]
+      when heartRemovalActive : @[\\src\\main\\scala\\GameLogic.scala 314:30]
+        node _heartFlashTimer_T = add(heartFlashTimer, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 315:42]
+        node _heartFlashTimer_T_1 = tail(_heartFlashTimer_T, 1) @[\\src\\main\\scala\\GameLogic.scala 315:42]
+        heartFlashTimer <= _heartFlashTimer_T_1 @[\\src\\main\\scala\\GameLogic.scala 315:23]
+      when seeded : @[\\src\\main\\scala\\GameLogic.scala 319:18]
+        node _T_7 = eq(viewBoxXReg, UInt<10>("h27f")) @[\\src\\main\\scala\\GameLogic.scala 320:24]
+        when _T_7 : @[\\src\\main\\scala\\GameLogic.scala 320:35]
+          viewBoxXReg <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 321:21]
+        else :
+          node _viewBoxXReg_T = add(viewBoxXReg, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 323:36]
+          node _viewBoxXReg_T_1 = tail(_viewBoxXReg_T, 1) @[\\src\\main\\scala\\GameLogic.scala 323:36]
+          viewBoxXReg <= _viewBoxXReg_T_1 @[\\src\\main\\scala\\GameLogic.scala 323:21]
+    io.frameUpdateDone <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 349:22]
+    node _T_8 = eq(UInt<4>("h0"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 351:20]
+    when _T_8 : @[\\src\\main\\scala\\GameLogic.scala 351:20]
+      when io.newFrame : @[\\src\\main\\scala\\GameLogic.scala 353:25]
+        when seeded : @[\\src\\main\\scala\\GameLogic.scala 354:22]
+          stateReg <= UInt<4>("h1") @[\\src\\main\\scala\\GameLogic.scala 355:20]
+        else :
+          stateReg <= UInt<4>("h8") @[\\src\\main\\scala\\GameLogic.scala 357:20]
     else :
-      node _T_9 = eq(UInt<4>("h1"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 344:20]
-      when _T_9 : @[\\src\\main\\scala\\GameLogic.scala 344:20]
-        node _T_10 = lt(sprite0YReg, asSInt(UInt<10>("h164"))) @[\\src\\main\\scala\\GameLogic.scala 354:35]
-        node _T_11 = and(io.btnD, _T_10) @[\\src\\main\\scala\\GameLogic.scala 354:20]
-        when _T_11 : @[\\src\\main\\scala\\GameLogic.scala 354:46]
-          node _sprite0YReg_T = add(sprite0YReg, asSInt(UInt<3>("h3"))) @[\\src\\main\\scala\\GameLogic.scala 355:36]
-          node _sprite0YReg_T_1 = tail(_sprite0YReg_T, 1) @[\\src\\main\\scala\\GameLogic.scala 355:36]
-          node _sprite0YReg_T_2 = asSInt(_sprite0YReg_T_1) @[\\src\\main\\scala\\GameLogic.scala 355:36]
-          sprite0YReg <= _sprite0YReg_T_2 @[\\src\\main\\scala\\GameLogic.scala 355:21]
+      node _T_9 = eq(UInt<4>("h1"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 351:20]
+      when _T_9 : @[\\src\\main\\scala\\GameLogic.scala 351:20]
+        node _T_10 = lt(sprite0YReg, asSInt(UInt<10>("h164"))) @[\\src\\main\\scala\\GameLogic.scala 365:35]
+        node _T_11 = and(io.btnD, _T_10) @[\\src\\main\\scala\\GameLogic.scala 365:20]
+        when _T_11 : @[\\src\\main\\scala\\GameLogic.scala 365:46]
+          node _sprite0YReg_T = add(sprite0YReg, asSInt(UInt<3>("h3"))) @[\\src\\main\\scala\\GameLogic.scala 366:36]
+          node _sprite0YReg_T_1 = tail(_sprite0YReg_T, 1) @[\\src\\main\\scala\\GameLogic.scala 366:36]
+          node _sprite0YReg_T_2 = asSInt(_sprite0YReg_T_1) @[\\src\\main\\scala\\GameLogic.scala 366:36]
+          sprite0YReg <= _sprite0YReg_T_2 @[\\src\\main\\scala\\GameLogic.scala 366:21]
         else :
-          node _T_12 = gt(sprite0YReg, asSInt(UInt<8>("h5e"))) @[\\src\\main\\scala\\GameLogic.scala 356:41]
-          node _T_13 = and(io.btnU, _T_12) @[\\src\\main\\scala\\GameLogic.scala 356:26]
-          when _T_13 : @[\\src\\main\\scala\\GameLogic.scala 356:51]
-            node _sprite0YReg_T_3 = sub(sprite0YReg, asSInt(UInt<3>("h3"))) @[\\src\\main\\scala\\GameLogic.scala 357:36]
-            node _sprite0YReg_T_4 = tail(_sprite0YReg_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 357:36]
-            node _sprite0YReg_T_5 = asSInt(_sprite0YReg_T_4) @[\\src\\main\\scala\\GameLogic.scala 357:36]
-            sprite0YReg <= _sprite0YReg_T_5 @[\\src\\main\\scala\\GameLogic.scala 357:21]
-        stateReg <= UInt<4>("h2") @[\\src\\main\\scala\\GameLogic.scala 360:16]
+          node _T_12 = gt(sprite0YReg, asSInt(UInt<8>("h5e"))) @[\\src\\main\\scala\\GameLogic.scala 367:41]
+          node _T_13 = and(io.btnU, _T_12) @[\\src\\main\\scala\\GameLogic.scala 367:26]
+          when _T_13 : @[\\src\\main\\scala\\GameLogic.scala 367:51]
+            node _sprite0YReg_T_3 = sub(sprite0YReg, asSInt(UInt<3>("h3"))) @[\\src\\main\\scala\\GameLogic.scala 368:36]
+            node _sprite0YReg_T_4 = tail(_sprite0YReg_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 368:36]
+            node _sprite0YReg_T_5 = asSInt(_sprite0YReg_T_4) @[\\src\\main\\scala\\GameLogic.scala 368:36]
+            sprite0YReg <= _sprite0YReg_T_5 @[\\src\\main\\scala\\GameLogic.scala 368:21]
+        stateReg <= UInt<4>("h2") @[\\src\\main\\scala\\GameLogic.scala 371:16]
       else :
-        node _T_14 = eq(UInt<4>("h2"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 344:20]
-        when _T_14 : @[\\src\\main\\scala\\GameLogic.scala 344:20]
-          node _T_15 = geq(asteroidSpawnTimer, asteroidSpawnIntervalRandomized) @[\\src\\main\\scala\\GameLogic.scala 366:31]
-          node _T_16 = and(_T_15, seeded) @[\\src\\main\\scala\\GameLogic.scala 366:66]
-          when _T_16 : @[\\src\\main\\scala\\GameLogic.scala 366:77]
-            asteroidSpawnTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 367:28]
-            node _lfsrReg_T_1 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 368:31]
-            node _lfsrReg_T_2 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 368:44]
-            node _lfsrReg_T_3 = xor(_lfsrReg_T_1, _lfsrReg_T_2) @[\\src\\main\\scala\\GameLogic.scala 368:35]
-            node _lfsrReg_T_4 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 369:20]
-            node _lfsrReg_T_5 = xor(_lfsrReg_T_3, _lfsrReg_T_4) @[\\src\\main\\scala\\GameLogic.scala 369:11]
-            node _lfsrReg_T_6 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 369:33]
-            node _lfsrReg_T_7 = xor(_lfsrReg_T_5, _lfsrReg_T_6) @[\\src\\main\\scala\\GameLogic.scala 369:24]
-            node _lfsrReg_T_8 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 369:45]
-            node _lfsrReg_T_9 = cat(_lfsrReg_T_7, _lfsrReg_T_8) @[\\src\\main\\scala\\GameLogic.scala 368:23]
-            lfsrReg <= _lfsrReg_T_9 @[\\src\\main\\scala\\GameLogic.scala 368:17]
-            node _shouldSpawn_T = eq(UInt<1>("h0"), UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:29]
-            node _shouldSpawn_T_1 = eq(asteroidActive[0], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:41]
-            node shouldSpawn = and(_shouldSpawn_T, _shouldSpawn_T_1) @[\\src\\main\\scala\\GameLogic.scala 373:38]
-            when shouldSpawn : @[\\src\\main\\scala\\GameLogic.scala 374:29]
-              asteroidActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 376:31]
-              asteroidX[0] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 377:26]
-              node _mappedSize_T = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:41]
-              node _mappedSize_T_1 = eq(_mappedSize_T, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 380:48]
-              node _mappedSize_T_2 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:69]
-              node mappedSize = mux(_mappedSize_T_1, UInt<1>("h0"), _mappedSize_T_2) @[\\src\\main\\scala\\GameLogic.scala 380:33]
-              asteroidSize[0] <= mappedSize @[\\src\\main\\scala\\GameLogic.scala 381:29]
-              node _rawYOffset_T = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 384:38]
-              node rawYOffset = shl(_rawYOffset_T, 3) @[\\src\\main\\scala\\GameLogic.scala 384:45]
-              node _safeYOffset_T = eq(mappedSize, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 385:46]
-              node _safeYOffset_T_1 = and(rawYOffset, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 385:65]
-              node safeYOffset = mux(_safeYOffset_T, _safeYOffset_T_1, rawYOffset) @[\\src\\main\\scala\\GameLogic.scala 385:34]
-              node _sum_T = add(UInt<9>("h60"), safeYOffset) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node _sum_T_1 = tail(_sum_T, 1) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node sum = cvt(_sum_T_1) @[\\src\\main\\scala\\GameLogic.scala 386:49]
-              asteroidY[0] <= sum @[\\src\\main\\scala\\GameLogic.scala 388:26]
-              node _nextLFSR1_T = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 391:40]
-              node _nextLFSR1_T_1 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 391:53]
-              node _nextLFSR1_T_2 = xor(_nextLFSR1_T, _nextLFSR1_T_1) @[\\src\\main\\scala\\GameLogic.scala 391:44]
-              node _nextLFSR1_T_3 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 391:66]
-              node _nextLFSR1_T_4 = xor(_nextLFSR1_T_2, _nextLFSR1_T_3) @[\\src\\main\\scala\\GameLogic.scala 391:57]
-              node _nextLFSR1_T_5 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 391:79]
-              node _nextLFSR1_T_6 = xor(_nextLFSR1_T_4, _nextLFSR1_T_5) @[\\src\\main\\scala\\GameLogic.scala 391:70]
-              node _nextLFSR1_T_7 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 391:91]
-              node nextLFSR1 = cat(_nextLFSR1_T_6, _nextLFSR1_T_7) @[\\src\\main\\scala\\GameLogic.scala 391:32]
-              node speedOffset = bits(nextLFSR1, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 392:40]
-              node _speedMultiplier_T = add(UInt<7>("h5a"), speedOffset) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node speedMultiplier = tail(_speedMultiplier_T, 1) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node _speedScaled_T = cvt(speedMultiplier) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_1 = mul(asSInt(UInt<3>("h5")), _speedScaled_T) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_2 = tail(_speedScaled_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_3 = asSInt(_speedScaled_T_2) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node speedScaled = shr(_speedScaled_T_3, 7) @[\\src\\main\\scala\\GameLogic.scala 394:73]
-              asteroidVX[0] <= speedScaled @[\\src\\main\\scala\\GameLogic.scala 395:27]
-              asteroidVY[0] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 396:27]
-              node _nextLFSR2_T = bits(nextLFSR1, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 399:42]
-              node _nextLFSR2_T_1 = bits(nextLFSR1, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 399:57]
-              node _nextLFSR2_T_2 = xor(_nextLFSR2_T, _nextLFSR2_T_1) @[\\src\\main\\scala\\GameLogic.scala 399:46]
-              node _nextLFSR2_T_3 = bits(nextLFSR1, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 399:72]
-              node _nextLFSR2_T_4 = xor(_nextLFSR2_T_2, _nextLFSR2_T_3) @[\\src\\main\\scala\\GameLogic.scala 399:61]
-              node _nextLFSR2_T_5 = bits(nextLFSR1, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 399:87]
-              node _nextLFSR2_T_6 = xor(_nextLFSR2_T_4, _nextLFSR2_T_5) @[\\src\\main\\scala\\GameLogic.scala 399:76]
-              node _nextLFSR2_T_7 = bits(nextLFSR1, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 399:101]
-              node nextLFSR2 = cat(_nextLFSR2_T_6, _nextLFSR2_T_7) @[\\src\\main\\scala\\GameLogic.scala 399:32]
-              node intervalOffset = bits(nextLFSR2, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 400:43]
-              node _intervalMultiplier_T = add(UInt<7>("h5a"), intervalOffset) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node intervalMultiplier = tail(_intervalMultiplier_T, 1) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node _asteroidSpawnIntervalRandomized_T = mul(UInt<6>("h3c"), intervalMultiplier) @[\\src\\main\\scala\\GameLogic.scala 402:75]
-              node _asteroidSpawnIntervalRandomized_T_1 = shr(_asteroidSpawnIntervalRandomized_T, 7) @[\\src\\main\\scala\\GameLogic.scala 402:97]
-              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_1 @[\\src\\main\\scala\\GameLogic.scala 402:45]
-              lfsrReg <= nextLFSR2 @[\\src\\main\\scala\\GameLogic.scala 405:21]
-            node _T_17 = or(UInt<1>("h0"), shouldSpawn) @[\\src\\main\\scala\\GameLogic.scala 408:29]
-            node _shouldSpawn_T_2 = eq(_T_17, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:29]
-            node _shouldSpawn_T_3 = eq(asteroidActive[1], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:41]
-            node shouldSpawn_1 = and(_shouldSpawn_T_2, _shouldSpawn_T_3) @[\\src\\main\\scala\\GameLogic.scala 373:38]
-            when shouldSpawn_1 : @[\\src\\main\\scala\\GameLogic.scala 374:29]
-              asteroidActive[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 376:31]
-              asteroidX[1] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 377:26]
-              node _mappedSize_T_3 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:41]
-              node _mappedSize_T_4 = eq(_mappedSize_T_3, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 380:48]
-              node _mappedSize_T_5 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:69]
-              node mappedSize_1 = mux(_mappedSize_T_4, UInt<1>("h0"), _mappedSize_T_5) @[\\src\\main\\scala\\GameLogic.scala 380:33]
-              asteroidSize[1] <= mappedSize_1 @[\\src\\main\\scala\\GameLogic.scala 381:29]
-              node _rawYOffset_T_1 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 384:38]
-              node rawYOffset_1 = shl(_rawYOffset_T_1, 3) @[\\src\\main\\scala\\GameLogic.scala 384:45]
-              node _safeYOffset_T_2 = eq(mappedSize_1, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 385:46]
-              node _safeYOffset_T_3 = and(rawYOffset_1, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 385:65]
-              node safeYOffset_1 = mux(_safeYOffset_T_2, _safeYOffset_T_3, rawYOffset_1) @[\\src\\main\\scala\\GameLogic.scala 385:34]
-              node _sum_T_2 = add(UInt<9>("h60"), safeYOffset_1) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node _sum_T_3 = tail(_sum_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node sum_1 = cvt(_sum_T_3) @[\\src\\main\\scala\\GameLogic.scala 386:49]
-              asteroidY[1] <= sum_1 @[\\src\\main\\scala\\GameLogic.scala 388:26]
-              node _nextLFSR1_T_8 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 391:40]
-              node _nextLFSR1_T_9 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 391:53]
-              node _nextLFSR1_T_10 = xor(_nextLFSR1_T_8, _nextLFSR1_T_9) @[\\src\\main\\scala\\GameLogic.scala 391:44]
-              node _nextLFSR1_T_11 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 391:66]
-              node _nextLFSR1_T_12 = xor(_nextLFSR1_T_10, _nextLFSR1_T_11) @[\\src\\main\\scala\\GameLogic.scala 391:57]
-              node _nextLFSR1_T_13 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 391:79]
-              node _nextLFSR1_T_14 = xor(_nextLFSR1_T_12, _nextLFSR1_T_13) @[\\src\\main\\scala\\GameLogic.scala 391:70]
-              node _nextLFSR1_T_15 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 391:91]
-              node nextLFSR1_1 = cat(_nextLFSR1_T_14, _nextLFSR1_T_15) @[\\src\\main\\scala\\GameLogic.scala 391:32]
-              node speedOffset_1 = bits(nextLFSR1_1, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 392:40]
-              node _speedMultiplier_T_1 = add(UInt<7>("h5a"), speedOffset_1) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node speedMultiplier_1 = tail(_speedMultiplier_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node _speedScaled_T_4 = cvt(speedMultiplier_1) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_5 = mul(asSInt(UInt<3>("h5")), _speedScaled_T_4) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_6 = tail(_speedScaled_T_5, 1) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_7 = asSInt(_speedScaled_T_6) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node speedScaled_1 = shr(_speedScaled_T_7, 7) @[\\src\\main\\scala\\GameLogic.scala 394:73]
-              asteroidVX[1] <= speedScaled_1 @[\\src\\main\\scala\\GameLogic.scala 395:27]
-              asteroidVY[1] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 396:27]
-              node _nextLFSR2_T_8 = bits(nextLFSR1_1, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 399:42]
-              node _nextLFSR2_T_9 = bits(nextLFSR1_1, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 399:57]
-              node _nextLFSR2_T_10 = xor(_nextLFSR2_T_8, _nextLFSR2_T_9) @[\\src\\main\\scala\\GameLogic.scala 399:46]
-              node _nextLFSR2_T_11 = bits(nextLFSR1_1, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 399:72]
-              node _nextLFSR2_T_12 = xor(_nextLFSR2_T_10, _nextLFSR2_T_11) @[\\src\\main\\scala\\GameLogic.scala 399:61]
-              node _nextLFSR2_T_13 = bits(nextLFSR1_1, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 399:87]
-              node _nextLFSR2_T_14 = xor(_nextLFSR2_T_12, _nextLFSR2_T_13) @[\\src\\main\\scala\\GameLogic.scala 399:76]
-              node _nextLFSR2_T_15 = bits(nextLFSR1_1, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 399:101]
-              node nextLFSR2_1 = cat(_nextLFSR2_T_14, _nextLFSR2_T_15) @[\\src\\main\\scala\\GameLogic.scala 399:32]
-              node intervalOffset_1 = bits(nextLFSR2_1, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 400:43]
-              node _intervalMultiplier_T_1 = add(UInt<7>("h5a"), intervalOffset_1) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node intervalMultiplier_1 = tail(_intervalMultiplier_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node _asteroidSpawnIntervalRandomized_T_2 = mul(UInt<6>("h3c"), intervalMultiplier_1) @[\\src\\main\\scala\\GameLogic.scala 402:75]
-              node _asteroidSpawnIntervalRandomized_T_3 = shr(_asteroidSpawnIntervalRandomized_T_2, 7) @[\\src\\main\\scala\\GameLogic.scala 402:97]
-              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_3 @[\\src\\main\\scala\\GameLogic.scala 402:45]
-              lfsrReg <= nextLFSR2_1 @[\\src\\main\\scala\\GameLogic.scala 405:21]
-            node _T_18 = or(_T_17, shouldSpawn_1) @[\\src\\main\\scala\\GameLogic.scala 408:29]
-            node _shouldSpawn_T_4 = eq(_T_18, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:29]
-            node _shouldSpawn_T_5 = eq(asteroidActive[2], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:41]
-            node shouldSpawn_2 = and(_shouldSpawn_T_4, _shouldSpawn_T_5) @[\\src\\main\\scala\\GameLogic.scala 373:38]
-            when shouldSpawn_2 : @[\\src\\main\\scala\\GameLogic.scala 374:29]
-              asteroidActive[2] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 376:31]
-              asteroidX[2] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 377:26]
-              node _mappedSize_T_6 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:41]
-              node _mappedSize_T_7 = eq(_mappedSize_T_6, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 380:48]
-              node _mappedSize_T_8 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:69]
-              node mappedSize_2 = mux(_mappedSize_T_7, UInt<1>("h0"), _mappedSize_T_8) @[\\src\\main\\scala\\GameLogic.scala 380:33]
-              asteroidSize[2] <= mappedSize_2 @[\\src\\main\\scala\\GameLogic.scala 381:29]
-              node _rawYOffset_T_2 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 384:38]
-              node rawYOffset_2 = shl(_rawYOffset_T_2, 3) @[\\src\\main\\scala\\GameLogic.scala 384:45]
-              node _safeYOffset_T_4 = eq(mappedSize_2, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 385:46]
-              node _safeYOffset_T_5 = and(rawYOffset_2, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 385:65]
-              node safeYOffset_2 = mux(_safeYOffset_T_4, _safeYOffset_T_5, rawYOffset_2) @[\\src\\main\\scala\\GameLogic.scala 385:34]
-              node _sum_T_4 = add(UInt<9>("h60"), safeYOffset_2) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node _sum_T_5 = tail(_sum_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node sum_2 = cvt(_sum_T_5) @[\\src\\main\\scala\\GameLogic.scala 386:49]
-              asteroidY[2] <= sum_2 @[\\src\\main\\scala\\GameLogic.scala 388:26]
-              node _nextLFSR1_T_16 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 391:40]
-              node _nextLFSR1_T_17 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 391:53]
-              node _nextLFSR1_T_18 = xor(_nextLFSR1_T_16, _nextLFSR1_T_17) @[\\src\\main\\scala\\GameLogic.scala 391:44]
-              node _nextLFSR1_T_19 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 391:66]
-              node _nextLFSR1_T_20 = xor(_nextLFSR1_T_18, _nextLFSR1_T_19) @[\\src\\main\\scala\\GameLogic.scala 391:57]
-              node _nextLFSR1_T_21 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 391:79]
-              node _nextLFSR1_T_22 = xor(_nextLFSR1_T_20, _nextLFSR1_T_21) @[\\src\\main\\scala\\GameLogic.scala 391:70]
-              node _nextLFSR1_T_23 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 391:91]
-              node nextLFSR1_2 = cat(_nextLFSR1_T_22, _nextLFSR1_T_23) @[\\src\\main\\scala\\GameLogic.scala 391:32]
-              node speedOffset_2 = bits(nextLFSR1_2, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 392:40]
-              node _speedMultiplier_T_2 = add(UInt<7>("h5a"), speedOffset_2) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node speedMultiplier_2 = tail(_speedMultiplier_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node _speedScaled_T_8 = cvt(speedMultiplier_2) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_9 = mul(asSInt(UInt<3>("h5")), _speedScaled_T_8) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_10 = tail(_speedScaled_T_9, 1) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_11 = asSInt(_speedScaled_T_10) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node speedScaled_2 = shr(_speedScaled_T_11, 7) @[\\src\\main\\scala\\GameLogic.scala 394:73]
-              asteroidVX[2] <= speedScaled_2 @[\\src\\main\\scala\\GameLogic.scala 395:27]
-              asteroidVY[2] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 396:27]
-              node _nextLFSR2_T_16 = bits(nextLFSR1_2, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 399:42]
-              node _nextLFSR2_T_17 = bits(nextLFSR1_2, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 399:57]
-              node _nextLFSR2_T_18 = xor(_nextLFSR2_T_16, _nextLFSR2_T_17) @[\\src\\main\\scala\\GameLogic.scala 399:46]
-              node _nextLFSR2_T_19 = bits(nextLFSR1_2, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 399:72]
-              node _nextLFSR2_T_20 = xor(_nextLFSR2_T_18, _nextLFSR2_T_19) @[\\src\\main\\scala\\GameLogic.scala 399:61]
-              node _nextLFSR2_T_21 = bits(nextLFSR1_2, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 399:87]
-              node _nextLFSR2_T_22 = xor(_nextLFSR2_T_20, _nextLFSR2_T_21) @[\\src\\main\\scala\\GameLogic.scala 399:76]
-              node _nextLFSR2_T_23 = bits(nextLFSR1_2, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 399:101]
-              node nextLFSR2_2 = cat(_nextLFSR2_T_22, _nextLFSR2_T_23) @[\\src\\main\\scala\\GameLogic.scala 399:32]
-              node intervalOffset_2 = bits(nextLFSR2_2, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 400:43]
-              node _intervalMultiplier_T_2 = add(UInt<7>("h5a"), intervalOffset_2) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node intervalMultiplier_2 = tail(_intervalMultiplier_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node _asteroidSpawnIntervalRandomized_T_4 = mul(UInt<6>("h3c"), intervalMultiplier_2) @[\\src\\main\\scala\\GameLogic.scala 402:75]
-              node _asteroidSpawnIntervalRandomized_T_5 = shr(_asteroidSpawnIntervalRandomized_T_4, 7) @[\\src\\main\\scala\\GameLogic.scala 402:97]
-              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_5 @[\\src\\main\\scala\\GameLogic.scala 402:45]
-              lfsrReg <= nextLFSR2_2 @[\\src\\main\\scala\\GameLogic.scala 405:21]
-            node _T_19 = or(_T_18, shouldSpawn_2) @[\\src\\main\\scala\\GameLogic.scala 408:29]
-            node _shouldSpawn_T_6 = eq(_T_19, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:29]
-            node _shouldSpawn_T_7 = eq(asteroidActive[3], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:41]
-            node shouldSpawn_3 = and(_shouldSpawn_T_6, _shouldSpawn_T_7) @[\\src\\main\\scala\\GameLogic.scala 373:38]
-            when shouldSpawn_3 : @[\\src\\main\\scala\\GameLogic.scala 374:29]
-              asteroidActive[3] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 376:31]
-              asteroidX[3] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 377:26]
-              node _mappedSize_T_9 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:41]
-              node _mappedSize_T_10 = eq(_mappedSize_T_9, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 380:48]
-              node _mappedSize_T_11 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:69]
-              node mappedSize_3 = mux(_mappedSize_T_10, UInt<1>("h0"), _mappedSize_T_11) @[\\src\\main\\scala\\GameLogic.scala 380:33]
-              asteroidSize[3] <= mappedSize_3 @[\\src\\main\\scala\\GameLogic.scala 381:29]
-              node _rawYOffset_T_3 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 384:38]
-              node rawYOffset_3 = shl(_rawYOffset_T_3, 3) @[\\src\\main\\scala\\GameLogic.scala 384:45]
-              node _safeYOffset_T_6 = eq(mappedSize_3, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 385:46]
-              node _safeYOffset_T_7 = and(rawYOffset_3, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 385:65]
-              node safeYOffset_3 = mux(_safeYOffset_T_6, _safeYOffset_T_7, rawYOffset_3) @[\\src\\main\\scala\\GameLogic.scala 385:34]
-              node _sum_T_6 = add(UInt<9>("h60"), safeYOffset_3) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node _sum_T_7 = tail(_sum_T_6, 1) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node sum_3 = cvt(_sum_T_7) @[\\src\\main\\scala\\GameLogic.scala 386:49]
-              asteroidY[3] <= sum_3 @[\\src\\main\\scala\\GameLogic.scala 388:26]
-              node _nextLFSR1_T_24 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 391:40]
-              node _nextLFSR1_T_25 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 391:53]
-              node _nextLFSR1_T_26 = xor(_nextLFSR1_T_24, _nextLFSR1_T_25) @[\\src\\main\\scala\\GameLogic.scala 391:44]
-              node _nextLFSR1_T_27 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 391:66]
-              node _nextLFSR1_T_28 = xor(_nextLFSR1_T_26, _nextLFSR1_T_27) @[\\src\\main\\scala\\GameLogic.scala 391:57]
-              node _nextLFSR1_T_29 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 391:79]
-              node _nextLFSR1_T_30 = xor(_nextLFSR1_T_28, _nextLFSR1_T_29) @[\\src\\main\\scala\\GameLogic.scala 391:70]
-              node _nextLFSR1_T_31 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 391:91]
-              node nextLFSR1_3 = cat(_nextLFSR1_T_30, _nextLFSR1_T_31) @[\\src\\main\\scala\\GameLogic.scala 391:32]
-              node speedOffset_3 = bits(nextLFSR1_3, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 392:40]
-              node _speedMultiplier_T_3 = add(UInt<7>("h5a"), speedOffset_3) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node speedMultiplier_3 = tail(_speedMultiplier_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node _speedScaled_T_12 = cvt(speedMultiplier_3) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_13 = mul(asSInt(UInt<3>("h5")), _speedScaled_T_12) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_14 = tail(_speedScaled_T_13, 1) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_15 = asSInt(_speedScaled_T_14) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node speedScaled_3 = shr(_speedScaled_T_15, 7) @[\\src\\main\\scala\\GameLogic.scala 394:73]
-              asteroidVX[3] <= speedScaled_3 @[\\src\\main\\scala\\GameLogic.scala 395:27]
-              asteroidVY[3] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 396:27]
-              node _nextLFSR2_T_24 = bits(nextLFSR1_3, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 399:42]
-              node _nextLFSR2_T_25 = bits(nextLFSR1_3, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 399:57]
-              node _nextLFSR2_T_26 = xor(_nextLFSR2_T_24, _nextLFSR2_T_25) @[\\src\\main\\scala\\GameLogic.scala 399:46]
-              node _nextLFSR2_T_27 = bits(nextLFSR1_3, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 399:72]
-              node _nextLFSR2_T_28 = xor(_nextLFSR2_T_26, _nextLFSR2_T_27) @[\\src\\main\\scala\\GameLogic.scala 399:61]
-              node _nextLFSR2_T_29 = bits(nextLFSR1_3, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 399:87]
-              node _nextLFSR2_T_30 = xor(_nextLFSR2_T_28, _nextLFSR2_T_29) @[\\src\\main\\scala\\GameLogic.scala 399:76]
-              node _nextLFSR2_T_31 = bits(nextLFSR1_3, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 399:101]
-              node nextLFSR2_3 = cat(_nextLFSR2_T_30, _nextLFSR2_T_31) @[\\src\\main\\scala\\GameLogic.scala 399:32]
-              node intervalOffset_3 = bits(nextLFSR2_3, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 400:43]
-              node _intervalMultiplier_T_3 = add(UInt<7>("h5a"), intervalOffset_3) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node intervalMultiplier_3 = tail(_intervalMultiplier_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node _asteroidSpawnIntervalRandomized_T_6 = mul(UInt<6>("h3c"), intervalMultiplier_3) @[\\src\\main\\scala\\GameLogic.scala 402:75]
-              node _asteroidSpawnIntervalRandomized_T_7 = shr(_asteroidSpawnIntervalRandomized_T_6, 7) @[\\src\\main\\scala\\GameLogic.scala 402:97]
-              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_7 @[\\src\\main\\scala\\GameLogic.scala 402:45]
-              lfsrReg <= nextLFSR2_3 @[\\src\\main\\scala\\GameLogic.scala 405:21]
-            node _T_20 = or(_T_19, shouldSpawn_3) @[\\src\\main\\scala\\GameLogic.scala 408:29]
-            node _shouldSpawn_T_8 = eq(_T_20, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:29]
-            node _shouldSpawn_T_9 = eq(asteroidActive[4], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:41]
-            node shouldSpawn_4 = and(_shouldSpawn_T_8, _shouldSpawn_T_9) @[\\src\\main\\scala\\GameLogic.scala 373:38]
-            when shouldSpawn_4 : @[\\src\\main\\scala\\GameLogic.scala 374:29]
-              asteroidActive[4] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 376:31]
-              asteroidX[4] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 377:26]
-              node _mappedSize_T_12 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:41]
-              node _mappedSize_T_13 = eq(_mappedSize_T_12, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 380:48]
-              node _mappedSize_T_14 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:69]
-              node mappedSize_4 = mux(_mappedSize_T_13, UInt<1>("h0"), _mappedSize_T_14) @[\\src\\main\\scala\\GameLogic.scala 380:33]
-              asteroidSize[4] <= mappedSize_4 @[\\src\\main\\scala\\GameLogic.scala 381:29]
-              node _rawYOffset_T_4 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 384:38]
-              node rawYOffset_4 = shl(_rawYOffset_T_4, 3) @[\\src\\main\\scala\\GameLogic.scala 384:45]
-              node _safeYOffset_T_8 = eq(mappedSize_4, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 385:46]
-              node _safeYOffset_T_9 = and(rawYOffset_4, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 385:65]
-              node safeYOffset_4 = mux(_safeYOffset_T_8, _safeYOffset_T_9, rawYOffset_4) @[\\src\\main\\scala\\GameLogic.scala 385:34]
-              node _sum_T_8 = add(UInt<9>("h60"), safeYOffset_4) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node _sum_T_9 = tail(_sum_T_8, 1) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node sum_4 = cvt(_sum_T_9) @[\\src\\main\\scala\\GameLogic.scala 386:49]
-              asteroidY[4] <= sum_4 @[\\src\\main\\scala\\GameLogic.scala 388:26]
-              node _nextLFSR1_T_32 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 391:40]
-              node _nextLFSR1_T_33 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 391:53]
-              node _nextLFSR1_T_34 = xor(_nextLFSR1_T_32, _nextLFSR1_T_33) @[\\src\\main\\scala\\GameLogic.scala 391:44]
-              node _nextLFSR1_T_35 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 391:66]
-              node _nextLFSR1_T_36 = xor(_nextLFSR1_T_34, _nextLFSR1_T_35) @[\\src\\main\\scala\\GameLogic.scala 391:57]
-              node _nextLFSR1_T_37 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 391:79]
-              node _nextLFSR1_T_38 = xor(_nextLFSR1_T_36, _nextLFSR1_T_37) @[\\src\\main\\scala\\GameLogic.scala 391:70]
-              node _nextLFSR1_T_39 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 391:91]
-              node nextLFSR1_4 = cat(_nextLFSR1_T_38, _nextLFSR1_T_39) @[\\src\\main\\scala\\GameLogic.scala 391:32]
-              node speedOffset_4 = bits(nextLFSR1_4, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 392:40]
-              node _speedMultiplier_T_4 = add(UInt<7>("h5a"), speedOffset_4) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node speedMultiplier_4 = tail(_speedMultiplier_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node _speedScaled_T_16 = cvt(speedMultiplier_4) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_17 = mul(asSInt(UInt<3>("h5")), _speedScaled_T_16) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_18 = tail(_speedScaled_T_17, 1) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_19 = asSInt(_speedScaled_T_18) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node speedScaled_4 = shr(_speedScaled_T_19, 7) @[\\src\\main\\scala\\GameLogic.scala 394:73]
-              asteroidVX[4] <= speedScaled_4 @[\\src\\main\\scala\\GameLogic.scala 395:27]
-              asteroidVY[4] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 396:27]
-              node _nextLFSR2_T_32 = bits(nextLFSR1_4, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 399:42]
-              node _nextLFSR2_T_33 = bits(nextLFSR1_4, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 399:57]
-              node _nextLFSR2_T_34 = xor(_nextLFSR2_T_32, _nextLFSR2_T_33) @[\\src\\main\\scala\\GameLogic.scala 399:46]
-              node _nextLFSR2_T_35 = bits(nextLFSR1_4, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 399:72]
-              node _nextLFSR2_T_36 = xor(_nextLFSR2_T_34, _nextLFSR2_T_35) @[\\src\\main\\scala\\GameLogic.scala 399:61]
-              node _nextLFSR2_T_37 = bits(nextLFSR1_4, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 399:87]
-              node _nextLFSR2_T_38 = xor(_nextLFSR2_T_36, _nextLFSR2_T_37) @[\\src\\main\\scala\\GameLogic.scala 399:76]
-              node _nextLFSR2_T_39 = bits(nextLFSR1_4, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 399:101]
-              node nextLFSR2_4 = cat(_nextLFSR2_T_38, _nextLFSR2_T_39) @[\\src\\main\\scala\\GameLogic.scala 399:32]
-              node intervalOffset_4 = bits(nextLFSR2_4, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 400:43]
-              node _intervalMultiplier_T_4 = add(UInt<7>("h5a"), intervalOffset_4) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node intervalMultiplier_4 = tail(_intervalMultiplier_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node _asteroidSpawnIntervalRandomized_T_8 = mul(UInt<6>("h3c"), intervalMultiplier_4) @[\\src\\main\\scala\\GameLogic.scala 402:75]
-              node _asteroidSpawnIntervalRandomized_T_9 = shr(_asteroidSpawnIntervalRandomized_T_8, 7) @[\\src\\main\\scala\\GameLogic.scala 402:97]
-              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_9 @[\\src\\main\\scala\\GameLogic.scala 402:45]
-              lfsrReg <= nextLFSR2_4 @[\\src\\main\\scala\\GameLogic.scala 405:21]
-            node _T_21 = or(_T_20, shouldSpawn_4) @[\\src\\main\\scala\\GameLogic.scala 408:29]
-            node _shouldSpawn_T_10 = eq(_T_21, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:29]
-            node _shouldSpawn_T_11 = eq(asteroidActive[5], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 373:41]
-            node shouldSpawn_5 = and(_shouldSpawn_T_10, _shouldSpawn_T_11) @[\\src\\main\\scala\\GameLogic.scala 373:38]
-            when shouldSpawn_5 : @[\\src\\main\\scala\\GameLogic.scala 374:29]
-              asteroidActive[5] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 376:31]
-              asteroidX[5] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 377:26]
-              node _mappedSize_T_15 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:41]
-              node _mappedSize_T_16 = eq(_mappedSize_T_15, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 380:48]
-              node _mappedSize_T_17 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 380:69]
-              node mappedSize_5 = mux(_mappedSize_T_16, UInt<1>("h0"), _mappedSize_T_17) @[\\src\\main\\scala\\GameLogic.scala 380:33]
-              asteroidSize[5] <= mappedSize_5 @[\\src\\main\\scala\\GameLogic.scala 381:29]
-              node _rawYOffset_T_5 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 384:38]
-              node rawYOffset_5 = shl(_rawYOffset_T_5, 3) @[\\src\\main\\scala\\GameLogic.scala 384:45]
-              node _safeYOffset_T_10 = eq(mappedSize_5, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 385:46]
-              node _safeYOffset_T_11 = and(rawYOffset_5, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 385:65]
-              node safeYOffset_5 = mux(_safeYOffset_T_10, _safeYOffset_T_11, rawYOffset_5) @[\\src\\main\\scala\\GameLogic.scala 385:34]
-              node _sum_T_10 = add(UInt<9>("h60"), safeYOffset_5) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node _sum_T_11 = tail(_sum_T_10, 1) @[\\src\\main\\scala\\GameLogic.scala 386:34]
-              node sum_5 = cvt(_sum_T_11) @[\\src\\main\\scala\\GameLogic.scala 386:49]
-              asteroidY[5] <= sum_5 @[\\src\\main\\scala\\GameLogic.scala 388:26]
-              node _nextLFSR1_T_40 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 391:40]
-              node _nextLFSR1_T_41 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 391:53]
-              node _nextLFSR1_T_42 = xor(_nextLFSR1_T_40, _nextLFSR1_T_41) @[\\src\\main\\scala\\GameLogic.scala 391:44]
-              node _nextLFSR1_T_43 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 391:66]
-              node _nextLFSR1_T_44 = xor(_nextLFSR1_T_42, _nextLFSR1_T_43) @[\\src\\main\\scala\\GameLogic.scala 391:57]
-              node _nextLFSR1_T_45 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 391:79]
-              node _nextLFSR1_T_46 = xor(_nextLFSR1_T_44, _nextLFSR1_T_45) @[\\src\\main\\scala\\GameLogic.scala 391:70]
-              node _nextLFSR1_T_47 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 391:91]
-              node nextLFSR1_5 = cat(_nextLFSR1_T_46, _nextLFSR1_T_47) @[\\src\\main\\scala\\GameLogic.scala 391:32]
-              node speedOffset_5 = bits(nextLFSR1_5, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 392:40]
-              node _speedMultiplier_T_5 = add(UInt<7>("h5a"), speedOffset_5) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node speedMultiplier_5 = tail(_speedMultiplier_T_5, 1) @[\\src\\main\\scala\\GameLogic.scala 393:40]
-              node _speedScaled_T_20 = cvt(speedMultiplier_5) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_21 = mul(asSInt(UInt<3>("h5")), _speedScaled_T_20) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_22 = tail(_speedScaled_T_21, 1) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node _speedScaled_T_23 = asSInt(_speedScaled_T_22) @[\\src\\main\\scala\\GameLogic.scala 394:47]
-              node speedScaled_5 = shr(_speedScaled_T_23, 7) @[\\src\\main\\scala\\GameLogic.scala 394:73]
-              asteroidVX[5] <= speedScaled_5 @[\\src\\main\\scala\\GameLogic.scala 395:27]
-              asteroidVY[5] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 396:27]
-              node _nextLFSR2_T_40 = bits(nextLFSR1_5, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 399:42]
-              node _nextLFSR2_T_41 = bits(nextLFSR1_5, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 399:57]
-              node _nextLFSR2_T_42 = xor(_nextLFSR2_T_40, _nextLFSR2_T_41) @[\\src\\main\\scala\\GameLogic.scala 399:46]
-              node _nextLFSR2_T_43 = bits(nextLFSR1_5, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 399:72]
-              node _nextLFSR2_T_44 = xor(_nextLFSR2_T_42, _nextLFSR2_T_43) @[\\src\\main\\scala\\GameLogic.scala 399:61]
-              node _nextLFSR2_T_45 = bits(nextLFSR1_5, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 399:87]
-              node _nextLFSR2_T_46 = xor(_nextLFSR2_T_44, _nextLFSR2_T_45) @[\\src\\main\\scala\\GameLogic.scala 399:76]
-              node _nextLFSR2_T_47 = bits(nextLFSR1_5, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 399:101]
-              node nextLFSR2_5 = cat(_nextLFSR2_T_46, _nextLFSR2_T_47) @[\\src\\main\\scala\\GameLogic.scala 399:32]
-              node intervalOffset_5 = bits(nextLFSR2_5, 5, 0) @[\\src\\main\\scala\\GameLogic.scala 400:43]
-              node _intervalMultiplier_T_5 = add(UInt<7>("h5a"), intervalOffset_5) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node intervalMultiplier_5 = tail(_intervalMultiplier_T_5, 1) @[\\src\\main\\scala\\GameLogic.scala 401:43]
-              node _asteroidSpawnIntervalRandomized_T_10 = mul(UInt<6>("h3c"), intervalMultiplier_5) @[\\src\\main\\scala\\GameLogic.scala 402:75]
-              node _asteroidSpawnIntervalRandomized_T_11 = shr(_asteroidSpawnIntervalRandomized_T_10, 7) @[\\src\\main\\scala\\GameLogic.scala 402:97]
-              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_11 @[\\src\\main\\scala\\GameLogic.scala 402:45]
-              lfsrReg <= nextLFSR2_5 @[\\src\\main\\scala\\GameLogic.scala 405:21]
-            node _T_22 = or(_T_21, shouldSpawn_5) @[\\src\\main\\scala\\GameLogic.scala 408:29]
-            node _ledActive_1_T = eq(_T_22, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 410:25]
-            ledActive[1] <= _ledActive_1_T @[\\src\\main\\scala\\GameLogic.scala 410:22]
-          stateReg <= UInt<4>("h3") @[\\src\\main\\scala\\GameLogic.scala 413:16]
-        else :
-          node _T_23 = eq(UInt<4>("h3"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 344:20]
-          when _T_23 : @[\\src\\main\\scala\\GameLogic.scala 344:20]
-            node _T_24 = and(io.btnR, rocketReadyReg) @[\\src\\main\\scala\\GameLogic.scala 419:20]
-            when _T_24 : @[\\src\\main\\scala\\GameLogic.scala 419:39]
-              node _shouldLaunch_T = eq(rocketActive[0], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 422:30]
-              node _shouldLaunch_T_1 = eq(UInt<1>("h0"), UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 422:50]
-              node shouldLaunch = and(_shouldLaunch_T, _shouldLaunch_T_1) @[\\src\\main\\scala\\GameLogic.scala 422:47]
-              when shouldLaunch : @[\\src\\main\\scala\\GameLogic.scala 423:30]
-                rocketActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 424:29]
-                node _rocketX_0_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                node _rocketX_0_T_1 = tail(_rocketX_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                node _rocketX_0_T_2 = asSInt(_rocketX_0_T_1) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                rocketX[0] <= _rocketX_0_T_2 @[\\src\\main\\scala\\GameLogic.scala 425:24]
-                node _rocketY_0_T = add(sprite0YReg, asSInt(UInt<5>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                node _rocketY_0_T_1 = tail(_rocketY_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                node _rocketY_0_T_2 = asSInt(_rocketY_0_T_1) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                rocketY[0] <= _rocketY_0_T_2 @[\\src\\main\\scala\\GameLogic.scala 426:24]
-                rocketVX[0] <= asSInt(UInt<4>("h5")) @[\\src\\main\\scala\\GameLogic.scala 427:25]
-              node _T_25 = or(UInt<1>("h0"), shouldLaunch) @[\\src\\main\\scala\\GameLogic.scala 429:31]
-              node _shouldLaunch_T_2 = eq(rocketActive[1], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 422:30]
-              node _shouldLaunch_T_3 = eq(_T_25, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 422:50]
-              node shouldLaunch_1 = and(_shouldLaunch_T_2, _shouldLaunch_T_3) @[\\src\\main\\scala\\GameLogic.scala 422:47]
-              when shouldLaunch_1 : @[\\src\\main\\scala\\GameLogic.scala 423:30]
-                rocketActive[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 424:29]
-                node _rocketX_1_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                node _rocketX_1_T_1 = tail(_rocketX_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                node _rocketX_1_T_2 = asSInt(_rocketX_1_T_1) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                rocketX[1] <= _rocketX_1_T_2 @[\\src\\main\\scala\\GameLogic.scala 425:24]
-                node _rocketY_1_T = add(sprite0YReg, asSInt(UInt<5>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                node _rocketY_1_T_1 = tail(_rocketY_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                node _rocketY_1_T_2 = asSInt(_rocketY_1_T_1) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                rocketY[1] <= _rocketY_1_T_2 @[\\src\\main\\scala\\GameLogic.scala 426:24]
-                rocketVX[1] <= asSInt(UInt<4>("h5")) @[\\src\\main\\scala\\GameLogic.scala 427:25]
-              node _T_26 = or(_T_25, shouldLaunch_1) @[\\src\\main\\scala\\GameLogic.scala 429:31]
-              node _shouldLaunch_T_4 = eq(rocketActive[2], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 422:30]
-              node _shouldLaunch_T_5 = eq(_T_26, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 422:50]
-              node shouldLaunch_2 = and(_shouldLaunch_T_4, _shouldLaunch_T_5) @[\\src\\main\\scala\\GameLogic.scala 422:47]
-              when shouldLaunch_2 : @[\\src\\main\\scala\\GameLogic.scala 423:30]
-                rocketActive[2] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 424:29]
-                node _rocketX_2_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                node _rocketX_2_T_1 = tail(_rocketX_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                node _rocketX_2_T_2 = asSInt(_rocketX_2_T_1) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                rocketX[2] <= _rocketX_2_T_2 @[\\src\\main\\scala\\GameLogic.scala 425:24]
-                node _rocketY_2_T = add(sprite0YReg, asSInt(UInt<5>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                node _rocketY_2_T_1 = tail(_rocketY_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                node _rocketY_2_T_2 = asSInt(_rocketY_2_T_1) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                rocketY[2] <= _rocketY_2_T_2 @[\\src\\main\\scala\\GameLogic.scala 426:24]
-                rocketVX[2] <= asSInt(UInt<4>("h5")) @[\\src\\main\\scala\\GameLogic.scala 427:25]
-              node _T_27 = or(_T_26, shouldLaunch_2) @[\\src\\main\\scala\\GameLogic.scala 429:31]
-              node _shouldLaunch_T_6 = eq(rocketActive[3], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 422:30]
-              node _shouldLaunch_T_7 = eq(_T_27, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 422:50]
-              node shouldLaunch_3 = and(_shouldLaunch_T_6, _shouldLaunch_T_7) @[\\src\\main\\scala\\GameLogic.scala 422:47]
-              when shouldLaunch_3 : @[\\src\\main\\scala\\GameLogic.scala 423:30]
-                rocketActive[3] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 424:29]
-                node _rocketX_3_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                node _rocketX_3_T_1 = tail(_rocketX_3_T, 1) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                node _rocketX_3_T_2 = asSInt(_rocketX_3_T_1) @[\\src\\main\\scala\\GameLogic.scala 425:39]
-                rocketX[3] <= _rocketX_3_T_2 @[\\src\\main\\scala\\GameLogic.scala 425:24]
-                node _rocketY_3_T = add(sprite0YReg, asSInt(UInt<5>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                node _rocketY_3_T_1 = tail(_rocketY_3_T, 1) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                node _rocketY_3_T_2 = asSInt(_rocketY_3_T_1) @[\\src\\main\\scala\\GameLogic.scala 426:39]
-                rocketY[3] <= _rocketY_3_T_2 @[\\src\\main\\scala\\GameLogic.scala 426:24]
-                rocketVX[3] <= asSInt(UInt<4>("h5")) @[\\src\\main\\scala\\GameLogic.scala 427:25]
-              node _T_28 = or(_T_27, shouldLaunch_3) @[\\src\\main\\scala\\GameLogic.scala 429:31]
-              when _T_28 : @[\\src\\main\\scala\\GameLogic.scala 432:24]
-                rocketReadyReg <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 433:26]
-              node _ledActive_2_T = eq(_T_28, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 435:25]
-              ledActive[2] <= _ledActive_2_T @[\\src\\main\\scala\\GameLogic.scala 435:22]
-            stateReg <= UInt<4>("h4") @[\\src\\main\\scala\\GameLogic.scala 438:16]
-          else :
-            node _T_29 = eq(UInt<4>("h4"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 344:20]
-            when _T_29 : @[\\src\\main\\scala\\GameLogic.scala 344:20]
-              when asteroidActive[0] : @[\\src\\main\\scala\\GameLogic.scala 446:33]
-                node _asteroidX_0_T = add(asteroidX[0], asteroidVX[0]) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_0_T_1 = tail(_asteroidX_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_0_T_2 = asSInt(_asteroidX_0_T_1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                asteroidX[0] <= _asteroidX_0_T_2 @[\\src\\main\\scala\\GameLogic.scala 447:24]
-                node _asteroidY_0_T = add(asteroidY[0], asteroidVY[0]) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_0_T_1 = tail(_asteroidY_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_0_T_2 = asSInt(_asteroidY_0_T_1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                asteroidY[0] <= _asteroidY_0_T_2 @[\\src\\main\\scala\\GameLogic.scala 448:24]
-                node _T_30 = eq(UInt<1>("h0"), asteroidSize[0]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_31 = mux(_T_30, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_32 = eq(UInt<1>("h1"), asteroidSize[0]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_33 = mux(_T_32, asSInt(UInt<6>("h10")), _T_31) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_34 = eq(UInt<2>("h2"), asteroidSize[0]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_35 = mux(_T_34, asSInt(UInt<8>("h40")), _T_33) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_36 = sub(asSInt(UInt<1>("h0")), _T_35) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_37 = tail(_T_36, 1) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_38 = asSInt(_T_37) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_39 = lt(asteroidX[0], _T_38) @[\\src\\main\\scala\\GameLogic.scala 449:29]
-                when _T_39 : @[\\src\\main\\scala\\GameLogic.scala 449:66]
-                  asteroidActive[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 450:31]
-              when asteroidActive[1] : @[\\src\\main\\scala\\GameLogic.scala 446:33]
-                node _asteroidX_1_T = add(asteroidX[1], asteroidVX[1]) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_1_T_1 = tail(_asteroidX_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_1_T_2 = asSInt(_asteroidX_1_T_1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                asteroidX[1] <= _asteroidX_1_T_2 @[\\src\\main\\scala\\GameLogic.scala 447:24]
-                node _asteroidY_1_T = add(asteroidY[1], asteroidVY[1]) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_1_T_1 = tail(_asteroidY_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_1_T_2 = asSInt(_asteroidY_1_T_1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                asteroidY[1] <= _asteroidY_1_T_2 @[\\src\\main\\scala\\GameLogic.scala 448:24]
-                node _T_40 = eq(UInt<1>("h0"), asteroidSize[1]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_41 = mux(_T_40, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_42 = eq(UInt<1>("h1"), asteroidSize[1]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_43 = mux(_T_42, asSInt(UInt<6>("h10")), _T_41) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_44 = eq(UInt<2>("h2"), asteroidSize[1]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_45 = mux(_T_44, asSInt(UInt<8>("h40")), _T_43) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_46 = sub(asSInt(UInt<1>("h0")), _T_45) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_47 = tail(_T_46, 1) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_48 = asSInt(_T_47) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_49 = lt(asteroidX[1], _T_48) @[\\src\\main\\scala\\GameLogic.scala 449:29]
-                when _T_49 : @[\\src\\main\\scala\\GameLogic.scala 449:66]
-                  asteroidActive[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 450:31]
-              when asteroidActive[2] : @[\\src\\main\\scala\\GameLogic.scala 446:33]
-                node _asteroidX_2_T = add(asteroidX[2], asteroidVX[2]) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_2_T_1 = tail(_asteroidX_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_2_T_2 = asSInt(_asteroidX_2_T_1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                asteroidX[2] <= _asteroidX_2_T_2 @[\\src\\main\\scala\\GameLogic.scala 447:24]
-                node _asteroidY_2_T = add(asteroidY[2], asteroidVY[2]) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_2_T_1 = tail(_asteroidY_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_2_T_2 = asSInt(_asteroidY_2_T_1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                asteroidY[2] <= _asteroidY_2_T_2 @[\\src\\main\\scala\\GameLogic.scala 448:24]
-                node _T_50 = eq(UInt<1>("h0"), asteroidSize[2]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_51 = mux(_T_50, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_52 = eq(UInt<1>("h1"), asteroidSize[2]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_53 = mux(_T_52, asSInt(UInt<6>("h10")), _T_51) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_54 = eq(UInt<2>("h2"), asteroidSize[2]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_55 = mux(_T_54, asSInt(UInt<8>("h40")), _T_53) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_56 = sub(asSInt(UInt<1>("h0")), _T_55) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_57 = tail(_T_56, 1) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_58 = asSInt(_T_57) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_59 = lt(asteroidX[2], _T_58) @[\\src\\main\\scala\\GameLogic.scala 449:29]
-                when _T_59 : @[\\src\\main\\scala\\GameLogic.scala 449:66]
-                  asteroidActive[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 450:31]
-              when asteroidActive[3] : @[\\src\\main\\scala\\GameLogic.scala 446:33]
-                node _asteroidX_3_T = add(asteroidX[3], asteroidVX[3]) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_3_T_1 = tail(_asteroidX_3_T, 1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_3_T_2 = asSInt(_asteroidX_3_T_1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                asteroidX[3] <= _asteroidX_3_T_2 @[\\src\\main\\scala\\GameLogic.scala 447:24]
-                node _asteroidY_3_T = add(asteroidY[3], asteroidVY[3]) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_3_T_1 = tail(_asteroidY_3_T, 1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_3_T_2 = asSInt(_asteroidY_3_T_1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                asteroidY[3] <= _asteroidY_3_T_2 @[\\src\\main\\scala\\GameLogic.scala 448:24]
-                node _T_60 = eq(UInt<1>("h0"), asteroidSize[3]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_61 = mux(_T_60, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_62 = eq(UInt<1>("h1"), asteroidSize[3]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_63 = mux(_T_62, asSInt(UInt<6>("h10")), _T_61) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_64 = eq(UInt<2>("h2"), asteroidSize[3]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_65 = mux(_T_64, asSInt(UInt<8>("h40")), _T_63) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_66 = sub(asSInt(UInt<1>("h0")), _T_65) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_67 = tail(_T_66, 1) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_68 = asSInt(_T_67) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_69 = lt(asteroidX[3], _T_68) @[\\src\\main\\scala\\GameLogic.scala 449:29]
-                when _T_69 : @[\\src\\main\\scala\\GameLogic.scala 449:66]
-                  asteroidActive[3] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 450:31]
-              when asteroidActive[4] : @[\\src\\main\\scala\\GameLogic.scala 446:33]
-                node _asteroidX_4_T = add(asteroidX[4], asteroidVX[4]) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_4_T_1 = tail(_asteroidX_4_T, 1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_4_T_2 = asSInt(_asteroidX_4_T_1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                asteroidX[4] <= _asteroidX_4_T_2 @[\\src\\main\\scala\\GameLogic.scala 447:24]
-                node _asteroidY_4_T = add(asteroidY[4], asteroidVY[4]) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_4_T_1 = tail(_asteroidY_4_T, 1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_4_T_2 = asSInt(_asteroidY_4_T_1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                asteroidY[4] <= _asteroidY_4_T_2 @[\\src\\main\\scala\\GameLogic.scala 448:24]
-                node _T_70 = eq(UInt<1>("h0"), asteroidSize[4]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_71 = mux(_T_70, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_72 = eq(UInt<1>("h1"), asteroidSize[4]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_73 = mux(_T_72, asSInt(UInt<6>("h10")), _T_71) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_74 = eq(UInt<2>("h2"), asteroidSize[4]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_75 = mux(_T_74, asSInt(UInt<8>("h40")), _T_73) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_76 = sub(asSInt(UInt<1>("h0")), _T_75) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_77 = tail(_T_76, 1) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_78 = asSInt(_T_77) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_79 = lt(asteroidX[4], _T_78) @[\\src\\main\\scala\\GameLogic.scala 449:29]
-                when _T_79 : @[\\src\\main\\scala\\GameLogic.scala 449:66]
-                  asteroidActive[4] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 450:31]
-              when asteroidActive[5] : @[\\src\\main\\scala\\GameLogic.scala 446:33]
-                node _asteroidX_5_T = add(asteroidX[5], asteroidVX[5]) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_5_T_1 = tail(_asteroidX_5_T, 1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                node _asteroidX_5_T_2 = asSInt(_asteroidX_5_T_1) @[\\src\\main\\scala\\GameLogic.scala 447:40]
-                asteroidX[5] <= _asteroidX_5_T_2 @[\\src\\main\\scala\\GameLogic.scala 447:24]
-                node _asteroidY_5_T = add(asteroidY[5], asteroidVY[5]) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_5_T_1 = tail(_asteroidY_5_T, 1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                node _asteroidY_5_T_2 = asSInt(_asteroidY_5_T_1) @[\\src\\main\\scala\\GameLogic.scala 448:40]
-                asteroidY[5] <= _asteroidY_5_T_2 @[\\src\\main\\scala\\GameLogic.scala 448:24]
-                node _T_80 = eq(UInt<1>("h0"), asteroidSize[5]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_81 = mux(_T_80, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_82 = eq(UInt<1>("h1"), asteroidSize[5]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_83 = mux(_T_82, asSInt(UInt<6>("h10")), _T_81) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_84 = eq(UInt<2>("h2"), asteroidSize[5]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_85 = mux(_T_84, asSInt(UInt<8>("h40")), _T_83) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                node _T_86 = sub(asSInt(UInt<1>("h0")), _T_85) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_87 = tail(_T_86, 1) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_88 = asSInt(_T_87) @[\\src\\main\\scala\\GameLogic.scala 449:31]
-                node _T_89 = lt(asteroidX[5], _T_88) @[\\src\\main\\scala\\GameLogic.scala 449:29]
-                when _T_89 : @[\\src\\main\\scala\\GameLogic.scala 449:66]
-                  asteroidActive[5] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 450:31]
-              when rocketActive[0] : @[\\src\\main\\scala\\GameLogic.scala 457:31]
-                node _rocketX_0_T_3 = add(rocketX[0], rocketVX[0]) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                node _rocketX_0_T_4 = tail(_rocketX_0_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                node _rocketX_0_T_5 = asSInt(_rocketX_0_T_4) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                rocketX[0] <= _rocketX_0_T_5 @[\\src\\main\\scala\\GameLogic.scala 458:22]
-                node _T_90 = gt(rocketX[0], asSInt(UInt<11>("h280"))) @[\\src\\main\\scala\\GameLogic.scala 459:27]
-                when _T_90 : @[\\src\\main\\scala\\GameLogic.scala 459:36]
-                  rocketActive[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 460:29]
-              when rocketActive[1] : @[\\src\\main\\scala\\GameLogic.scala 457:31]
-                node _rocketX_1_T_3 = add(rocketX[1], rocketVX[1]) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                node _rocketX_1_T_4 = tail(_rocketX_1_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                node _rocketX_1_T_5 = asSInt(_rocketX_1_T_4) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                rocketX[1] <= _rocketX_1_T_5 @[\\src\\main\\scala\\GameLogic.scala 458:22]
-                node _T_91 = gt(rocketX[1], asSInt(UInt<11>("h280"))) @[\\src\\main\\scala\\GameLogic.scala 459:27]
-                when _T_91 : @[\\src\\main\\scala\\GameLogic.scala 459:36]
-                  rocketActive[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 460:29]
-              when rocketActive[2] : @[\\src\\main\\scala\\GameLogic.scala 457:31]
-                node _rocketX_2_T_3 = add(rocketX[2], rocketVX[2]) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                node _rocketX_2_T_4 = tail(_rocketX_2_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                node _rocketX_2_T_5 = asSInt(_rocketX_2_T_4) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                rocketX[2] <= _rocketX_2_T_5 @[\\src\\main\\scala\\GameLogic.scala 458:22]
-                node _T_92 = gt(rocketX[2], asSInt(UInt<11>("h280"))) @[\\src\\main\\scala\\GameLogic.scala 459:27]
-                when _T_92 : @[\\src\\main\\scala\\GameLogic.scala 459:36]
-                  rocketActive[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 460:29]
-              when rocketActive[3] : @[\\src\\main\\scala\\GameLogic.scala 457:31]
-                node _rocketX_3_T_3 = add(rocketX[3], rocketVX[3]) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                node _rocketX_3_T_4 = tail(_rocketX_3_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                node _rocketX_3_T_5 = asSInt(_rocketX_3_T_4) @[\\src\\main\\scala\\GameLogic.scala 458:36]
-                rocketX[3] <= _rocketX_3_T_5 @[\\src\\main\\scala\\GameLogic.scala 458:22]
-                node _T_93 = gt(rocketX[3], asSInt(UInt<11>("h280"))) @[\\src\\main\\scala\\GameLogic.scala 459:27]
-                when _T_93 : @[\\src\\main\\scala\\GameLogic.scala 459:36]
-                  rocketActive[3] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 460:29]
-              stateReg <= UInt<4>("h5") @[\\src\\main\\scala\\GameLogic.scala 465:16]
-            else :
-              node _T_94 = eq(UInt<4>("h5"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 344:20]
-              when _T_94 : @[\\src\\main\\scala\\GameLogic.scala 344:20]
-                wire asteroidChecksThisFrame : UInt<2> @[\\src\\main\\scala\\GameLogic.scala 471:48]
-                asteroidChecksThisFrame <= UInt<2>("h3") @[\\src\\main\\scala\\GameLogic.scala 471:48]
-                node _remaining_T = sub(UInt<3>("h6"), collisionAstIndex) @[\\src\\main\\scala\\GameLogic.scala 472:38]
-                node remaining = tail(_remaining_T, 1) @[\\src\\main\\scala\\GameLogic.scala 472:38]
-                node _numChecks_T = lt(remaining, asteroidChecksThisFrame) @[\\src\\main\\scala\\GameLogic.scala 473:37]
-                node numChecks = mux(_numChecks_T, remaining, asteroidChecksThisFrame) @[\\src\\main\\scala\\GameLogic.scala 473:26]
-                node _T_95 = eq(collisionCheckMode, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 475:31]
-                when _T_95 : @[\\src\\main\\scala\\GameLogic.scala 475:40]
-                  node _shipCenterX_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 476:39]
-                  node _shipCenterX_T_1 = tail(_shipCenterX_T, 1) @[\\src\\main\\scala\\GameLogic.scala 476:39]
-                  node shipCenterX = asSInt(_shipCenterX_T_1) @[\\src\\main\\scala\\GameLogic.scala 476:39]
-                  node _shipCenterY_T = add(sprite0YReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 477:39]
-                  node _shipCenterY_T_1 = tail(_shipCenterY_T, 1) @[\\src\\main\\scala\\GameLogic.scala 477:39]
-                  node shipCenterY = asSInt(_shipCenterY_T_1) @[\\src\\main\\scala\\GameLogic.scala 477:39]
-                  node _T_96 = lt(UInt<1>("h0"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 480:20]
-                  when _T_96 : @[\\src\\main\\scala\\GameLogic.scala 480:33]
-                    node _idx_T = add(collisionAstIndex, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 481:41]
-                    node idx = tail(_idx_T, 1) @[\\src\\main\\scala\\GameLogic.scala 481:41]
-                    node _T_97 = lt(idx, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 482:22]
-                    node _T_98 = bits(idx, 2, 0)
-                    node _T_99 = and(_T_97, asteroidActive[_T_98]) @[\\src\\main\\scala\\GameLogic.scala 482:39]
-                    when _T_99 : @[\\src\\main\\scala\\GameLogic.scala 482:63]
-                      node _size_T = bits(idx, 2, 0)
-                      node _radius_T = eq(UInt<1>("h0"), asteroidSize[_size_T]) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_1 = mux(_radius_T, asSInt(UInt<6>("h10")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_2 = eq(UInt<1>("h1"), asteroidSize[_size_T]) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_3 = mux(_radius_T_2, asSInt(UInt<5>("h8")), _radius_T_1) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_4 = eq(UInt<2>("h2"), asteroidSize[_size_T]) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node radius = mux(_radius_T_4, asSInt(UInt<7>("h20")), _radius_T_3) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _centerX_T = bits(idx, 2, 0)
-                      node _centerX_T_1 = add(asteroidX[_centerX_T], radius) @[\\src\\main\\scala\\GameLogic.scala 485:44]
-                      node _centerX_T_2 = tail(_centerX_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 485:44]
-                      node centerX = asSInt(_centerX_T_2) @[\\src\\main\\scala\\GameLogic.scala 485:44]
-                      node _centerY_T = bits(idx, 2, 0)
-                      node _centerY_T_1 = add(asteroidY[_centerY_T], radius) @[\\src\\main\\scala\\GameLogic.scala 486:44]
-                      node _centerY_T_2 = tail(_centerY_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 486:44]
-                      node centerY = asSInt(_centerY_T_2) @[\\src\\main\\scala\\GameLogic.scala 486:44]
-                      node _dx_T = sub(shipCenterX, centerX) @[\\src\\main\\scala\\GameLogic.scala 487:36]
-                      node _dx_T_1 = tail(_dx_T, 1) @[\\src\\main\\scala\\GameLogic.scala 487:36]
-                      node dx = asSInt(_dx_T_1) @[\\src\\main\\scala\\GameLogic.scala 487:36]
-                      node _dy_T = sub(shipCenterY, centerY) @[\\src\\main\\scala\\GameLogic.scala 488:36]
-                      node _dy_T_1 = tail(_dy_T, 1) @[\\src\\main\\scala\\GameLogic.scala 488:36]
-                      node dy = asSInt(_dy_T_1) @[\\src\\main\\scala\\GameLogic.scala 488:36]
-                      node _totalRadius_T = add(asSInt(UInt<5>("hc")), radius) @[\\src\\main\\scala\\GameLogic.scala 490:44]
-                      node _totalRadius_T_1 = tail(_totalRadius_T, 1) @[\\src\\main\\scala\\GameLogic.scala 490:44]
-                      node totalRadius = asSInt(_totalRadius_T_1) @[\\src\\main\\scala\\GameLogic.scala 490:44]
-                      node _boxCheck_T = lt(dx, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_1 = sub(asSInt(UInt<1>("h0")), dx) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_2 = tail(_boxCheck_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_3 = asSInt(_boxCheck_T_2) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_4 = mux(_boxCheck_T, _boxCheck_T_3, dx) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_5 = lt(_boxCheck_T_4, totalRadius) @[\\src\\main\\scala\\GameLogic.scala 492:37]
-                      node _boxCheck_T_6 = lt(dy, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_7 = sub(asSInt(UInt<1>("h0")), dy) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_8 = tail(_boxCheck_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_9 = asSInt(_boxCheck_T_8) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_10 = mux(_boxCheck_T_6, _boxCheck_T_9, dy) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_11 = lt(_boxCheck_T_10, totalRadius) @[\\src\\main\\scala\\GameLogic.scala 492:61]
-                      node boxCheck = and(_boxCheck_T_5, _boxCheck_T_11) @[\\src\\main\\scala\\GameLogic.scala 492:51]
-                      node _T_100 = eq(pendingCircleCheck, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 494:32]
-                      node _T_101 = and(boxCheck, _T_100) @[\\src\\main\\scala\\GameLogic.scala 494:29]
-                      when _T_101 : @[\\src\\main\\scala\\GameLogic.scala 494:53]
-                        pendingDX <= dx @[\\src\\main\\scala\\GameLogic.scala 495:27]
-                        pendingDY <= dy @[\\src\\main\\scala\\GameLogic.scala 496:27]
-                        node _pendingRadiusSq_T = mul(totalRadius, totalRadius) @[\\src\\main\\scala\\GameLogic.scala 497:48]
-                        pendingRadiusSq <= _pendingRadiusSq_T @[\\src\\main\\scala\\GameLogic.scala 497:33]
-                        pendingCircleCheck <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 498:36]
-                  node _T_102 = lt(UInt<1>("h1"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 480:20]
-                  when _T_102 : @[\\src\\main\\scala\\GameLogic.scala 480:33]
-                    node _idx_T_1 = add(collisionAstIndex, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 481:41]
-                    node idx_1 = tail(_idx_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 481:41]
-                    node _T_103 = lt(idx_1, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 482:22]
-                    node _T_104 = bits(idx_1, 2, 0)
-                    node _T_105 = and(_T_103, asteroidActive[_T_104]) @[\\src\\main\\scala\\GameLogic.scala 482:39]
-                    when _T_105 : @[\\src\\main\\scala\\GameLogic.scala 482:63]
-                      node _size_T_1 = bits(idx_1, 2, 0)
-                      node _radius_T_5 = eq(UInt<1>("h0"), asteroidSize[_size_T_1]) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_6 = mux(_radius_T_5, asSInt(UInt<6>("h10")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_7 = eq(UInt<1>("h1"), asteroidSize[_size_T_1]) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_8 = mux(_radius_T_7, asSInt(UInt<5>("h8")), _radius_T_6) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_9 = eq(UInt<2>("h2"), asteroidSize[_size_T_1]) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node radius_1 = mux(_radius_T_9, asSInt(UInt<7>("h20")), _radius_T_8) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _centerX_T_3 = bits(idx_1, 2, 0)
-                      node _centerX_T_4 = add(asteroidX[_centerX_T_3], radius_1) @[\\src\\main\\scala\\GameLogic.scala 485:44]
-                      node _centerX_T_5 = tail(_centerX_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 485:44]
-                      node centerX_1 = asSInt(_centerX_T_5) @[\\src\\main\\scala\\GameLogic.scala 485:44]
-                      node _centerY_T_3 = bits(idx_1, 2, 0)
-                      node _centerY_T_4 = add(asteroidY[_centerY_T_3], radius_1) @[\\src\\main\\scala\\GameLogic.scala 486:44]
-                      node _centerY_T_5 = tail(_centerY_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 486:44]
-                      node centerY_1 = asSInt(_centerY_T_5) @[\\src\\main\\scala\\GameLogic.scala 486:44]
-                      node _dx_T_2 = sub(shipCenterX, centerX_1) @[\\src\\main\\scala\\GameLogic.scala 487:36]
-                      node _dx_T_3 = tail(_dx_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 487:36]
-                      node dx_1 = asSInt(_dx_T_3) @[\\src\\main\\scala\\GameLogic.scala 487:36]
-                      node _dy_T_2 = sub(shipCenterY, centerY_1) @[\\src\\main\\scala\\GameLogic.scala 488:36]
-                      node _dy_T_3 = tail(_dy_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 488:36]
-                      node dy_1 = asSInt(_dy_T_3) @[\\src\\main\\scala\\GameLogic.scala 488:36]
-                      node _totalRadius_T_2 = add(asSInt(UInt<5>("hc")), radius_1) @[\\src\\main\\scala\\GameLogic.scala 490:44]
-                      node _totalRadius_T_3 = tail(_totalRadius_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 490:44]
-                      node totalRadius_1 = asSInt(_totalRadius_T_3) @[\\src\\main\\scala\\GameLogic.scala 490:44]
-                      node _boxCheck_T_12 = lt(dx_1, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_13 = sub(asSInt(UInt<1>("h0")), dx_1) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_14 = tail(_boxCheck_T_13, 1) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_15 = asSInt(_boxCheck_T_14) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_16 = mux(_boxCheck_T_12, _boxCheck_T_15, dx_1) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_17 = lt(_boxCheck_T_16, totalRadius_1) @[\\src\\main\\scala\\GameLogic.scala 492:37]
-                      node _boxCheck_T_18 = lt(dy_1, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_19 = sub(asSInt(UInt<1>("h0")), dy_1) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_20 = tail(_boxCheck_T_19, 1) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_21 = asSInt(_boxCheck_T_20) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_22 = mux(_boxCheck_T_18, _boxCheck_T_21, dy_1) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_23 = lt(_boxCheck_T_22, totalRadius_1) @[\\src\\main\\scala\\GameLogic.scala 492:61]
-                      node boxCheck_1 = and(_boxCheck_T_17, _boxCheck_T_23) @[\\src\\main\\scala\\GameLogic.scala 492:51]
-                      node _T_106 = eq(pendingCircleCheck, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 494:32]
-                      node _T_107 = and(boxCheck_1, _T_106) @[\\src\\main\\scala\\GameLogic.scala 494:29]
-                      when _T_107 : @[\\src\\main\\scala\\GameLogic.scala 494:53]
-                        pendingDX <= dx_1 @[\\src\\main\\scala\\GameLogic.scala 495:27]
-                        pendingDY <= dy_1 @[\\src\\main\\scala\\GameLogic.scala 496:27]
-                        node _pendingRadiusSq_T_1 = mul(totalRadius_1, totalRadius_1) @[\\src\\main\\scala\\GameLogic.scala 497:48]
-                        pendingRadiusSq <= _pendingRadiusSq_T_1 @[\\src\\main\\scala\\GameLogic.scala 497:33]
-                        pendingCircleCheck <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 498:36]
-                  node _T_108 = lt(UInt<2>("h2"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 480:20]
-                  when _T_108 : @[\\src\\main\\scala\\GameLogic.scala 480:33]
-                    node _idx_T_2 = add(collisionAstIndex, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 481:41]
-                    node idx_2 = tail(_idx_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 481:41]
-                    node _T_109 = lt(idx_2, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 482:22]
-                    node _T_110 = bits(idx_2, 2, 0)
-                    node _T_111 = and(_T_109, asteroidActive[_T_110]) @[\\src\\main\\scala\\GameLogic.scala 482:39]
-                    when _T_111 : @[\\src\\main\\scala\\GameLogic.scala 482:63]
-                      node _size_T_2 = bits(idx_2, 2, 0)
-                      node _radius_T_10 = eq(UInt<1>("h0"), asteroidSize[_size_T_2]) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_11 = mux(_radius_T_10, asSInt(UInt<6>("h10")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_12 = eq(UInt<1>("h1"), asteroidSize[_size_T_2]) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_13 = mux(_radius_T_12, asSInt(UInt<5>("h8")), _radius_T_11) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _radius_T_14 = eq(UInt<2>("h2"), asteroidSize[_size_T_2]) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node radius_2 = mux(_radius_T_14, asSInt(UInt<7>("h20")), _radius_T_13) @[\\src\\main\\scala\\GameLogic.scala 325:26]
-                      node _centerX_T_6 = bits(idx_2, 2, 0)
-                      node _centerX_T_7 = add(asteroidX[_centerX_T_6], radius_2) @[\\src\\main\\scala\\GameLogic.scala 485:44]
-                      node _centerX_T_8 = tail(_centerX_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 485:44]
-                      node centerX_2 = asSInt(_centerX_T_8) @[\\src\\main\\scala\\GameLogic.scala 485:44]
-                      node _centerY_T_6 = bits(idx_2, 2, 0)
-                      node _centerY_T_7 = add(asteroidY[_centerY_T_6], radius_2) @[\\src\\main\\scala\\GameLogic.scala 486:44]
-                      node _centerY_T_8 = tail(_centerY_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 486:44]
-                      node centerY_2 = asSInt(_centerY_T_8) @[\\src\\main\\scala\\GameLogic.scala 486:44]
-                      node _dx_T_4 = sub(shipCenterX, centerX_2) @[\\src\\main\\scala\\GameLogic.scala 487:36]
-                      node _dx_T_5 = tail(_dx_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 487:36]
-                      node dx_2 = asSInt(_dx_T_5) @[\\src\\main\\scala\\GameLogic.scala 487:36]
-                      node _dy_T_4 = sub(shipCenterY, centerY_2) @[\\src\\main\\scala\\GameLogic.scala 488:36]
-                      node _dy_T_5 = tail(_dy_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 488:36]
-                      node dy_2 = asSInt(_dy_T_5) @[\\src\\main\\scala\\GameLogic.scala 488:36]
-                      node _totalRadius_T_4 = add(asSInt(UInt<5>("hc")), radius_2) @[\\src\\main\\scala\\GameLogic.scala 490:44]
-                      node _totalRadius_T_5 = tail(_totalRadius_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 490:44]
-                      node totalRadius_2 = asSInt(_totalRadius_T_5) @[\\src\\main\\scala\\GameLogic.scala 490:44]
-                      node _boxCheck_T_24 = lt(dx_2, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_25 = sub(asSInt(UInt<1>("h0")), dx_2) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_26 = tail(_boxCheck_T_25, 1) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_27 = asSInt(_boxCheck_T_26) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_28 = mux(_boxCheck_T_24, _boxCheck_T_27, dx_2) @[\\src\\main\\scala\\GameLogic.scala 492:33]
-                      node _boxCheck_T_29 = lt(_boxCheck_T_28, totalRadius_2) @[\\src\\main\\scala\\GameLogic.scala 492:37]
-                      node _boxCheck_T_30 = lt(dy_2, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_31 = sub(asSInt(UInt<1>("h0")), dy_2) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_32 = tail(_boxCheck_T_31, 1) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_33 = asSInt(_boxCheck_T_32) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_34 = mux(_boxCheck_T_30, _boxCheck_T_33, dy_2) @[\\src\\main\\scala\\GameLogic.scala 492:57]
-                      node _boxCheck_T_35 = lt(_boxCheck_T_34, totalRadius_2) @[\\src\\main\\scala\\GameLogic.scala 492:61]
-                      node boxCheck_2 = and(_boxCheck_T_29, _boxCheck_T_35) @[\\src\\main\\scala\\GameLogic.scala 492:51]
-                      node _T_112 = eq(pendingCircleCheck, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 494:32]
-                      node _T_113 = and(boxCheck_2, _T_112) @[\\src\\main\\scala\\GameLogic.scala 494:29]
-                      when _T_113 : @[\\src\\main\\scala\\GameLogic.scala 494:53]
-                        pendingDX <= dx_2 @[\\src\\main\\scala\\GameLogic.scala 495:27]
-                        pendingDY <= dy_2 @[\\src\\main\\scala\\GameLogic.scala 496:27]
-                        node _pendingRadiusSq_T_2 = mul(totalRadius_2, totalRadius_2) @[\\src\\main\\scala\\GameLogic.scala 497:48]
-                        pendingRadiusSq <= _pendingRadiusSq_T_2 @[\\src\\main\\scala\\GameLogic.scala 497:33]
-                        pendingCircleCheck <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 498:36]
+        node _T_14 = eq(UInt<4>("h2"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 351:20]
+        when _T_14 : @[\\src\\main\\scala\\GameLogic.scala 351:20]
+          node _T_15 = geq(asteroidSpawnTimer, asteroidSpawnIntervalRandomized) @[\\src\\main\\scala\\GameLogic.scala 377:31]
+          when _T_15 : @[\\src\\main\\scala\\GameLogic.scala 377:67]
+            asteroidSpawnTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 378:28]
+            node _lfsrReg_T_1 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 379:31]
+            node _lfsrReg_T_2 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 379:44]
+            node _lfsrReg_T_3 = xor(_lfsrReg_T_1, _lfsrReg_T_2) @[\\src\\main\\scala\\GameLogic.scala 379:35]
+            node _lfsrReg_T_4 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 380:20]
+            node _lfsrReg_T_5 = xor(_lfsrReg_T_3, _lfsrReg_T_4) @[\\src\\main\\scala\\GameLogic.scala 380:11]
+            node _lfsrReg_T_6 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 380:33]
+            node _lfsrReg_T_7 = xor(_lfsrReg_T_5, _lfsrReg_T_6) @[\\src\\main\\scala\\GameLogic.scala 380:24]
+            node _lfsrReg_T_8 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 380:45]
+            node _lfsrReg_T_9 = cat(_lfsrReg_T_7, _lfsrReg_T_8) @[\\src\\main\\scala\\GameLogic.scala 379:23]
+            lfsrReg <= _lfsrReg_T_9 @[\\src\\main\\scala\\GameLogic.scala 379:17]
+            node _shouldSpawn_T = eq(UInt<1>("h0"), UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:29]
+            node _shouldSpawn_T_1 = eq(asteroidActive[0], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:41]
+            node shouldSpawn = and(_shouldSpawn_T, _shouldSpawn_T_1) @[\\src\\main\\scala\\GameLogic.scala 384:38]
+            when shouldSpawn : @[\\src\\main\\scala\\GameLogic.scala 385:29]
+              asteroidActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 387:31]
+              asteroidX[0] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 388:26]
+              node _mappedSize_T = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:41]
+              node _mappedSize_T_1 = eq(_mappedSize_T, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 391:48]
+              node _mappedSize_T_2 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:69]
+              node mappedSize = mux(_mappedSize_T_1, UInt<1>("h0"), _mappedSize_T_2) @[\\src\\main\\scala\\GameLogic.scala 391:33]
+              asteroidSize[0] <= mappedSize @[\\src\\main\\scala\\GameLogic.scala 392:29]
+              node _rawYOffset_T = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 395:38]
+              node rawYOffset = shl(_rawYOffset_T, 3) @[\\src\\main\\scala\\GameLogic.scala 395:45]
+              node _safeYOffset_T = eq(mappedSize, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 396:46]
+              node _safeYOffset_T_1 = and(rawYOffset, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 396:65]
+              node safeYOffset = mux(_safeYOffset_T, _safeYOffset_T_1, rawYOffset) @[\\src\\main\\scala\\GameLogic.scala 396:34]
+              node _sum_T = add(UInt<9>("h60"), safeYOffset) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node _sum_T_1 = tail(_sum_T, 1) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node sum = cvt(_sum_T_1) @[\\src\\main\\scala\\GameLogic.scala 397:49]
+              asteroidY[0] <= sum @[\\src\\main\\scala\\GameLogic.scala 399:26]
+              node _nextLFSR1_T = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 402:40]
+              node _nextLFSR1_T_1 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 402:53]
+              node _nextLFSR1_T_2 = xor(_nextLFSR1_T, _nextLFSR1_T_1) @[\\src\\main\\scala\\GameLogic.scala 402:44]
+              node _nextLFSR1_T_3 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 402:66]
+              node _nextLFSR1_T_4 = xor(_nextLFSR1_T_2, _nextLFSR1_T_3) @[\\src\\main\\scala\\GameLogic.scala 402:57]
+              node _nextLFSR1_T_5 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 402:79]
+              node _nextLFSR1_T_6 = xor(_nextLFSR1_T_4, _nextLFSR1_T_5) @[\\src\\main\\scala\\GameLogic.scala 402:70]
+              node _nextLFSR1_T_7 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 402:91]
+              node nextLFSR1 = cat(_nextLFSR1_T_6, _nextLFSR1_T_7) @[\\src\\main\\scala\\GameLogic.scala 402:32]
+              node speedBits = bits(nextLFSR1, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 403:38]
+              wire speedDelta : SInt @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 407:24]
+              node _T_16 = eq(UInt<1>("h0"), speedBits) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+              when _T_16 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                speedDelta <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 409:36]
+              else :
+                node _T_17 = eq(UInt<1>("h1"), speedBits) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                when _T_17 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  speedDelta <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 410:36]
                 else :
-                  node _T_114 = leq(collisionCheckMode, UInt<3>("h4")) @[\\src\\main\\scala\\GameLogic.scala 503:37]
-                  when _T_114 : @[\\src\\main\\scala\\GameLogic.scala 503:54]
-                    node _T_115 = lt(UInt<1>("h0"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 505:20]
-                    when _T_115 : @[\\src\\main\\scala\\GameLogic.scala 505:33]
-                      node _idx_T_3 = add(collisionAstIndex, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 506:41]
-                      node idx_3 = tail(_idx_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 506:41]
-                      node _T_116 = lt(idx_3, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 507:22]
-                      node _T_117 = bits(idx_3, 2, 0)
-                      node _T_118 = and(_T_116, asteroidActive[_T_117]) @[\\src\\main\\scala\\GameLogic.scala 507:39]
-                      when _T_118 : @[\\src\\main\\scala\\GameLogic.scala 507:63]
-                        node _rocketIdx_T = sub(collisionCheckMode, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 511:50]
-                        node rocketIdx = tail(_rocketIdx_T, 1) @[\\src\\main\\scala\\GameLogic.scala 511:50]
-                        node _T_119 = bits(rocketIdx, 1, 0)
-                        when rocketActive[_T_119] : @[\\src\\main\\scala\\GameLogic.scala 512:45]
+                  node _T_18 = eq(UInt<2>("h2"), speedBits) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  when _T_18 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    speedDelta <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 411:36]
+                  else :
+                    node _T_19 = eq(UInt<2>("h3"), speedBits) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    when _T_19 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      speedDelta <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 412:36]
+                    else :
+                      node _T_20 = eq(UInt<3>("h4"), speedBits) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      when _T_20 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        speedDelta <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 413:36]
+                      else :
+                        node _T_21 = eq(UInt<3>("h5"), speedBits) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        when _T_21 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          speedDelta <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 414:36]
+                        else :
+                          node _T_22 = eq(UInt<3>("h6"), speedBits) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          when _T_22 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            speedDelta <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 415:36]
+                          else :
+                            node _T_23 = eq(UInt<3>("h7"), speedBits) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            when _T_23 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                              speedDelta <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 416:36]
+              node _speedScaled_T = add(asSInt(UInt<3>("h5")), speedDelta) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node _speedScaled_T_1 = tail(_speedScaled_T, 1) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node speedScaled = asSInt(_speedScaled_T_1) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              asteroidVX[0] <= speedScaled @[\\src\\main\\scala\\GameLogic.scala 419:27]
+              asteroidVY[0] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 420:27]
+              node _nextLFSR2_T = bits(nextLFSR1, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 423:42]
+              node _nextLFSR2_T_1 = bits(nextLFSR1, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 423:57]
+              node _nextLFSR2_T_2 = xor(_nextLFSR2_T, _nextLFSR2_T_1) @[\\src\\main\\scala\\GameLogic.scala 423:46]
+              node _nextLFSR2_T_3 = bits(nextLFSR1, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 423:72]
+              node _nextLFSR2_T_4 = xor(_nextLFSR2_T_2, _nextLFSR2_T_3) @[\\src\\main\\scala\\GameLogic.scala 423:61]
+              node _nextLFSR2_T_5 = bits(nextLFSR1, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 423:87]
+              node _nextLFSR2_T_6 = xor(_nextLFSR2_T_4, _nextLFSR2_T_5) @[\\src\\main\\scala\\GameLogic.scala 423:76]
+              node _nextLFSR2_T_7 = bits(nextLFSR1, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 423:101]
+              node nextLFSR2 = cat(_nextLFSR2_T_6, _nextLFSR2_T_7) @[\\src\\main\\scala\\GameLogic.scala 423:32]
+              node intervalBits = bits(nextLFSR2, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 424:41]
+              wire intervalDelta : UInt<8> @[\\src\\main\\scala\\GameLogic.scala 427:37]
+              intervalDelta <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 428:27]
+              node _T_24 = eq(UInt<1>("h0"), intervalBits) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+              when _T_24 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                node _intervalDelta_T = asUInt(asSInt(UInt<5>("h16"))) @[\\src\\main\\scala\\GameLogic.scala 430:50]
+                intervalDelta <= _intervalDelta_T @[\\src\\main\\scala\\GameLogic.scala 430:39]
+              else :
+                node _T_25 = eq(UInt<1>("h1"), intervalBits) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                when _T_25 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  node _intervalDelta_T_1 = asUInt(asSInt(UInt<4>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 431:49]
+                  intervalDelta <= _intervalDelta_T_1 @[\\src\\main\\scala\\GameLogic.scala 431:39]
+                else :
+                  node _T_26 = eq(UInt<2>("h2"), intervalBits) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  when _T_26 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    node _intervalDelta_T_2 = asUInt(asSInt(UInt<3>("h4"))) @[\\src\\main\\scala\\GameLogic.scala 432:49]
+                    intervalDelta <= _intervalDelta_T_2 @[\\src\\main\\scala\\GameLogic.scala 432:39]
+                  else :
+                    node _T_27 = eq(UInt<2>("h3"), intervalBits) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    when _T_27 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      node _intervalDelta_T_3 = asUInt(asSInt(UInt<2>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 433:49]
+                      intervalDelta <= _intervalDelta_T_3 @[\\src\\main\\scala\\GameLogic.scala 433:39]
+                    else :
+                      node _T_28 = eq(UInt<3>("h4"), intervalBits) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      when _T_28 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        intervalDelta <= UInt<2>("h2") @[\\src\\main\\scala\\GameLogic.scala 434:39]
+                      else :
+                        node _T_29 = eq(UInt<3>("h5"), intervalBits) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        when _T_29 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          intervalDelta <= UInt<3>("h4") @[\\src\\main\\scala\\GameLogic.scala 435:39]
+                        else :
+                          node _T_30 = eq(UInt<3>("h6"), intervalBits) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          when _T_30 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            intervalDelta <= UInt<3>("h6") @[\\src\\main\\scala\\GameLogic.scala 436:39]
+                          else :
+                            node _T_31 = eq(UInt<3>("h7"), intervalBits) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            when _T_31 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                              intervalDelta <= UInt<4>("ha") @[\\src\\main\\scala\\GameLogic.scala 437:39]
+              node _intervalSigned_T = cvt(UInt<6>("h3c")) @[\\src\\main\\scala\\GameLogic.scala 441:60]
+              node _intervalSigned_T_1 = cvt(intervalDelta) @[\\src\\main\\scala\\GameLogic.scala 441:81]
+              node _intervalSigned_T_2 = add(_intervalSigned_T, _intervalSigned_T_1) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _intervalSigned_T_3 = tail(_intervalSigned_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node intervalSigned = asSInt(_intervalSigned_T_3) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _asteroidSpawnIntervalRandomized_T = asUInt(intervalSigned) @[\\src\\main\\scala\\GameLogic.scala 442:63]
+              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T @[\\src\\main\\scala\\GameLogic.scala 442:45]
+              lfsrReg <= nextLFSR2 @[\\src\\main\\scala\\GameLogic.scala 445:21]
+            node _T_32 = or(UInt<1>("h0"), shouldSpawn) @[\\src\\main\\scala\\GameLogic.scala 448:29]
+            node _shouldSpawn_T_2 = eq(_T_32, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:29]
+            node _shouldSpawn_T_3 = eq(asteroidActive[1], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:41]
+            node shouldSpawn_1 = and(_shouldSpawn_T_2, _shouldSpawn_T_3) @[\\src\\main\\scala\\GameLogic.scala 384:38]
+            when shouldSpawn_1 : @[\\src\\main\\scala\\GameLogic.scala 385:29]
+              asteroidActive[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 387:31]
+              asteroidX[1] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 388:26]
+              node _mappedSize_T_3 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:41]
+              node _mappedSize_T_4 = eq(_mappedSize_T_3, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 391:48]
+              node _mappedSize_T_5 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:69]
+              node mappedSize_1 = mux(_mappedSize_T_4, UInt<1>("h0"), _mappedSize_T_5) @[\\src\\main\\scala\\GameLogic.scala 391:33]
+              asteroidSize[1] <= mappedSize_1 @[\\src\\main\\scala\\GameLogic.scala 392:29]
+              node _rawYOffset_T_1 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 395:38]
+              node rawYOffset_1 = shl(_rawYOffset_T_1, 3) @[\\src\\main\\scala\\GameLogic.scala 395:45]
+              node _safeYOffset_T_2 = eq(mappedSize_1, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 396:46]
+              node _safeYOffset_T_3 = and(rawYOffset_1, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 396:65]
+              node safeYOffset_1 = mux(_safeYOffset_T_2, _safeYOffset_T_3, rawYOffset_1) @[\\src\\main\\scala\\GameLogic.scala 396:34]
+              node _sum_T_2 = add(UInt<9>("h60"), safeYOffset_1) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node _sum_T_3 = tail(_sum_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node sum_1 = cvt(_sum_T_3) @[\\src\\main\\scala\\GameLogic.scala 397:49]
+              asteroidY[1] <= sum_1 @[\\src\\main\\scala\\GameLogic.scala 399:26]
+              node _nextLFSR1_T_8 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 402:40]
+              node _nextLFSR1_T_9 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 402:53]
+              node _nextLFSR1_T_10 = xor(_nextLFSR1_T_8, _nextLFSR1_T_9) @[\\src\\main\\scala\\GameLogic.scala 402:44]
+              node _nextLFSR1_T_11 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 402:66]
+              node _nextLFSR1_T_12 = xor(_nextLFSR1_T_10, _nextLFSR1_T_11) @[\\src\\main\\scala\\GameLogic.scala 402:57]
+              node _nextLFSR1_T_13 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 402:79]
+              node _nextLFSR1_T_14 = xor(_nextLFSR1_T_12, _nextLFSR1_T_13) @[\\src\\main\\scala\\GameLogic.scala 402:70]
+              node _nextLFSR1_T_15 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 402:91]
+              node nextLFSR1_1 = cat(_nextLFSR1_T_14, _nextLFSR1_T_15) @[\\src\\main\\scala\\GameLogic.scala 402:32]
+              node speedBits_1 = bits(nextLFSR1_1, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 403:38]
+              wire speedDelta_1 : SInt @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_1 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_1 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 407:24]
+              node _T_33 = eq(UInt<1>("h0"), speedBits_1) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+              when _T_33 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                speedDelta_1 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 409:36]
+              else :
+                node _T_34 = eq(UInt<1>("h1"), speedBits_1) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                when _T_34 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  speedDelta_1 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 410:36]
+                else :
+                  node _T_35 = eq(UInt<2>("h2"), speedBits_1) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  when _T_35 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    speedDelta_1 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 411:36]
+                  else :
+                    node _T_36 = eq(UInt<2>("h3"), speedBits_1) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    when _T_36 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      speedDelta_1 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 412:36]
+                    else :
+                      node _T_37 = eq(UInt<3>("h4"), speedBits_1) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      when _T_37 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        speedDelta_1 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 413:36]
+                      else :
+                        node _T_38 = eq(UInt<3>("h5"), speedBits_1) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        when _T_38 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          speedDelta_1 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 414:36]
+                        else :
+                          node _T_39 = eq(UInt<3>("h6"), speedBits_1) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          when _T_39 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            speedDelta_1 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 415:36]
+                          else :
+                            node _T_40 = eq(UInt<3>("h7"), speedBits_1) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            when _T_40 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                              speedDelta_1 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 416:36]
+              node _speedScaled_T_2 = add(asSInt(UInt<3>("h5")), speedDelta_1) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node _speedScaled_T_3 = tail(_speedScaled_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node speedScaled_1 = asSInt(_speedScaled_T_3) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              asteroidVX[1] <= speedScaled_1 @[\\src\\main\\scala\\GameLogic.scala 419:27]
+              asteroidVY[1] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 420:27]
+              node _nextLFSR2_T_8 = bits(nextLFSR1_1, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 423:42]
+              node _nextLFSR2_T_9 = bits(nextLFSR1_1, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 423:57]
+              node _nextLFSR2_T_10 = xor(_nextLFSR2_T_8, _nextLFSR2_T_9) @[\\src\\main\\scala\\GameLogic.scala 423:46]
+              node _nextLFSR2_T_11 = bits(nextLFSR1_1, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 423:72]
+              node _nextLFSR2_T_12 = xor(_nextLFSR2_T_10, _nextLFSR2_T_11) @[\\src\\main\\scala\\GameLogic.scala 423:61]
+              node _nextLFSR2_T_13 = bits(nextLFSR1_1, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 423:87]
+              node _nextLFSR2_T_14 = xor(_nextLFSR2_T_12, _nextLFSR2_T_13) @[\\src\\main\\scala\\GameLogic.scala 423:76]
+              node _nextLFSR2_T_15 = bits(nextLFSR1_1, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 423:101]
+              node nextLFSR2_1 = cat(_nextLFSR2_T_14, _nextLFSR2_T_15) @[\\src\\main\\scala\\GameLogic.scala 423:32]
+              node intervalBits_1 = bits(nextLFSR2_1, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 424:41]
+              wire intervalDelta_1 : UInt<8> @[\\src\\main\\scala\\GameLogic.scala 427:37]
+              intervalDelta_1 <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 428:27]
+              node _T_41 = eq(UInt<1>("h0"), intervalBits_1) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+              when _T_41 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                node _intervalDelta_T_4 = asUInt(asSInt(UInt<5>("h16"))) @[\\src\\main\\scala\\GameLogic.scala 430:50]
+                intervalDelta_1 <= _intervalDelta_T_4 @[\\src\\main\\scala\\GameLogic.scala 430:39]
+              else :
+                node _T_42 = eq(UInt<1>("h1"), intervalBits_1) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                when _T_42 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  node _intervalDelta_T_5 = asUInt(asSInt(UInt<4>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 431:49]
+                  intervalDelta_1 <= _intervalDelta_T_5 @[\\src\\main\\scala\\GameLogic.scala 431:39]
+                else :
+                  node _T_43 = eq(UInt<2>("h2"), intervalBits_1) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  when _T_43 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    node _intervalDelta_T_6 = asUInt(asSInt(UInt<3>("h4"))) @[\\src\\main\\scala\\GameLogic.scala 432:49]
+                    intervalDelta_1 <= _intervalDelta_T_6 @[\\src\\main\\scala\\GameLogic.scala 432:39]
+                  else :
+                    node _T_44 = eq(UInt<2>("h3"), intervalBits_1) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    when _T_44 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      node _intervalDelta_T_7 = asUInt(asSInt(UInt<2>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 433:49]
+                      intervalDelta_1 <= _intervalDelta_T_7 @[\\src\\main\\scala\\GameLogic.scala 433:39]
+                    else :
+                      node _T_45 = eq(UInt<3>("h4"), intervalBits_1) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      when _T_45 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        intervalDelta_1 <= UInt<2>("h2") @[\\src\\main\\scala\\GameLogic.scala 434:39]
+                      else :
+                        node _T_46 = eq(UInt<3>("h5"), intervalBits_1) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        when _T_46 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          intervalDelta_1 <= UInt<3>("h4") @[\\src\\main\\scala\\GameLogic.scala 435:39]
+                        else :
+                          node _T_47 = eq(UInt<3>("h6"), intervalBits_1) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          when _T_47 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            intervalDelta_1 <= UInt<3>("h6") @[\\src\\main\\scala\\GameLogic.scala 436:39]
+                          else :
+                            node _T_48 = eq(UInt<3>("h7"), intervalBits_1) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            when _T_48 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                              intervalDelta_1 <= UInt<4>("ha") @[\\src\\main\\scala\\GameLogic.scala 437:39]
+              node _intervalSigned_T_4 = cvt(UInt<6>("h3c")) @[\\src\\main\\scala\\GameLogic.scala 441:60]
+              node _intervalSigned_T_5 = cvt(intervalDelta_1) @[\\src\\main\\scala\\GameLogic.scala 441:81]
+              node _intervalSigned_T_6 = add(_intervalSigned_T_4, _intervalSigned_T_5) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _intervalSigned_T_7 = tail(_intervalSigned_T_6, 1) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node intervalSigned_1 = asSInt(_intervalSigned_T_7) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _asteroidSpawnIntervalRandomized_T_1 = asUInt(intervalSigned_1) @[\\src\\main\\scala\\GameLogic.scala 442:63]
+              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_1 @[\\src\\main\\scala\\GameLogic.scala 442:45]
+              lfsrReg <= nextLFSR2_1 @[\\src\\main\\scala\\GameLogic.scala 445:21]
+            node _T_49 = or(_T_32, shouldSpawn_1) @[\\src\\main\\scala\\GameLogic.scala 448:29]
+            node _shouldSpawn_T_4 = eq(_T_49, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:29]
+            node _shouldSpawn_T_5 = eq(asteroidActive[2], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:41]
+            node shouldSpawn_2 = and(_shouldSpawn_T_4, _shouldSpawn_T_5) @[\\src\\main\\scala\\GameLogic.scala 384:38]
+            when shouldSpawn_2 : @[\\src\\main\\scala\\GameLogic.scala 385:29]
+              asteroidActive[2] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 387:31]
+              asteroidX[2] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 388:26]
+              node _mappedSize_T_6 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:41]
+              node _mappedSize_T_7 = eq(_mappedSize_T_6, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 391:48]
+              node _mappedSize_T_8 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:69]
+              node mappedSize_2 = mux(_mappedSize_T_7, UInt<1>("h0"), _mappedSize_T_8) @[\\src\\main\\scala\\GameLogic.scala 391:33]
+              asteroidSize[2] <= mappedSize_2 @[\\src\\main\\scala\\GameLogic.scala 392:29]
+              node _rawYOffset_T_2 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 395:38]
+              node rawYOffset_2 = shl(_rawYOffset_T_2, 3) @[\\src\\main\\scala\\GameLogic.scala 395:45]
+              node _safeYOffset_T_4 = eq(mappedSize_2, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 396:46]
+              node _safeYOffset_T_5 = and(rawYOffset_2, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 396:65]
+              node safeYOffset_2 = mux(_safeYOffset_T_4, _safeYOffset_T_5, rawYOffset_2) @[\\src\\main\\scala\\GameLogic.scala 396:34]
+              node _sum_T_4 = add(UInt<9>("h60"), safeYOffset_2) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node _sum_T_5 = tail(_sum_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node sum_2 = cvt(_sum_T_5) @[\\src\\main\\scala\\GameLogic.scala 397:49]
+              asteroidY[2] <= sum_2 @[\\src\\main\\scala\\GameLogic.scala 399:26]
+              node _nextLFSR1_T_16 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 402:40]
+              node _nextLFSR1_T_17 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 402:53]
+              node _nextLFSR1_T_18 = xor(_nextLFSR1_T_16, _nextLFSR1_T_17) @[\\src\\main\\scala\\GameLogic.scala 402:44]
+              node _nextLFSR1_T_19 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 402:66]
+              node _nextLFSR1_T_20 = xor(_nextLFSR1_T_18, _nextLFSR1_T_19) @[\\src\\main\\scala\\GameLogic.scala 402:57]
+              node _nextLFSR1_T_21 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 402:79]
+              node _nextLFSR1_T_22 = xor(_nextLFSR1_T_20, _nextLFSR1_T_21) @[\\src\\main\\scala\\GameLogic.scala 402:70]
+              node _nextLFSR1_T_23 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 402:91]
+              node nextLFSR1_2 = cat(_nextLFSR1_T_22, _nextLFSR1_T_23) @[\\src\\main\\scala\\GameLogic.scala 402:32]
+              node speedBits_2 = bits(nextLFSR1_2, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 403:38]
+              wire speedDelta_2 : SInt @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_2 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_2 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 407:24]
+              node _T_50 = eq(UInt<1>("h0"), speedBits_2) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+              when _T_50 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                speedDelta_2 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 409:36]
+              else :
+                node _T_51 = eq(UInt<1>("h1"), speedBits_2) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                when _T_51 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  speedDelta_2 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 410:36]
+                else :
+                  node _T_52 = eq(UInt<2>("h2"), speedBits_2) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  when _T_52 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    speedDelta_2 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 411:36]
+                  else :
+                    node _T_53 = eq(UInt<2>("h3"), speedBits_2) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    when _T_53 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      speedDelta_2 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 412:36]
+                    else :
+                      node _T_54 = eq(UInt<3>("h4"), speedBits_2) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      when _T_54 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        speedDelta_2 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 413:36]
+                      else :
+                        node _T_55 = eq(UInt<3>("h5"), speedBits_2) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        when _T_55 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          speedDelta_2 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 414:36]
+                        else :
+                          node _T_56 = eq(UInt<3>("h6"), speedBits_2) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          when _T_56 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            speedDelta_2 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 415:36]
+                          else :
+                            node _T_57 = eq(UInt<3>("h7"), speedBits_2) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            when _T_57 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                              speedDelta_2 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 416:36]
+              node _speedScaled_T_4 = add(asSInt(UInt<3>("h5")), speedDelta_2) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node _speedScaled_T_5 = tail(_speedScaled_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node speedScaled_2 = asSInt(_speedScaled_T_5) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              asteroidVX[2] <= speedScaled_2 @[\\src\\main\\scala\\GameLogic.scala 419:27]
+              asteroidVY[2] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 420:27]
+              node _nextLFSR2_T_16 = bits(nextLFSR1_2, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 423:42]
+              node _nextLFSR2_T_17 = bits(nextLFSR1_2, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 423:57]
+              node _nextLFSR2_T_18 = xor(_nextLFSR2_T_16, _nextLFSR2_T_17) @[\\src\\main\\scala\\GameLogic.scala 423:46]
+              node _nextLFSR2_T_19 = bits(nextLFSR1_2, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 423:72]
+              node _nextLFSR2_T_20 = xor(_nextLFSR2_T_18, _nextLFSR2_T_19) @[\\src\\main\\scala\\GameLogic.scala 423:61]
+              node _nextLFSR2_T_21 = bits(nextLFSR1_2, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 423:87]
+              node _nextLFSR2_T_22 = xor(_nextLFSR2_T_20, _nextLFSR2_T_21) @[\\src\\main\\scala\\GameLogic.scala 423:76]
+              node _nextLFSR2_T_23 = bits(nextLFSR1_2, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 423:101]
+              node nextLFSR2_2 = cat(_nextLFSR2_T_22, _nextLFSR2_T_23) @[\\src\\main\\scala\\GameLogic.scala 423:32]
+              node intervalBits_2 = bits(nextLFSR2_2, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 424:41]
+              wire intervalDelta_2 : UInt<8> @[\\src\\main\\scala\\GameLogic.scala 427:37]
+              intervalDelta_2 <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 428:27]
+              node _T_58 = eq(UInt<1>("h0"), intervalBits_2) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+              when _T_58 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                node _intervalDelta_T_8 = asUInt(asSInt(UInt<5>("h16"))) @[\\src\\main\\scala\\GameLogic.scala 430:50]
+                intervalDelta_2 <= _intervalDelta_T_8 @[\\src\\main\\scala\\GameLogic.scala 430:39]
+              else :
+                node _T_59 = eq(UInt<1>("h1"), intervalBits_2) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                when _T_59 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  node _intervalDelta_T_9 = asUInt(asSInt(UInt<4>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 431:49]
+                  intervalDelta_2 <= _intervalDelta_T_9 @[\\src\\main\\scala\\GameLogic.scala 431:39]
+                else :
+                  node _T_60 = eq(UInt<2>("h2"), intervalBits_2) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  when _T_60 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    node _intervalDelta_T_10 = asUInt(asSInt(UInt<3>("h4"))) @[\\src\\main\\scala\\GameLogic.scala 432:49]
+                    intervalDelta_2 <= _intervalDelta_T_10 @[\\src\\main\\scala\\GameLogic.scala 432:39]
+                  else :
+                    node _T_61 = eq(UInt<2>("h3"), intervalBits_2) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    when _T_61 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      node _intervalDelta_T_11 = asUInt(asSInt(UInt<2>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 433:49]
+                      intervalDelta_2 <= _intervalDelta_T_11 @[\\src\\main\\scala\\GameLogic.scala 433:39]
+                    else :
+                      node _T_62 = eq(UInt<3>("h4"), intervalBits_2) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      when _T_62 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        intervalDelta_2 <= UInt<2>("h2") @[\\src\\main\\scala\\GameLogic.scala 434:39]
+                      else :
+                        node _T_63 = eq(UInt<3>("h5"), intervalBits_2) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        when _T_63 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          intervalDelta_2 <= UInt<3>("h4") @[\\src\\main\\scala\\GameLogic.scala 435:39]
+                        else :
+                          node _T_64 = eq(UInt<3>("h6"), intervalBits_2) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          when _T_64 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            intervalDelta_2 <= UInt<3>("h6") @[\\src\\main\\scala\\GameLogic.scala 436:39]
+                          else :
+                            node _T_65 = eq(UInt<3>("h7"), intervalBits_2) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            when _T_65 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                              intervalDelta_2 <= UInt<4>("ha") @[\\src\\main\\scala\\GameLogic.scala 437:39]
+              node _intervalSigned_T_8 = cvt(UInt<6>("h3c")) @[\\src\\main\\scala\\GameLogic.scala 441:60]
+              node _intervalSigned_T_9 = cvt(intervalDelta_2) @[\\src\\main\\scala\\GameLogic.scala 441:81]
+              node _intervalSigned_T_10 = add(_intervalSigned_T_8, _intervalSigned_T_9) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _intervalSigned_T_11 = tail(_intervalSigned_T_10, 1) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node intervalSigned_2 = asSInt(_intervalSigned_T_11) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _asteroidSpawnIntervalRandomized_T_2 = asUInt(intervalSigned_2) @[\\src\\main\\scala\\GameLogic.scala 442:63]
+              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_2 @[\\src\\main\\scala\\GameLogic.scala 442:45]
+              lfsrReg <= nextLFSR2_2 @[\\src\\main\\scala\\GameLogic.scala 445:21]
+            node _T_66 = or(_T_49, shouldSpawn_2) @[\\src\\main\\scala\\GameLogic.scala 448:29]
+            node _shouldSpawn_T_6 = eq(_T_66, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:29]
+            node _shouldSpawn_T_7 = eq(asteroidActive[3], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:41]
+            node shouldSpawn_3 = and(_shouldSpawn_T_6, _shouldSpawn_T_7) @[\\src\\main\\scala\\GameLogic.scala 384:38]
+            when shouldSpawn_3 : @[\\src\\main\\scala\\GameLogic.scala 385:29]
+              asteroidActive[3] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 387:31]
+              asteroidX[3] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 388:26]
+              node _mappedSize_T_9 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:41]
+              node _mappedSize_T_10 = eq(_mappedSize_T_9, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 391:48]
+              node _mappedSize_T_11 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:69]
+              node mappedSize_3 = mux(_mappedSize_T_10, UInt<1>("h0"), _mappedSize_T_11) @[\\src\\main\\scala\\GameLogic.scala 391:33]
+              asteroidSize[3] <= mappedSize_3 @[\\src\\main\\scala\\GameLogic.scala 392:29]
+              node _rawYOffset_T_3 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 395:38]
+              node rawYOffset_3 = shl(_rawYOffset_T_3, 3) @[\\src\\main\\scala\\GameLogic.scala 395:45]
+              node _safeYOffset_T_6 = eq(mappedSize_3, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 396:46]
+              node _safeYOffset_T_7 = and(rawYOffset_3, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 396:65]
+              node safeYOffset_3 = mux(_safeYOffset_T_6, _safeYOffset_T_7, rawYOffset_3) @[\\src\\main\\scala\\GameLogic.scala 396:34]
+              node _sum_T_6 = add(UInt<9>("h60"), safeYOffset_3) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node _sum_T_7 = tail(_sum_T_6, 1) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node sum_3 = cvt(_sum_T_7) @[\\src\\main\\scala\\GameLogic.scala 397:49]
+              asteroidY[3] <= sum_3 @[\\src\\main\\scala\\GameLogic.scala 399:26]
+              node _nextLFSR1_T_24 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 402:40]
+              node _nextLFSR1_T_25 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 402:53]
+              node _nextLFSR1_T_26 = xor(_nextLFSR1_T_24, _nextLFSR1_T_25) @[\\src\\main\\scala\\GameLogic.scala 402:44]
+              node _nextLFSR1_T_27 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 402:66]
+              node _nextLFSR1_T_28 = xor(_nextLFSR1_T_26, _nextLFSR1_T_27) @[\\src\\main\\scala\\GameLogic.scala 402:57]
+              node _nextLFSR1_T_29 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 402:79]
+              node _nextLFSR1_T_30 = xor(_nextLFSR1_T_28, _nextLFSR1_T_29) @[\\src\\main\\scala\\GameLogic.scala 402:70]
+              node _nextLFSR1_T_31 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 402:91]
+              node nextLFSR1_3 = cat(_nextLFSR1_T_30, _nextLFSR1_T_31) @[\\src\\main\\scala\\GameLogic.scala 402:32]
+              node speedBits_3 = bits(nextLFSR1_3, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 403:38]
+              wire speedDelta_3 : SInt @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_3 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_3 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 407:24]
+              node _T_67 = eq(UInt<1>("h0"), speedBits_3) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+              when _T_67 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                speedDelta_3 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 409:36]
+              else :
+                node _T_68 = eq(UInt<1>("h1"), speedBits_3) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                when _T_68 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  speedDelta_3 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 410:36]
+                else :
+                  node _T_69 = eq(UInt<2>("h2"), speedBits_3) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  when _T_69 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    speedDelta_3 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 411:36]
+                  else :
+                    node _T_70 = eq(UInt<2>("h3"), speedBits_3) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    when _T_70 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      speedDelta_3 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 412:36]
+                    else :
+                      node _T_71 = eq(UInt<3>("h4"), speedBits_3) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      when _T_71 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        speedDelta_3 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 413:36]
+                      else :
+                        node _T_72 = eq(UInt<3>("h5"), speedBits_3) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        when _T_72 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          speedDelta_3 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 414:36]
+                        else :
+                          node _T_73 = eq(UInt<3>("h6"), speedBits_3) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          when _T_73 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            speedDelta_3 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 415:36]
+                          else :
+                            node _T_74 = eq(UInt<3>("h7"), speedBits_3) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            when _T_74 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                              speedDelta_3 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 416:36]
+              node _speedScaled_T_6 = add(asSInt(UInt<3>("h5")), speedDelta_3) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node _speedScaled_T_7 = tail(_speedScaled_T_6, 1) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node speedScaled_3 = asSInt(_speedScaled_T_7) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              asteroidVX[3] <= speedScaled_3 @[\\src\\main\\scala\\GameLogic.scala 419:27]
+              asteroidVY[3] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 420:27]
+              node _nextLFSR2_T_24 = bits(nextLFSR1_3, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 423:42]
+              node _nextLFSR2_T_25 = bits(nextLFSR1_3, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 423:57]
+              node _nextLFSR2_T_26 = xor(_nextLFSR2_T_24, _nextLFSR2_T_25) @[\\src\\main\\scala\\GameLogic.scala 423:46]
+              node _nextLFSR2_T_27 = bits(nextLFSR1_3, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 423:72]
+              node _nextLFSR2_T_28 = xor(_nextLFSR2_T_26, _nextLFSR2_T_27) @[\\src\\main\\scala\\GameLogic.scala 423:61]
+              node _nextLFSR2_T_29 = bits(nextLFSR1_3, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 423:87]
+              node _nextLFSR2_T_30 = xor(_nextLFSR2_T_28, _nextLFSR2_T_29) @[\\src\\main\\scala\\GameLogic.scala 423:76]
+              node _nextLFSR2_T_31 = bits(nextLFSR1_3, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 423:101]
+              node nextLFSR2_3 = cat(_nextLFSR2_T_30, _nextLFSR2_T_31) @[\\src\\main\\scala\\GameLogic.scala 423:32]
+              node intervalBits_3 = bits(nextLFSR2_3, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 424:41]
+              wire intervalDelta_3 : UInt<8> @[\\src\\main\\scala\\GameLogic.scala 427:37]
+              intervalDelta_3 <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 428:27]
+              node _T_75 = eq(UInt<1>("h0"), intervalBits_3) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+              when _T_75 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                node _intervalDelta_T_12 = asUInt(asSInt(UInt<5>("h16"))) @[\\src\\main\\scala\\GameLogic.scala 430:50]
+                intervalDelta_3 <= _intervalDelta_T_12 @[\\src\\main\\scala\\GameLogic.scala 430:39]
+              else :
+                node _T_76 = eq(UInt<1>("h1"), intervalBits_3) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                when _T_76 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  node _intervalDelta_T_13 = asUInt(asSInt(UInt<4>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 431:49]
+                  intervalDelta_3 <= _intervalDelta_T_13 @[\\src\\main\\scala\\GameLogic.scala 431:39]
+                else :
+                  node _T_77 = eq(UInt<2>("h2"), intervalBits_3) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  when _T_77 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    node _intervalDelta_T_14 = asUInt(asSInt(UInt<3>("h4"))) @[\\src\\main\\scala\\GameLogic.scala 432:49]
+                    intervalDelta_3 <= _intervalDelta_T_14 @[\\src\\main\\scala\\GameLogic.scala 432:39]
+                  else :
+                    node _T_78 = eq(UInt<2>("h3"), intervalBits_3) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    when _T_78 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      node _intervalDelta_T_15 = asUInt(asSInt(UInt<2>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 433:49]
+                      intervalDelta_3 <= _intervalDelta_T_15 @[\\src\\main\\scala\\GameLogic.scala 433:39]
+                    else :
+                      node _T_79 = eq(UInt<3>("h4"), intervalBits_3) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      when _T_79 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        intervalDelta_3 <= UInt<2>("h2") @[\\src\\main\\scala\\GameLogic.scala 434:39]
+                      else :
+                        node _T_80 = eq(UInt<3>("h5"), intervalBits_3) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        when _T_80 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          intervalDelta_3 <= UInt<3>("h4") @[\\src\\main\\scala\\GameLogic.scala 435:39]
+                        else :
+                          node _T_81 = eq(UInt<3>("h6"), intervalBits_3) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          when _T_81 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            intervalDelta_3 <= UInt<3>("h6") @[\\src\\main\\scala\\GameLogic.scala 436:39]
+                          else :
+                            node _T_82 = eq(UInt<3>("h7"), intervalBits_3) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            when _T_82 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                              intervalDelta_3 <= UInt<4>("ha") @[\\src\\main\\scala\\GameLogic.scala 437:39]
+              node _intervalSigned_T_12 = cvt(UInt<6>("h3c")) @[\\src\\main\\scala\\GameLogic.scala 441:60]
+              node _intervalSigned_T_13 = cvt(intervalDelta_3) @[\\src\\main\\scala\\GameLogic.scala 441:81]
+              node _intervalSigned_T_14 = add(_intervalSigned_T_12, _intervalSigned_T_13) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _intervalSigned_T_15 = tail(_intervalSigned_T_14, 1) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node intervalSigned_3 = asSInt(_intervalSigned_T_15) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _asteroidSpawnIntervalRandomized_T_3 = asUInt(intervalSigned_3) @[\\src\\main\\scala\\GameLogic.scala 442:63]
+              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_3 @[\\src\\main\\scala\\GameLogic.scala 442:45]
+              lfsrReg <= nextLFSR2_3 @[\\src\\main\\scala\\GameLogic.scala 445:21]
+            node _T_83 = or(_T_66, shouldSpawn_3) @[\\src\\main\\scala\\GameLogic.scala 448:29]
+            node _shouldSpawn_T_8 = eq(_T_83, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:29]
+            node _shouldSpawn_T_9 = eq(asteroidActive[4], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:41]
+            node shouldSpawn_4 = and(_shouldSpawn_T_8, _shouldSpawn_T_9) @[\\src\\main\\scala\\GameLogic.scala 384:38]
+            when shouldSpawn_4 : @[\\src\\main\\scala\\GameLogic.scala 385:29]
+              asteroidActive[4] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 387:31]
+              asteroidX[4] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 388:26]
+              node _mappedSize_T_12 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:41]
+              node _mappedSize_T_13 = eq(_mappedSize_T_12, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 391:48]
+              node _mappedSize_T_14 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:69]
+              node mappedSize_4 = mux(_mappedSize_T_13, UInt<1>("h0"), _mappedSize_T_14) @[\\src\\main\\scala\\GameLogic.scala 391:33]
+              asteroidSize[4] <= mappedSize_4 @[\\src\\main\\scala\\GameLogic.scala 392:29]
+              node _rawYOffset_T_4 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 395:38]
+              node rawYOffset_4 = shl(_rawYOffset_T_4, 3) @[\\src\\main\\scala\\GameLogic.scala 395:45]
+              node _safeYOffset_T_8 = eq(mappedSize_4, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 396:46]
+              node _safeYOffset_T_9 = and(rawYOffset_4, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 396:65]
+              node safeYOffset_4 = mux(_safeYOffset_T_8, _safeYOffset_T_9, rawYOffset_4) @[\\src\\main\\scala\\GameLogic.scala 396:34]
+              node _sum_T_8 = add(UInt<9>("h60"), safeYOffset_4) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node _sum_T_9 = tail(_sum_T_8, 1) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node sum_4 = cvt(_sum_T_9) @[\\src\\main\\scala\\GameLogic.scala 397:49]
+              asteroidY[4] <= sum_4 @[\\src\\main\\scala\\GameLogic.scala 399:26]
+              node _nextLFSR1_T_32 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 402:40]
+              node _nextLFSR1_T_33 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 402:53]
+              node _nextLFSR1_T_34 = xor(_nextLFSR1_T_32, _nextLFSR1_T_33) @[\\src\\main\\scala\\GameLogic.scala 402:44]
+              node _nextLFSR1_T_35 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 402:66]
+              node _nextLFSR1_T_36 = xor(_nextLFSR1_T_34, _nextLFSR1_T_35) @[\\src\\main\\scala\\GameLogic.scala 402:57]
+              node _nextLFSR1_T_37 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 402:79]
+              node _nextLFSR1_T_38 = xor(_nextLFSR1_T_36, _nextLFSR1_T_37) @[\\src\\main\\scala\\GameLogic.scala 402:70]
+              node _nextLFSR1_T_39 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 402:91]
+              node nextLFSR1_4 = cat(_nextLFSR1_T_38, _nextLFSR1_T_39) @[\\src\\main\\scala\\GameLogic.scala 402:32]
+              node speedBits_4 = bits(nextLFSR1_4, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 403:38]
+              wire speedDelta_4 : SInt @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_4 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_4 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 407:24]
+              node _T_84 = eq(UInt<1>("h0"), speedBits_4) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+              when _T_84 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                speedDelta_4 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 409:36]
+              else :
+                node _T_85 = eq(UInt<1>("h1"), speedBits_4) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                when _T_85 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  speedDelta_4 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 410:36]
+                else :
+                  node _T_86 = eq(UInt<2>("h2"), speedBits_4) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  when _T_86 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    speedDelta_4 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 411:36]
+                  else :
+                    node _T_87 = eq(UInt<2>("h3"), speedBits_4) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    when _T_87 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      speedDelta_4 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 412:36]
+                    else :
+                      node _T_88 = eq(UInt<3>("h4"), speedBits_4) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      when _T_88 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        speedDelta_4 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 413:36]
+                      else :
+                        node _T_89 = eq(UInt<3>("h5"), speedBits_4) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        when _T_89 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          speedDelta_4 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 414:36]
+                        else :
+                          node _T_90 = eq(UInt<3>("h6"), speedBits_4) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          when _T_90 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            speedDelta_4 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 415:36]
+                          else :
+                            node _T_91 = eq(UInt<3>("h7"), speedBits_4) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            when _T_91 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                              speedDelta_4 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 416:36]
+              node _speedScaled_T_8 = add(asSInt(UInt<3>("h5")), speedDelta_4) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node _speedScaled_T_9 = tail(_speedScaled_T_8, 1) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node speedScaled_4 = asSInt(_speedScaled_T_9) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              asteroidVX[4] <= speedScaled_4 @[\\src\\main\\scala\\GameLogic.scala 419:27]
+              asteroidVY[4] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 420:27]
+              node _nextLFSR2_T_32 = bits(nextLFSR1_4, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 423:42]
+              node _nextLFSR2_T_33 = bits(nextLFSR1_4, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 423:57]
+              node _nextLFSR2_T_34 = xor(_nextLFSR2_T_32, _nextLFSR2_T_33) @[\\src\\main\\scala\\GameLogic.scala 423:46]
+              node _nextLFSR2_T_35 = bits(nextLFSR1_4, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 423:72]
+              node _nextLFSR2_T_36 = xor(_nextLFSR2_T_34, _nextLFSR2_T_35) @[\\src\\main\\scala\\GameLogic.scala 423:61]
+              node _nextLFSR2_T_37 = bits(nextLFSR1_4, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 423:87]
+              node _nextLFSR2_T_38 = xor(_nextLFSR2_T_36, _nextLFSR2_T_37) @[\\src\\main\\scala\\GameLogic.scala 423:76]
+              node _nextLFSR2_T_39 = bits(nextLFSR1_4, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 423:101]
+              node nextLFSR2_4 = cat(_nextLFSR2_T_38, _nextLFSR2_T_39) @[\\src\\main\\scala\\GameLogic.scala 423:32]
+              node intervalBits_4 = bits(nextLFSR2_4, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 424:41]
+              wire intervalDelta_4 : UInt<8> @[\\src\\main\\scala\\GameLogic.scala 427:37]
+              intervalDelta_4 <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 428:27]
+              node _T_92 = eq(UInt<1>("h0"), intervalBits_4) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+              when _T_92 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                node _intervalDelta_T_16 = asUInt(asSInt(UInt<5>("h16"))) @[\\src\\main\\scala\\GameLogic.scala 430:50]
+                intervalDelta_4 <= _intervalDelta_T_16 @[\\src\\main\\scala\\GameLogic.scala 430:39]
+              else :
+                node _T_93 = eq(UInt<1>("h1"), intervalBits_4) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                when _T_93 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  node _intervalDelta_T_17 = asUInt(asSInt(UInt<4>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 431:49]
+                  intervalDelta_4 <= _intervalDelta_T_17 @[\\src\\main\\scala\\GameLogic.scala 431:39]
+                else :
+                  node _T_94 = eq(UInt<2>("h2"), intervalBits_4) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  when _T_94 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    node _intervalDelta_T_18 = asUInt(asSInt(UInt<3>("h4"))) @[\\src\\main\\scala\\GameLogic.scala 432:49]
+                    intervalDelta_4 <= _intervalDelta_T_18 @[\\src\\main\\scala\\GameLogic.scala 432:39]
+                  else :
+                    node _T_95 = eq(UInt<2>("h3"), intervalBits_4) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    when _T_95 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      node _intervalDelta_T_19 = asUInt(asSInt(UInt<2>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 433:49]
+                      intervalDelta_4 <= _intervalDelta_T_19 @[\\src\\main\\scala\\GameLogic.scala 433:39]
+                    else :
+                      node _T_96 = eq(UInt<3>("h4"), intervalBits_4) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      when _T_96 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        intervalDelta_4 <= UInt<2>("h2") @[\\src\\main\\scala\\GameLogic.scala 434:39]
+                      else :
+                        node _T_97 = eq(UInt<3>("h5"), intervalBits_4) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        when _T_97 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          intervalDelta_4 <= UInt<3>("h4") @[\\src\\main\\scala\\GameLogic.scala 435:39]
+                        else :
+                          node _T_98 = eq(UInt<3>("h6"), intervalBits_4) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          when _T_98 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            intervalDelta_4 <= UInt<3>("h6") @[\\src\\main\\scala\\GameLogic.scala 436:39]
+                          else :
+                            node _T_99 = eq(UInt<3>("h7"), intervalBits_4) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            when _T_99 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                              intervalDelta_4 <= UInt<4>("ha") @[\\src\\main\\scala\\GameLogic.scala 437:39]
+              node _intervalSigned_T_16 = cvt(UInt<6>("h3c")) @[\\src\\main\\scala\\GameLogic.scala 441:60]
+              node _intervalSigned_T_17 = cvt(intervalDelta_4) @[\\src\\main\\scala\\GameLogic.scala 441:81]
+              node _intervalSigned_T_18 = add(_intervalSigned_T_16, _intervalSigned_T_17) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _intervalSigned_T_19 = tail(_intervalSigned_T_18, 1) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node intervalSigned_4 = asSInt(_intervalSigned_T_19) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _asteroidSpawnIntervalRandomized_T_4 = asUInt(intervalSigned_4) @[\\src\\main\\scala\\GameLogic.scala 442:63]
+              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_4 @[\\src\\main\\scala\\GameLogic.scala 442:45]
+              lfsrReg <= nextLFSR2_4 @[\\src\\main\\scala\\GameLogic.scala 445:21]
+            node _T_100 = or(_T_83, shouldSpawn_4) @[\\src\\main\\scala\\GameLogic.scala 448:29]
+            node _shouldSpawn_T_10 = eq(_T_100, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:29]
+            node _shouldSpawn_T_11 = eq(asteroidActive[5], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 384:41]
+            node shouldSpawn_5 = and(_shouldSpawn_T_10, _shouldSpawn_T_11) @[\\src\\main\\scala\\GameLogic.scala 384:38]
+            when shouldSpawn_5 : @[\\src\\main\\scala\\GameLogic.scala 385:29]
+              asteroidActive[5] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 387:31]
+              asteroidX[5] <= asSInt(UInt<11>("h280")) @[\\src\\main\\scala\\GameLogic.scala 388:26]
+              node _mappedSize_T_15 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:41]
+              node _mappedSize_T_16 = eq(_mappedSize_T_15, UInt<2>("h3")) @[\\src\\main\\scala\\GameLogic.scala 391:48]
+              node _mappedSize_T_17 = bits(lfsrReg, 1, 0) @[\\src\\main\\scala\\GameLogic.scala 391:69]
+              node mappedSize_5 = mux(_mappedSize_T_16, UInt<1>("h0"), _mappedSize_T_17) @[\\src\\main\\scala\\GameLogic.scala 391:33]
+              asteroidSize[5] <= mappedSize_5 @[\\src\\main\\scala\\GameLogic.scala 392:29]
+              node _rawYOffset_T_5 = bits(lfsrReg, 4, 0) @[\\src\\main\\scala\\GameLogic.scala 395:38]
+              node rawYOffset_5 = shl(_rawYOffset_T_5, 3) @[\\src\\main\\scala\\GameLogic.scala 395:45]
+              node _safeYOffset_T_10 = eq(mappedSize_5, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 396:46]
+              node _safeYOffset_T_11 = and(rawYOffset_5, UInt<7>("h70")) @[\\src\\main\\scala\\GameLogic.scala 396:65]
+              node safeYOffset_5 = mux(_safeYOffset_T_10, _safeYOffset_T_11, rawYOffset_5) @[\\src\\main\\scala\\GameLogic.scala 396:34]
+              node _sum_T_10 = add(UInt<9>("h60"), safeYOffset_5) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node _sum_T_11 = tail(_sum_T_10, 1) @[\\src\\main\\scala\\GameLogic.scala 397:34]
+              node sum_5 = cvt(_sum_T_11) @[\\src\\main\\scala\\GameLogic.scala 397:49]
+              asteroidY[5] <= sum_5 @[\\src\\main\\scala\\GameLogic.scala 399:26]
+              node _nextLFSR1_T_40 = bits(lfsrReg, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 402:40]
+              node _nextLFSR1_T_41 = bits(lfsrReg, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 402:53]
+              node _nextLFSR1_T_42 = xor(_nextLFSR1_T_40, _nextLFSR1_T_41) @[\\src\\main\\scala\\GameLogic.scala 402:44]
+              node _nextLFSR1_T_43 = bits(lfsrReg, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 402:66]
+              node _nextLFSR1_T_44 = xor(_nextLFSR1_T_42, _nextLFSR1_T_43) @[\\src\\main\\scala\\GameLogic.scala 402:57]
+              node _nextLFSR1_T_45 = bits(lfsrReg, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 402:79]
+              node _nextLFSR1_T_46 = xor(_nextLFSR1_T_44, _nextLFSR1_T_45) @[\\src\\main\\scala\\GameLogic.scala 402:70]
+              node _nextLFSR1_T_47 = bits(lfsrReg, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 402:91]
+              node nextLFSR1_5 = cat(_nextLFSR1_T_46, _nextLFSR1_T_47) @[\\src\\main\\scala\\GameLogic.scala 402:32]
+              node speedBits_5 = bits(nextLFSR1_5, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 403:38]
+              wire speedDelta_5 : SInt @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_5 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 406:41]
+              speedDelta_5 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 407:24]
+              node _T_101 = eq(UInt<1>("h0"), speedBits_5) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+              when _T_101 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                speedDelta_5 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 409:36]
+              else :
+                node _T_102 = eq(UInt<1>("h1"), speedBits_5) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                when _T_102 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  speedDelta_5 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 410:36]
+                else :
+                  node _T_103 = eq(UInt<2>("h2"), speedBits_5) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                  when _T_103 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    speedDelta_5 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 411:36]
+                  else :
+                    node _T_104 = eq(UInt<2>("h3"), speedBits_5) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                    when _T_104 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      speedDelta_5 <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 412:36]
+                    else :
+                      node _T_105 = eq(UInt<3>("h4"), speedBits_5) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                      when _T_105 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        speedDelta_5 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 413:36]
+                      else :
+                        node _T_106 = eq(UInt<3>("h5"), speedBits_5) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                        when _T_106 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          speedDelta_5 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 414:36]
+                        else :
+                          node _T_107 = eq(UInt<3>("h6"), speedBits_5) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                          when _T_107 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            speedDelta_5 <= asSInt(UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 415:36]
+                          else :
+                            node _T_108 = eq(UInt<3>("h7"), speedBits_5) @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                            when _T_108 : @[\\src\\main\\scala\\GameLogic.scala 408:31]
+                              speedDelta_5 <= asSInt(UInt<2>("h1")) @[\\src\\main\\scala\\GameLogic.scala 416:36]
+              node _speedScaled_T_10 = add(asSInt(UInt<3>("h5")), speedDelta_5) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node _speedScaled_T_11 = tail(_speedScaled_T_10, 1) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              node speedScaled_5 = asSInt(_speedScaled_T_11) @[\\src\\main\\scala\\GameLogic.scala 418:46]
+              asteroidVX[5] <= speedScaled_5 @[\\src\\main\\scala\\GameLogic.scala 419:27]
+              asteroidVY[5] <= asSInt(UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 420:27]
+              node _nextLFSR2_T_40 = bits(nextLFSR1_5, 6, 6) @[\\src\\main\\scala\\GameLogic.scala 423:42]
+              node _nextLFSR2_T_41 = bits(nextLFSR1_5, 5, 5) @[\\src\\main\\scala\\GameLogic.scala 423:57]
+              node _nextLFSR2_T_42 = xor(_nextLFSR2_T_40, _nextLFSR2_T_41) @[\\src\\main\\scala\\GameLogic.scala 423:46]
+              node _nextLFSR2_T_43 = bits(nextLFSR1_5, 4, 4) @[\\src\\main\\scala\\GameLogic.scala 423:72]
+              node _nextLFSR2_T_44 = xor(_nextLFSR2_T_42, _nextLFSR2_T_43) @[\\src\\main\\scala\\GameLogic.scala 423:61]
+              node _nextLFSR2_T_45 = bits(nextLFSR1_5, 0, 0) @[\\src\\main\\scala\\GameLogic.scala 423:87]
+              node _nextLFSR2_T_46 = xor(_nextLFSR2_T_44, _nextLFSR2_T_45) @[\\src\\main\\scala\\GameLogic.scala 423:76]
+              node _nextLFSR2_T_47 = bits(nextLFSR1_5, 7, 1) @[\\src\\main\\scala\\GameLogic.scala 423:101]
+              node nextLFSR2_5 = cat(_nextLFSR2_T_46, _nextLFSR2_T_47) @[\\src\\main\\scala\\GameLogic.scala 423:32]
+              node intervalBits_5 = bits(nextLFSR2_5, 2, 0) @[\\src\\main\\scala\\GameLogic.scala 424:41]
+              wire intervalDelta_5 : UInt<8> @[\\src\\main\\scala\\GameLogic.scala 427:37]
+              intervalDelta_5 <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 428:27]
+              node _T_109 = eq(UInt<1>("h0"), intervalBits_5) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+              when _T_109 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                node _intervalDelta_T_20 = asUInt(asSInt(UInt<5>("h16"))) @[\\src\\main\\scala\\GameLogic.scala 430:50]
+                intervalDelta_5 <= _intervalDelta_T_20 @[\\src\\main\\scala\\GameLogic.scala 430:39]
+              else :
+                node _T_110 = eq(UInt<1>("h1"), intervalBits_5) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                when _T_110 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  node _intervalDelta_T_21 = asUInt(asSInt(UInt<4>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 431:49]
+                  intervalDelta_5 <= _intervalDelta_T_21 @[\\src\\main\\scala\\GameLogic.scala 431:39]
+                else :
+                  node _T_111 = eq(UInt<2>("h2"), intervalBits_5) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                  when _T_111 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    node _intervalDelta_T_22 = asUInt(asSInt(UInt<3>("h4"))) @[\\src\\main\\scala\\GameLogic.scala 432:49]
+                    intervalDelta_5 <= _intervalDelta_T_22 @[\\src\\main\\scala\\GameLogic.scala 432:39]
+                  else :
+                    node _T_112 = eq(UInt<2>("h3"), intervalBits_5) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                    when _T_112 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      node _intervalDelta_T_23 = asUInt(asSInt(UInt<2>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 433:49]
+                      intervalDelta_5 <= _intervalDelta_T_23 @[\\src\\main\\scala\\GameLogic.scala 433:39]
+                    else :
+                      node _T_113 = eq(UInt<3>("h4"), intervalBits_5) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                      when _T_113 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        intervalDelta_5 <= UInt<2>("h2") @[\\src\\main\\scala\\GameLogic.scala 434:39]
+                      else :
+                        node _T_114 = eq(UInt<3>("h5"), intervalBits_5) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                        when _T_114 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          intervalDelta_5 <= UInt<3>("h4") @[\\src\\main\\scala\\GameLogic.scala 435:39]
+                        else :
+                          node _T_115 = eq(UInt<3>("h6"), intervalBits_5) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                          when _T_115 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            intervalDelta_5 <= UInt<3>("h6") @[\\src\\main\\scala\\GameLogic.scala 436:39]
+                          else :
+                            node _T_116 = eq(UInt<3>("h7"), intervalBits_5) @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                            when _T_116 : @[\\src\\main\\scala\\GameLogic.scala 429:34]
+                              intervalDelta_5 <= UInt<4>("ha") @[\\src\\main\\scala\\GameLogic.scala 437:39]
+              node _intervalSigned_T_20 = cvt(UInt<6>("h3c")) @[\\src\\main\\scala\\GameLogic.scala 441:60]
+              node _intervalSigned_T_21 = cvt(intervalDelta_5) @[\\src\\main\\scala\\GameLogic.scala 441:81]
+              node _intervalSigned_T_22 = add(_intervalSigned_T_20, _intervalSigned_T_21) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _intervalSigned_T_23 = tail(_intervalSigned_T_22, 1) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node intervalSigned_5 = asSInt(_intervalSigned_T_23) @[\\src\\main\\scala\\GameLogic.scala 441:65]
+              node _asteroidSpawnIntervalRandomized_T_5 = asUInt(intervalSigned_5) @[\\src\\main\\scala\\GameLogic.scala 442:63]
+              asteroidSpawnIntervalRandomized <= _asteroidSpawnIntervalRandomized_T_5 @[\\src\\main\\scala\\GameLogic.scala 442:45]
+              lfsrReg <= nextLFSR2_5 @[\\src\\main\\scala\\GameLogic.scala 445:21]
+            node _T_117 = or(_T_100, shouldSpawn_5) @[\\src\\main\\scala\\GameLogic.scala 448:29]
+            node _ledActive_1_T = eq(_T_117, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 450:25]
+            ledActive[1] <= _ledActive_1_T @[\\src\\main\\scala\\GameLogic.scala 450:22]
+          stateReg <= UInt<4>("h3") @[\\src\\main\\scala\\GameLogic.scala 453:16]
+        else :
+          node _T_118 = eq(UInt<4>("h3"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 351:20]
+          when _T_118 : @[\\src\\main\\scala\\GameLogic.scala 351:20]
+            node _T_119 = and(io.btnR, rocketReadyReg) @[\\src\\main\\scala\\GameLogic.scala 459:20]
+            when _T_119 : @[\\src\\main\\scala\\GameLogic.scala 459:39]
+              node _shouldLaunch_T = eq(rocketActive[0], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 462:30]
+              node _shouldLaunch_T_1 = eq(UInt<1>("h0"), UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 462:50]
+              node shouldLaunch = and(_shouldLaunch_T, _shouldLaunch_T_1) @[\\src\\main\\scala\\GameLogic.scala 462:47]
+              when shouldLaunch : @[\\src\\main\\scala\\GameLogic.scala 463:30]
+                rocketActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 464:29]
+                node _rocketX_0_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                node _rocketX_0_T_1 = tail(_rocketX_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                node _rocketX_0_T_2 = asSInt(_rocketX_0_T_1) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                rocketX[0] <= _rocketX_0_T_2 @[\\src\\main\\scala\\GameLogic.scala 465:24]
+                node _rocketY_0_T = add(sprite0YReg, asSInt(UInt<5>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                node _rocketY_0_T_1 = tail(_rocketY_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                node _rocketY_0_T_2 = asSInt(_rocketY_0_T_1) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                rocketY[0] <= _rocketY_0_T_2 @[\\src\\main\\scala\\GameLogic.scala 466:24]
+                rocketVX[0] <= asSInt(UInt<4>("h5")) @[\\src\\main\\scala\\GameLogic.scala 467:25]
+              node _T_120 = or(UInt<1>("h0"), shouldLaunch) @[\\src\\main\\scala\\GameLogic.scala 469:31]
+              node _shouldLaunch_T_2 = eq(rocketActive[1], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 462:30]
+              node _shouldLaunch_T_3 = eq(_T_120, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 462:50]
+              node shouldLaunch_1 = and(_shouldLaunch_T_2, _shouldLaunch_T_3) @[\\src\\main\\scala\\GameLogic.scala 462:47]
+              when shouldLaunch_1 : @[\\src\\main\\scala\\GameLogic.scala 463:30]
+                rocketActive[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 464:29]
+                node _rocketX_1_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                node _rocketX_1_T_1 = tail(_rocketX_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                node _rocketX_1_T_2 = asSInt(_rocketX_1_T_1) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                rocketX[1] <= _rocketX_1_T_2 @[\\src\\main\\scala\\GameLogic.scala 465:24]
+                node _rocketY_1_T = add(sprite0YReg, asSInt(UInt<5>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                node _rocketY_1_T_1 = tail(_rocketY_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                node _rocketY_1_T_2 = asSInt(_rocketY_1_T_1) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                rocketY[1] <= _rocketY_1_T_2 @[\\src\\main\\scala\\GameLogic.scala 466:24]
+                rocketVX[1] <= asSInt(UInt<4>("h5")) @[\\src\\main\\scala\\GameLogic.scala 467:25]
+              node _T_121 = or(_T_120, shouldLaunch_1) @[\\src\\main\\scala\\GameLogic.scala 469:31]
+              node _shouldLaunch_T_4 = eq(rocketActive[2], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 462:30]
+              node _shouldLaunch_T_5 = eq(_T_121, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 462:50]
+              node shouldLaunch_2 = and(_shouldLaunch_T_4, _shouldLaunch_T_5) @[\\src\\main\\scala\\GameLogic.scala 462:47]
+              when shouldLaunch_2 : @[\\src\\main\\scala\\GameLogic.scala 463:30]
+                rocketActive[2] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 464:29]
+                node _rocketX_2_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                node _rocketX_2_T_1 = tail(_rocketX_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                node _rocketX_2_T_2 = asSInt(_rocketX_2_T_1) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                rocketX[2] <= _rocketX_2_T_2 @[\\src\\main\\scala\\GameLogic.scala 465:24]
+                node _rocketY_2_T = add(sprite0YReg, asSInt(UInt<5>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                node _rocketY_2_T_1 = tail(_rocketY_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                node _rocketY_2_T_2 = asSInt(_rocketY_2_T_1) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                rocketY[2] <= _rocketY_2_T_2 @[\\src\\main\\scala\\GameLogic.scala 466:24]
+                rocketVX[2] <= asSInt(UInt<4>("h5")) @[\\src\\main\\scala\\GameLogic.scala 467:25]
+              node _T_122 = or(_T_121, shouldLaunch_2) @[\\src\\main\\scala\\GameLogic.scala 469:31]
+              node _shouldLaunch_T_6 = eq(rocketActive[3], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 462:30]
+              node _shouldLaunch_T_7 = eq(_T_122, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 462:50]
+              node shouldLaunch_3 = and(_shouldLaunch_T_6, _shouldLaunch_T_7) @[\\src\\main\\scala\\GameLogic.scala 462:47]
+              when shouldLaunch_3 : @[\\src\\main\\scala\\GameLogic.scala 463:30]
+                rocketActive[3] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 464:29]
+                node _rocketX_3_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                node _rocketX_3_T_1 = tail(_rocketX_3_T, 1) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                node _rocketX_3_T_2 = asSInt(_rocketX_3_T_1) @[\\src\\main\\scala\\GameLogic.scala 465:39]
+                rocketX[3] <= _rocketX_3_T_2 @[\\src\\main\\scala\\GameLogic.scala 465:24]
+                node _rocketY_3_T = add(sprite0YReg, asSInt(UInt<5>("ha"))) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                node _rocketY_3_T_1 = tail(_rocketY_3_T, 1) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                node _rocketY_3_T_2 = asSInt(_rocketY_3_T_1) @[\\src\\main\\scala\\GameLogic.scala 466:39]
+                rocketY[3] <= _rocketY_3_T_2 @[\\src\\main\\scala\\GameLogic.scala 466:24]
+                rocketVX[3] <= asSInt(UInt<4>("h5")) @[\\src\\main\\scala\\GameLogic.scala 467:25]
+              node _T_123 = or(_T_122, shouldLaunch_3) @[\\src\\main\\scala\\GameLogic.scala 469:31]
+              when _T_123 : @[\\src\\main\\scala\\GameLogic.scala 472:24]
+                rocketReadyReg <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 473:26]
+              node _ledActive_2_T = eq(_T_123, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 475:25]
+              ledActive[2] <= _ledActive_2_T @[\\src\\main\\scala\\GameLogic.scala 475:22]
+            stateReg <= UInt<4>("h4") @[\\src\\main\\scala\\GameLogic.scala 478:16]
+          else :
+            node _T_124 = eq(UInt<4>("h4"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 351:20]
+            when _T_124 : @[\\src\\main\\scala\\GameLogic.scala 351:20]
+              when asteroidActive[0] : @[\\src\\main\\scala\\GameLogic.scala 486:33]
+                node _asteroidX_0_T = add(asteroidX[0], asteroidVX[0]) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_0_T_1 = tail(_asteroidX_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_0_T_2 = asSInt(_asteroidX_0_T_1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                asteroidX[0] <= _asteroidX_0_T_2 @[\\src\\main\\scala\\GameLogic.scala 487:24]
+                node _asteroidY_0_T = add(asteroidY[0], asteroidVY[0]) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_0_T_1 = tail(_asteroidY_0_T, 1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_0_T_2 = asSInt(_asteroidY_0_T_1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                asteroidY[0] <= _asteroidY_0_T_2 @[\\src\\main\\scala\\GameLogic.scala 488:24]
+                node _T_125 = eq(UInt<1>("h0"), asteroidSize[0]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_126 = mux(_T_125, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_127 = eq(UInt<1>("h1"), asteroidSize[0]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_128 = mux(_T_127, asSInt(UInt<6>("h10")), _T_126) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_129 = eq(UInt<2>("h2"), asteroidSize[0]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_130 = mux(_T_129, asSInt(UInt<8>("h40")), _T_128) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_131 = sub(asSInt(UInt<1>("h0")), _T_130) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_132 = tail(_T_131, 1) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_133 = asSInt(_T_132) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_134 = lt(asteroidX[0], _T_133) @[\\src\\main\\scala\\GameLogic.scala 489:29]
+                when _T_134 : @[\\src\\main\\scala\\GameLogic.scala 489:66]
+                  asteroidActive[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 490:31]
+              when asteroidActive[1] : @[\\src\\main\\scala\\GameLogic.scala 486:33]
+                node _asteroidX_1_T = add(asteroidX[1], asteroidVX[1]) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_1_T_1 = tail(_asteroidX_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_1_T_2 = asSInt(_asteroidX_1_T_1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                asteroidX[1] <= _asteroidX_1_T_2 @[\\src\\main\\scala\\GameLogic.scala 487:24]
+                node _asteroidY_1_T = add(asteroidY[1], asteroidVY[1]) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_1_T_1 = tail(_asteroidY_1_T, 1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_1_T_2 = asSInt(_asteroidY_1_T_1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                asteroidY[1] <= _asteroidY_1_T_2 @[\\src\\main\\scala\\GameLogic.scala 488:24]
+                node _T_135 = eq(UInt<1>("h0"), asteroidSize[1]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_136 = mux(_T_135, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_137 = eq(UInt<1>("h1"), asteroidSize[1]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_138 = mux(_T_137, asSInt(UInt<6>("h10")), _T_136) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_139 = eq(UInt<2>("h2"), asteroidSize[1]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_140 = mux(_T_139, asSInt(UInt<8>("h40")), _T_138) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_141 = sub(asSInt(UInt<1>("h0")), _T_140) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_142 = tail(_T_141, 1) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_143 = asSInt(_T_142) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_144 = lt(asteroidX[1], _T_143) @[\\src\\main\\scala\\GameLogic.scala 489:29]
+                when _T_144 : @[\\src\\main\\scala\\GameLogic.scala 489:66]
+                  asteroidActive[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 490:31]
+              when asteroidActive[2] : @[\\src\\main\\scala\\GameLogic.scala 486:33]
+                node _asteroidX_2_T = add(asteroidX[2], asteroidVX[2]) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_2_T_1 = tail(_asteroidX_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_2_T_2 = asSInt(_asteroidX_2_T_1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                asteroidX[2] <= _asteroidX_2_T_2 @[\\src\\main\\scala\\GameLogic.scala 487:24]
+                node _asteroidY_2_T = add(asteroidY[2], asteroidVY[2]) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_2_T_1 = tail(_asteroidY_2_T, 1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_2_T_2 = asSInt(_asteroidY_2_T_1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                asteroidY[2] <= _asteroidY_2_T_2 @[\\src\\main\\scala\\GameLogic.scala 488:24]
+                node _T_145 = eq(UInt<1>("h0"), asteroidSize[2]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_146 = mux(_T_145, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_147 = eq(UInt<1>("h1"), asteroidSize[2]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_148 = mux(_T_147, asSInt(UInt<6>("h10")), _T_146) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_149 = eq(UInt<2>("h2"), asteroidSize[2]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_150 = mux(_T_149, asSInt(UInt<8>("h40")), _T_148) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_151 = sub(asSInt(UInt<1>("h0")), _T_150) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_152 = tail(_T_151, 1) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_153 = asSInt(_T_152) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_154 = lt(asteroidX[2], _T_153) @[\\src\\main\\scala\\GameLogic.scala 489:29]
+                when _T_154 : @[\\src\\main\\scala\\GameLogic.scala 489:66]
+                  asteroidActive[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 490:31]
+              when asteroidActive[3] : @[\\src\\main\\scala\\GameLogic.scala 486:33]
+                node _asteroidX_3_T = add(asteroidX[3], asteroidVX[3]) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_3_T_1 = tail(_asteroidX_3_T, 1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_3_T_2 = asSInt(_asteroidX_3_T_1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                asteroidX[3] <= _asteroidX_3_T_2 @[\\src\\main\\scala\\GameLogic.scala 487:24]
+                node _asteroidY_3_T = add(asteroidY[3], asteroidVY[3]) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_3_T_1 = tail(_asteroidY_3_T, 1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_3_T_2 = asSInt(_asteroidY_3_T_1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                asteroidY[3] <= _asteroidY_3_T_2 @[\\src\\main\\scala\\GameLogic.scala 488:24]
+                node _T_155 = eq(UInt<1>("h0"), asteroidSize[3]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_156 = mux(_T_155, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_157 = eq(UInt<1>("h1"), asteroidSize[3]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_158 = mux(_T_157, asSInt(UInt<6>("h10")), _T_156) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_159 = eq(UInt<2>("h2"), asteroidSize[3]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_160 = mux(_T_159, asSInt(UInt<8>("h40")), _T_158) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_161 = sub(asSInt(UInt<1>("h0")), _T_160) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_162 = tail(_T_161, 1) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_163 = asSInt(_T_162) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_164 = lt(asteroidX[3], _T_163) @[\\src\\main\\scala\\GameLogic.scala 489:29]
+                when _T_164 : @[\\src\\main\\scala\\GameLogic.scala 489:66]
+                  asteroidActive[3] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 490:31]
+              when asteroidActive[4] : @[\\src\\main\\scala\\GameLogic.scala 486:33]
+                node _asteroidX_4_T = add(asteroidX[4], asteroidVX[4]) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_4_T_1 = tail(_asteroidX_4_T, 1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_4_T_2 = asSInt(_asteroidX_4_T_1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                asteroidX[4] <= _asteroidX_4_T_2 @[\\src\\main\\scala\\GameLogic.scala 487:24]
+                node _asteroidY_4_T = add(asteroidY[4], asteroidVY[4]) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_4_T_1 = tail(_asteroidY_4_T, 1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_4_T_2 = asSInt(_asteroidY_4_T_1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                asteroidY[4] <= _asteroidY_4_T_2 @[\\src\\main\\scala\\GameLogic.scala 488:24]
+                node _T_165 = eq(UInt<1>("h0"), asteroidSize[4]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_166 = mux(_T_165, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_167 = eq(UInt<1>("h1"), asteroidSize[4]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_168 = mux(_T_167, asSInt(UInt<6>("h10")), _T_166) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_169 = eq(UInt<2>("h2"), asteroidSize[4]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_170 = mux(_T_169, asSInt(UInt<8>("h40")), _T_168) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_171 = sub(asSInt(UInt<1>("h0")), _T_170) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_172 = tail(_T_171, 1) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_173 = asSInt(_T_172) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_174 = lt(asteroidX[4], _T_173) @[\\src\\main\\scala\\GameLogic.scala 489:29]
+                when _T_174 : @[\\src\\main\\scala\\GameLogic.scala 489:66]
+                  asteroidActive[4] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 490:31]
+              when asteroidActive[5] : @[\\src\\main\\scala\\GameLogic.scala 486:33]
+                node _asteroidX_5_T = add(asteroidX[5], asteroidVX[5]) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_5_T_1 = tail(_asteroidX_5_T, 1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                node _asteroidX_5_T_2 = asSInt(_asteroidX_5_T_1) @[\\src\\main\\scala\\GameLogic.scala 487:40]
+                asteroidX[5] <= _asteroidX_5_T_2 @[\\src\\main\\scala\\GameLogic.scala 487:24]
+                node _asteroidY_5_T = add(asteroidY[5], asteroidVY[5]) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_5_T_1 = tail(_asteroidY_5_T, 1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                node _asteroidY_5_T_2 = asSInt(_asteroidY_5_T_1) @[\\src\\main\\scala\\GameLogic.scala 488:40]
+                asteroidY[5] <= _asteroidY_5_T_2 @[\\src\\main\\scala\\GameLogic.scala 488:24]
+                node _T_175 = eq(UInt<1>("h0"), asteroidSize[5]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_176 = mux(_T_175, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_177 = eq(UInt<1>("h1"), asteroidSize[5]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_178 = mux(_T_177, asSInt(UInt<6>("h10")), _T_176) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_179 = eq(UInt<2>("h2"), asteroidSize[5]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_180 = mux(_T_179, asSInt(UInt<8>("h40")), _T_178) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                node _T_181 = sub(asSInt(UInt<1>("h0")), _T_180) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_182 = tail(_T_181, 1) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_183 = asSInt(_T_182) @[\\src\\main\\scala\\GameLogic.scala 489:31]
+                node _T_184 = lt(asteroidX[5], _T_183) @[\\src\\main\\scala\\GameLogic.scala 489:29]
+                when _T_184 : @[\\src\\main\\scala\\GameLogic.scala 489:66]
+                  asteroidActive[5] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 490:31]
+              when rocketActive[0] : @[\\src\\main\\scala\\GameLogic.scala 497:31]
+                node _rocketX_0_T_3 = add(rocketX[0], rocketVX[0]) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                node _rocketX_0_T_4 = tail(_rocketX_0_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                node _rocketX_0_T_5 = asSInt(_rocketX_0_T_4) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                rocketX[0] <= _rocketX_0_T_5 @[\\src\\main\\scala\\GameLogic.scala 498:22]
+                node _T_185 = gt(rocketX[0], asSInt(UInt<11>("h280"))) @[\\src\\main\\scala\\GameLogic.scala 499:27]
+                when _T_185 : @[\\src\\main\\scala\\GameLogic.scala 499:36]
+                  rocketActive[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 500:29]
+              when rocketActive[1] : @[\\src\\main\\scala\\GameLogic.scala 497:31]
+                node _rocketX_1_T_3 = add(rocketX[1], rocketVX[1]) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                node _rocketX_1_T_4 = tail(_rocketX_1_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                node _rocketX_1_T_5 = asSInt(_rocketX_1_T_4) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                rocketX[1] <= _rocketX_1_T_5 @[\\src\\main\\scala\\GameLogic.scala 498:22]
+                node _T_186 = gt(rocketX[1], asSInt(UInt<11>("h280"))) @[\\src\\main\\scala\\GameLogic.scala 499:27]
+                when _T_186 : @[\\src\\main\\scala\\GameLogic.scala 499:36]
+                  rocketActive[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 500:29]
+              when rocketActive[2] : @[\\src\\main\\scala\\GameLogic.scala 497:31]
+                node _rocketX_2_T_3 = add(rocketX[2], rocketVX[2]) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                node _rocketX_2_T_4 = tail(_rocketX_2_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                node _rocketX_2_T_5 = asSInt(_rocketX_2_T_4) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                rocketX[2] <= _rocketX_2_T_5 @[\\src\\main\\scala\\GameLogic.scala 498:22]
+                node _T_187 = gt(rocketX[2], asSInt(UInt<11>("h280"))) @[\\src\\main\\scala\\GameLogic.scala 499:27]
+                when _T_187 : @[\\src\\main\\scala\\GameLogic.scala 499:36]
+                  rocketActive[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 500:29]
+              when rocketActive[3] : @[\\src\\main\\scala\\GameLogic.scala 497:31]
+                node _rocketX_3_T_3 = add(rocketX[3], rocketVX[3]) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                node _rocketX_3_T_4 = tail(_rocketX_3_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                node _rocketX_3_T_5 = asSInt(_rocketX_3_T_4) @[\\src\\main\\scala\\GameLogic.scala 498:36]
+                rocketX[3] <= _rocketX_3_T_5 @[\\src\\main\\scala\\GameLogic.scala 498:22]
+                node _T_188 = gt(rocketX[3], asSInt(UInt<11>("h280"))) @[\\src\\main\\scala\\GameLogic.scala 499:27]
+                when _T_188 : @[\\src\\main\\scala\\GameLogic.scala 499:36]
+                  rocketActive[3] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 500:29]
+              stateReg <= UInt<4>("h5") @[\\src\\main\\scala\\GameLogic.scala 505:16]
+            else :
+              node _T_189 = eq(UInt<4>("h5"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 351:20]
+              when _T_189 : @[\\src\\main\\scala\\GameLogic.scala 351:20]
+                wire asteroidChecksThisFrame : UInt<2> @[\\src\\main\\scala\\GameLogic.scala 511:48]
+                asteroidChecksThisFrame <= UInt<2>("h3") @[\\src\\main\\scala\\GameLogic.scala 511:48]
+                node _remaining_T = sub(UInt<3>("h6"), collisionAstIndex) @[\\src\\main\\scala\\GameLogic.scala 512:38]
+                node remaining = tail(_remaining_T, 1) @[\\src\\main\\scala\\GameLogic.scala 512:38]
+                node _numChecks_T = lt(remaining, asteroidChecksThisFrame) @[\\src\\main\\scala\\GameLogic.scala 513:37]
+                node numChecks = mux(_numChecks_T, remaining, asteroidChecksThisFrame) @[\\src\\main\\scala\\GameLogic.scala 513:26]
+                node _T_190 = eq(collisionCheckMode, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 515:31]
+                when _T_190 : @[\\src\\main\\scala\\GameLogic.scala 515:40]
+                  node _shipCenterX_T = add(sprite0XReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 516:39]
+                  node _shipCenterX_T_1 = tail(_shipCenterX_T, 1) @[\\src\\main\\scala\\GameLogic.scala 516:39]
+                  node shipCenterX = asSInt(_shipCenterX_T_1) @[\\src\\main\\scala\\GameLogic.scala 516:39]
+                  node _shipCenterY_T = add(sprite0YReg, asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 517:39]
+                  node _shipCenterY_T_1 = tail(_shipCenterY_T, 1) @[\\src\\main\\scala\\GameLogic.scala 517:39]
+                  node shipCenterY = asSInt(_shipCenterY_T_1) @[\\src\\main\\scala\\GameLogic.scala 517:39]
+                  node _T_191 = lt(UInt<1>("h0"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 520:20]
+                  when _T_191 : @[\\src\\main\\scala\\GameLogic.scala 520:33]
+                    node _idx_T = add(collisionAstIndex, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 521:41]
+                    node idx = tail(_idx_T, 1) @[\\src\\main\\scala\\GameLogic.scala 521:41]
+                    node _T_192 = lt(idx, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 522:22]
+                    node _T_193 = bits(idx, 2, 0)
+                    node _T_194 = and(_T_192, asteroidActive[_T_193]) @[\\src\\main\\scala\\GameLogic.scala 522:39]
+                    when _T_194 : @[\\src\\main\\scala\\GameLogic.scala 522:63]
+                      node _size_T = bits(idx, 2, 0)
+                      node _radius_T = eq(UInt<1>("h0"), asteroidSize[_size_T]) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_1 = mux(_radius_T, asSInt(UInt<6>("h10")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_2 = eq(UInt<1>("h1"), asteroidSize[_size_T]) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_3 = mux(_radius_T_2, asSInt(UInt<5>("h8")), _radius_T_1) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_4 = eq(UInt<2>("h2"), asteroidSize[_size_T]) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node radius = mux(_radius_T_4, asSInt(UInt<7>("h20")), _radius_T_3) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _centerX_T = bits(idx, 2, 0)
+                      node _centerX_T_1 = add(asteroidX[_centerX_T], radius) @[\\src\\main\\scala\\GameLogic.scala 525:44]
+                      node _centerX_T_2 = tail(_centerX_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 525:44]
+                      node centerX = asSInt(_centerX_T_2) @[\\src\\main\\scala\\GameLogic.scala 525:44]
+                      node _centerY_T = bits(idx, 2, 0)
+                      node _centerY_T_1 = add(asteroidY[_centerY_T], radius) @[\\src\\main\\scala\\GameLogic.scala 526:44]
+                      node _centerY_T_2 = tail(_centerY_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 526:44]
+                      node centerY = asSInt(_centerY_T_2) @[\\src\\main\\scala\\GameLogic.scala 526:44]
+                      node _dx_T = sub(shipCenterX, centerX) @[\\src\\main\\scala\\GameLogic.scala 527:36]
+                      node _dx_T_1 = tail(_dx_T, 1) @[\\src\\main\\scala\\GameLogic.scala 527:36]
+                      node dx = asSInt(_dx_T_1) @[\\src\\main\\scala\\GameLogic.scala 527:36]
+                      node _dy_T = sub(shipCenterY, centerY) @[\\src\\main\\scala\\GameLogic.scala 528:36]
+                      node _dy_T_1 = tail(_dy_T, 1) @[\\src\\main\\scala\\GameLogic.scala 528:36]
+                      node dy = asSInt(_dy_T_1) @[\\src\\main\\scala\\GameLogic.scala 528:36]
+                      node _totalRadius_T = add(asSInt(UInt<5>("hc")), radius) @[\\src\\main\\scala\\GameLogic.scala 530:44]
+                      node _totalRadius_T_1 = tail(_totalRadius_T, 1) @[\\src\\main\\scala\\GameLogic.scala 530:44]
+                      node totalRadius = asSInt(_totalRadius_T_1) @[\\src\\main\\scala\\GameLogic.scala 530:44]
+                      node _boxCheck_T = lt(dx, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_1 = sub(asSInt(UInt<1>("h0")), dx) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_2 = tail(_boxCheck_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_3 = asSInt(_boxCheck_T_2) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_4 = mux(_boxCheck_T, _boxCheck_T_3, dx) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_5 = lt(_boxCheck_T_4, totalRadius) @[\\src\\main\\scala\\GameLogic.scala 532:37]
+                      node _boxCheck_T_6 = lt(dy, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_7 = sub(asSInt(UInt<1>("h0")), dy) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_8 = tail(_boxCheck_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_9 = asSInt(_boxCheck_T_8) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_10 = mux(_boxCheck_T_6, _boxCheck_T_9, dy) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_11 = lt(_boxCheck_T_10, totalRadius) @[\\src\\main\\scala\\GameLogic.scala 532:61]
+                      node boxCheck = and(_boxCheck_T_5, _boxCheck_T_11) @[\\src\\main\\scala\\GameLogic.scala 532:51]
+                      node _T_195 = eq(pendingCircleCheck, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 534:32]
+                      node _T_196 = and(boxCheck, _T_195) @[\\src\\main\\scala\\GameLogic.scala 534:29]
+                      when _T_196 : @[\\src\\main\\scala\\GameLogic.scala 534:53]
+                        pendingDX <= dx @[\\src\\main\\scala\\GameLogic.scala 535:27]
+                        pendingDY <= dy @[\\src\\main\\scala\\GameLogic.scala 536:27]
+                        node _pendingRadiusSq_T = mul(totalRadius, totalRadius) @[\\src\\main\\scala\\GameLogic.scala 537:48]
+                        pendingRadiusSq <= _pendingRadiusSq_T @[\\src\\main\\scala\\GameLogic.scala 537:33]
+                        pendingCircleCheck <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 538:36]
+                  node _T_197 = lt(UInt<1>("h1"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 520:20]
+                  when _T_197 : @[\\src\\main\\scala\\GameLogic.scala 520:33]
+                    node _idx_T_1 = add(collisionAstIndex, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 521:41]
+                    node idx_1 = tail(_idx_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 521:41]
+                    node _T_198 = lt(idx_1, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 522:22]
+                    node _T_199 = bits(idx_1, 2, 0)
+                    node _T_200 = and(_T_198, asteroidActive[_T_199]) @[\\src\\main\\scala\\GameLogic.scala 522:39]
+                    when _T_200 : @[\\src\\main\\scala\\GameLogic.scala 522:63]
+                      node _size_T_1 = bits(idx_1, 2, 0)
+                      node _radius_T_5 = eq(UInt<1>("h0"), asteroidSize[_size_T_1]) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_6 = mux(_radius_T_5, asSInt(UInt<6>("h10")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_7 = eq(UInt<1>("h1"), asteroidSize[_size_T_1]) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_8 = mux(_radius_T_7, asSInt(UInt<5>("h8")), _radius_T_6) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_9 = eq(UInt<2>("h2"), asteroidSize[_size_T_1]) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node radius_1 = mux(_radius_T_9, asSInt(UInt<7>("h20")), _radius_T_8) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _centerX_T_3 = bits(idx_1, 2, 0)
+                      node _centerX_T_4 = add(asteroidX[_centerX_T_3], radius_1) @[\\src\\main\\scala\\GameLogic.scala 525:44]
+                      node _centerX_T_5 = tail(_centerX_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 525:44]
+                      node centerX_1 = asSInt(_centerX_T_5) @[\\src\\main\\scala\\GameLogic.scala 525:44]
+                      node _centerY_T_3 = bits(idx_1, 2, 0)
+                      node _centerY_T_4 = add(asteroidY[_centerY_T_3], radius_1) @[\\src\\main\\scala\\GameLogic.scala 526:44]
+                      node _centerY_T_5 = tail(_centerY_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 526:44]
+                      node centerY_1 = asSInt(_centerY_T_5) @[\\src\\main\\scala\\GameLogic.scala 526:44]
+                      node _dx_T_2 = sub(shipCenterX, centerX_1) @[\\src\\main\\scala\\GameLogic.scala 527:36]
+                      node _dx_T_3 = tail(_dx_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 527:36]
+                      node dx_1 = asSInt(_dx_T_3) @[\\src\\main\\scala\\GameLogic.scala 527:36]
+                      node _dy_T_2 = sub(shipCenterY, centerY_1) @[\\src\\main\\scala\\GameLogic.scala 528:36]
+                      node _dy_T_3 = tail(_dy_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 528:36]
+                      node dy_1 = asSInt(_dy_T_3) @[\\src\\main\\scala\\GameLogic.scala 528:36]
+                      node _totalRadius_T_2 = add(asSInt(UInt<5>("hc")), radius_1) @[\\src\\main\\scala\\GameLogic.scala 530:44]
+                      node _totalRadius_T_3 = tail(_totalRadius_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 530:44]
+                      node totalRadius_1 = asSInt(_totalRadius_T_3) @[\\src\\main\\scala\\GameLogic.scala 530:44]
+                      node _boxCheck_T_12 = lt(dx_1, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_13 = sub(asSInt(UInt<1>("h0")), dx_1) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_14 = tail(_boxCheck_T_13, 1) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_15 = asSInt(_boxCheck_T_14) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_16 = mux(_boxCheck_T_12, _boxCheck_T_15, dx_1) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_17 = lt(_boxCheck_T_16, totalRadius_1) @[\\src\\main\\scala\\GameLogic.scala 532:37]
+                      node _boxCheck_T_18 = lt(dy_1, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_19 = sub(asSInt(UInt<1>("h0")), dy_1) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_20 = tail(_boxCheck_T_19, 1) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_21 = asSInt(_boxCheck_T_20) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_22 = mux(_boxCheck_T_18, _boxCheck_T_21, dy_1) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_23 = lt(_boxCheck_T_22, totalRadius_1) @[\\src\\main\\scala\\GameLogic.scala 532:61]
+                      node boxCheck_1 = and(_boxCheck_T_17, _boxCheck_T_23) @[\\src\\main\\scala\\GameLogic.scala 532:51]
+                      node _T_201 = eq(pendingCircleCheck, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 534:32]
+                      node _T_202 = and(boxCheck_1, _T_201) @[\\src\\main\\scala\\GameLogic.scala 534:29]
+                      when _T_202 : @[\\src\\main\\scala\\GameLogic.scala 534:53]
+                        pendingDX <= dx_1 @[\\src\\main\\scala\\GameLogic.scala 535:27]
+                        pendingDY <= dy_1 @[\\src\\main\\scala\\GameLogic.scala 536:27]
+                        node _pendingRadiusSq_T_1 = mul(totalRadius_1, totalRadius_1) @[\\src\\main\\scala\\GameLogic.scala 537:48]
+                        pendingRadiusSq <= _pendingRadiusSq_T_1 @[\\src\\main\\scala\\GameLogic.scala 537:33]
+                        pendingCircleCheck <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 538:36]
+                  node _T_203 = lt(UInt<2>("h2"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 520:20]
+                  when _T_203 : @[\\src\\main\\scala\\GameLogic.scala 520:33]
+                    node _idx_T_2 = add(collisionAstIndex, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 521:41]
+                    node idx_2 = tail(_idx_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 521:41]
+                    node _T_204 = lt(idx_2, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 522:22]
+                    node _T_205 = bits(idx_2, 2, 0)
+                    node _T_206 = and(_T_204, asteroidActive[_T_205]) @[\\src\\main\\scala\\GameLogic.scala 522:39]
+                    when _T_206 : @[\\src\\main\\scala\\GameLogic.scala 522:63]
+                      node _size_T_2 = bits(idx_2, 2, 0)
+                      node _radius_T_10 = eq(UInt<1>("h0"), asteroidSize[_size_T_2]) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_11 = mux(_radius_T_10, asSInt(UInt<6>("h10")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_12 = eq(UInt<1>("h1"), asteroidSize[_size_T_2]) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_13 = mux(_radius_T_12, asSInt(UInt<5>("h8")), _radius_T_11) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _radius_T_14 = eq(UInt<2>("h2"), asteroidSize[_size_T_2]) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node radius_2 = mux(_radius_T_14, asSInt(UInt<7>("h20")), _radius_T_13) @[\\src\\main\\scala\\GameLogic.scala 332:26]
+                      node _centerX_T_6 = bits(idx_2, 2, 0)
+                      node _centerX_T_7 = add(asteroidX[_centerX_T_6], radius_2) @[\\src\\main\\scala\\GameLogic.scala 525:44]
+                      node _centerX_T_8 = tail(_centerX_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 525:44]
+                      node centerX_2 = asSInt(_centerX_T_8) @[\\src\\main\\scala\\GameLogic.scala 525:44]
+                      node _centerY_T_6 = bits(idx_2, 2, 0)
+                      node _centerY_T_7 = add(asteroidY[_centerY_T_6], radius_2) @[\\src\\main\\scala\\GameLogic.scala 526:44]
+                      node _centerY_T_8 = tail(_centerY_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 526:44]
+                      node centerY_2 = asSInt(_centerY_T_8) @[\\src\\main\\scala\\GameLogic.scala 526:44]
+                      node _dx_T_4 = sub(shipCenterX, centerX_2) @[\\src\\main\\scala\\GameLogic.scala 527:36]
+                      node _dx_T_5 = tail(_dx_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 527:36]
+                      node dx_2 = asSInt(_dx_T_5) @[\\src\\main\\scala\\GameLogic.scala 527:36]
+                      node _dy_T_4 = sub(shipCenterY, centerY_2) @[\\src\\main\\scala\\GameLogic.scala 528:36]
+                      node _dy_T_5 = tail(_dy_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 528:36]
+                      node dy_2 = asSInt(_dy_T_5) @[\\src\\main\\scala\\GameLogic.scala 528:36]
+                      node _totalRadius_T_4 = add(asSInt(UInt<5>("hc")), radius_2) @[\\src\\main\\scala\\GameLogic.scala 530:44]
+                      node _totalRadius_T_5 = tail(_totalRadius_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 530:44]
+                      node totalRadius_2 = asSInt(_totalRadius_T_5) @[\\src\\main\\scala\\GameLogic.scala 530:44]
+                      node _boxCheck_T_24 = lt(dx_2, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_25 = sub(asSInt(UInt<1>("h0")), dx_2) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_26 = tail(_boxCheck_T_25, 1) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_27 = asSInt(_boxCheck_T_26) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_28 = mux(_boxCheck_T_24, _boxCheck_T_27, dx_2) @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                      node _boxCheck_T_29 = lt(_boxCheck_T_28, totalRadius_2) @[\\src\\main\\scala\\GameLogic.scala 532:37]
+                      node _boxCheck_T_30 = lt(dy_2, asSInt(UInt<1>("h0"))) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_31 = sub(asSInt(UInt<1>("h0")), dy_2) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_32 = tail(_boxCheck_T_31, 1) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_33 = asSInt(_boxCheck_T_32) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_34 = mux(_boxCheck_T_30, _boxCheck_T_33, dy_2) @[\\src\\main\\scala\\GameLogic.scala 532:57]
+                      node _boxCheck_T_35 = lt(_boxCheck_T_34, totalRadius_2) @[\\src\\main\\scala\\GameLogic.scala 532:61]
+                      node boxCheck_2 = and(_boxCheck_T_29, _boxCheck_T_35) @[\\src\\main\\scala\\GameLogic.scala 532:51]
+                      node _T_207 = eq(pendingCircleCheck, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 534:32]
+                      node _T_208 = and(boxCheck_2, _T_207) @[\\src\\main\\scala\\GameLogic.scala 534:29]
+                      when _T_208 : @[\\src\\main\\scala\\GameLogic.scala 534:53]
+                        pendingDX <= dx_2 @[\\src\\main\\scala\\GameLogic.scala 535:27]
+                        pendingDY <= dy_2 @[\\src\\main\\scala\\GameLogic.scala 536:27]
+                        node _pendingRadiusSq_T_2 = mul(totalRadius_2, totalRadius_2) @[\\src\\main\\scala\\GameLogic.scala 537:48]
+                        pendingRadiusSq <= _pendingRadiusSq_T_2 @[\\src\\main\\scala\\GameLogic.scala 537:33]
+                        pendingCircleCheck <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 538:36]
+                else :
+                  node _T_209 = leq(collisionCheckMode, UInt<3>("h4")) @[\\src\\main\\scala\\GameLogic.scala 543:37]
+                  when _T_209 : @[\\src\\main\\scala\\GameLogic.scala 543:54]
+                    node _T_210 = lt(UInt<1>("h0"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 545:20]
+                    when _T_210 : @[\\src\\main\\scala\\GameLogic.scala 545:33]
+                      node _idx_T_3 = add(collisionAstIndex, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 546:41]
+                      node idx_3 = tail(_idx_T_3, 1) @[\\src\\main\\scala\\GameLogic.scala 546:41]
+                      node _T_211 = lt(idx_3, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 547:22]
+                      node _T_212 = bits(idx_3, 2, 0)
+                      node _T_213 = and(_T_211, asteroidActive[_T_212]) @[\\src\\main\\scala\\GameLogic.scala 547:39]
+                      when _T_213 : @[\\src\\main\\scala\\GameLogic.scala 547:63]
+                        node _rocketIdx_T = sub(collisionCheckMode, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 551:50]
+                        node rocketIdx = tail(_rocketIdx_T, 1) @[\\src\\main\\scala\\GameLogic.scala 551:50]
+                        node _T_214 = bits(rocketIdx, 1, 0)
+                        when rocketActive[_T_214] : @[\\src\\main\\scala\\GameLogic.scala 552:45]
                           node _asteroidSizePx_T = bits(idx_3, 2, 0)
-                          node _asteroidSizePx_T_1 = eq(UInt<1>("h0"), asteroidSize[_asteroidSizePx_T]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_2 = mux(_asteroidSizePx_T_1, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_3 = eq(UInt<1>("h1"), asteroidSize[_asteroidSizePx_T]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_4 = mux(_asteroidSizePx_T_3, asSInt(UInt<6>("h10")), _asteroidSizePx_T_2) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_5 = eq(UInt<2>("h2"), asteroidSize[_asteroidSizePx_T]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node asteroidSizePx = mux(_asteroidSizePx_T_5, asSInt(UInt<8>("h40")), _asteroidSizePx_T_4) @[\\src\\main\\scala\\GameLogic.scala 333:26]
+                          node _asteroidSizePx_T_1 = eq(UInt<1>("h0"), asteroidSize[_asteroidSizePx_T]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_2 = mux(_asteroidSizePx_T_1, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_3 = eq(UInt<1>("h1"), asteroidSize[_asteroidSizePx_T]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_4 = mux(_asteroidSizePx_T_3, asSInt(UInt<6>("h10")), _asteroidSizePx_T_2) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_5 = eq(UInt<2>("h2"), asteroidSize[_asteroidSizePx_T]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node asteroidSizePx = mux(_asteroidSizePx_T_5, asSInt(UInt<8>("h40")), _asteroidSizePx_T_4) @[\\src\\main\\scala\\GameLogic.scala 340:26]
                           node _asteroidLeft_T = bits(idx_3, 2, 0)
                           node _asteroidRight_T = bits(idx_3, 2, 0)
-                          node _asteroidRight_T_1 = add(asteroidX[_asteroidRight_T], asteroidSizePx) @[\\src\\main\\scala\\GameLogic.scala 515:52]
-                          node _asteroidRight_T_2 = tail(_asteroidRight_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 515:52]
-                          node asteroidRight = asSInt(_asteroidRight_T_2) @[\\src\\main\\scala\\GameLogic.scala 515:52]
+                          node _asteroidRight_T_1 = add(asteroidX[_asteroidRight_T], asteroidSizePx) @[\\src\\main\\scala\\GameLogic.scala 555:52]
+                          node _asteroidRight_T_2 = tail(_asteroidRight_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 555:52]
+                          node asteroidRight = asSInt(_asteroidRight_T_2) @[\\src\\main\\scala\\GameLogic.scala 555:52]
                           node _asteroidTop_T = bits(idx_3, 2, 0)
                           node _asteroidBottom_T = bits(idx_3, 2, 0)
-                          node _asteroidBottom_T_1 = add(asteroidY[_asteroidBottom_T], asteroidSizePx) @[\\src\\main\\scala\\GameLogic.scala 517:53]
-                          node _asteroidBottom_T_2 = tail(_asteroidBottom_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 517:53]
-                          node asteroidBottom = asSInt(_asteroidBottom_T_2) @[\\src\\main\\scala\\GameLogic.scala 517:53]
+                          node _asteroidBottom_T_1 = add(asteroidY[_asteroidBottom_T], asteroidSizePx) @[\\src\\main\\scala\\GameLogic.scala 557:53]
+                          node _asteroidBottom_T_2 = tail(_asteroidBottom_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 557:53]
+                          node asteroidBottom = asSInt(_asteroidBottom_T_2) @[\\src\\main\\scala\\GameLogic.scala 557:53]
                           node _rocketLeft_T = bits(rocketIdx, 1, 0)
-                          node _rocketLeft_T_1 = add(rocketX[_rocketLeft_T], asSInt(UInt<3>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 520:53]
-                          node _rocketLeft_T_2 = tail(_rocketLeft_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 520:53]
-                          node rocketLeft = asSInt(_rocketLeft_T_2) @[\\src\\main\\scala\\GameLogic.scala 520:53]
+                          node _rocketLeft_T_1 = add(rocketX[_rocketLeft_T], asSInt(UInt<3>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 560:53]
+                          node _rocketLeft_T_2 = tail(_rocketLeft_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 560:53]
+                          node rocketLeft = asSInt(_rocketLeft_T_2) @[\\src\\main\\scala\\GameLogic.scala 560:53]
                           node _rocketRight_T = bits(rocketIdx, 1, 0)
-                          node _rocketRight_T_1 = add(rocketX[_rocketRight_T], asSInt(UInt<6>("h1e"))) @[\\src\\main\\scala\\GameLogic.scala 521:54]
-                          node _rocketRight_T_2 = tail(_rocketRight_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 521:54]
-                          node rocketRight = asSInt(_rocketRight_T_2) @[\\src\\main\\scala\\GameLogic.scala 521:54]
+                          node _rocketRight_T_1 = add(rocketX[_rocketRight_T], asSInt(UInt<6>("h1e"))) @[\\src\\main\\scala\\GameLogic.scala 561:54]
+                          node _rocketRight_T_2 = tail(_rocketRight_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 561:54]
+                          node rocketRight = asSInt(_rocketRight_T_2) @[\\src\\main\\scala\\GameLogic.scala 561:54]
                           node _rocketTop_T = bits(rocketIdx, 1, 0)
-                          node _rocketTop_T_1 = add(rocketY[_rocketTop_T], asSInt(UInt<4>("h5"))) @[\\src\\main\\scala\\GameLogic.scala 522:52]
-                          node _rocketTop_T_2 = tail(_rocketTop_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 522:52]
-                          node rocketTop = asSInt(_rocketTop_T_2) @[\\src\\main\\scala\\GameLogic.scala 522:52]
+                          node _rocketTop_T_1 = add(rocketY[_rocketTop_T], asSInt(UInt<4>("h5"))) @[\\src\\main\\scala\\GameLogic.scala 562:52]
+                          node _rocketTop_T_2 = tail(_rocketTop_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 562:52]
+                          node rocketTop = asSInt(_rocketTop_T_2) @[\\src\\main\\scala\\GameLogic.scala 562:52]
                           node _rocketBottom_T = bits(rocketIdx, 1, 0)
-                          node _rocketBottom_T_1 = add(rocketY[_rocketBottom_T], asSInt(UInt<5>("hc"))) @[\\src\\main\\scala\\GameLogic.scala 523:55]
-                          node _rocketBottom_T_2 = tail(_rocketBottom_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 523:55]
-                          node rocketBottom = asSInt(_rocketBottom_T_2) @[\\src\\main\\scala\\GameLogic.scala 523:55]
-                          node _T_120 = gt(rocketRight, asteroidX[_asteroidLeft_T]) @[\\src\\main\\scala\\GameLogic.scala 525:34]
-                          node _T_121 = lt(rocketLeft, asteroidRight) @[\\src\\main\\scala\\GameLogic.scala 525:63]
-                          node _T_122 = and(_T_120, _T_121) @[\\src\\main\\scala\\GameLogic.scala 525:49]
-                          node _T_123 = gt(rocketBottom, asteroidY[_asteroidTop_T]) @[\\src\\main\\scala\\GameLogic.scala 526:32]
-                          node _T_124 = and(_T_122, _T_123) @[\\src\\main\\scala\\GameLogic.scala 525:79]
-                          node _T_125 = lt(rocketTop, asteroidBottom) @[\\src\\main\\scala\\GameLogic.scala 526:59]
-                          node _T_126 = and(_T_124, _T_125) @[\\src\\main\\scala\\GameLogic.scala 526:46]
-                          when _T_126 : @[\\src\\main\\scala\\GameLogic.scala 526:77]
-                            node _T_127 = bits(rocketIdx, 1, 0)
-                            rocketActive[_T_127] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 527:43]
-                            node _T_128 = bits(idx_3, 2, 0)
-                            asteroidActive[_T_128] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 528:39]
-                            explosionActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 531:38]
+                          node _rocketBottom_T_1 = add(rocketY[_rocketBottom_T], asSInt(UInt<5>("hc"))) @[\\src\\main\\scala\\GameLogic.scala 563:55]
+                          node _rocketBottom_T_2 = tail(_rocketBottom_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 563:55]
+                          node rocketBottom = asSInt(_rocketBottom_T_2) @[\\src\\main\\scala\\GameLogic.scala 563:55]
+                          node _T_215 = gt(rocketRight, asteroidX[_asteroidLeft_T]) @[\\src\\main\\scala\\GameLogic.scala 565:34]
+                          node _T_216 = lt(rocketLeft, asteroidRight) @[\\src\\main\\scala\\GameLogic.scala 565:63]
+                          node _T_217 = and(_T_215, _T_216) @[\\src\\main\\scala\\GameLogic.scala 565:49]
+                          node _T_218 = gt(rocketBottom, asteroidY[_asteroidTop_T]) @[\\src\\main\\scala\\GameLogic.scala 566:32]
+                          node _T_219 = and(_T_217, _T_218) @[\\src\\main\\scala\\GameLogic.scala 565:79]
+                          node _T_220 = lt(rocketTop, asteroidBottom) @[\\src\\main\\scala\\GameLogic.scala 566:59]
+                          node _T_221 = and(_T_219, _T_220) @[\\src\\main\\scala\\GameLogic.scala 566:46]
+                          when _T_221 : @[\\src\\main\\scala\\GameLogic.scala 566:77]
+                            node _T_222 = bits(rocketIdx, 1, 0)
+                            rocketActive[_T_222] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 567:43]
+                            node _T_223 = bits(idx_3, 2, 0)
+                            asteroidActive[_T_223] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 568:39]
+                            explosionActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 571:38]
                             node _explosionX_0_T = bits(idx_3, 2, 0)
-                            explosionX[0] <= asteroidX[_explosionX_0_T] @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                            explosionX[0] <= asteroidX[_explosionX_0_T] @[\\src\\main\\scala\\GameLogic.scala 572:33]
                             node _explosionY_0_T = bits(idx_3, 2, 0)
-                            explosionY[0] <= asteroidY[_explosionY_0_T] @[\\src\\main\\scala\\GameLogic.scala 533:33]
+                            explosionY[0] <= asteroidY[_explosionY_0_T] @[\\src\\main\\scala\\GameLogic.scala 573:33]
                             node _explosionSize_0_T = bits(idx_3, 2, 0)
-                            explosionSize[0] <= asteroidSize[_explosionSize_0_T] @[\\src\\main\\scala\\GameLogic.scala 534:36]
-                            explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 535:37]
-                    node _T_129 = lt(UInt<1>("h1"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 505:20]
-                    when _T_129 : @[\\src\\main\\scala\\GameLogic.scala 505:33]
-                      node _idx_T_4 = add(collisionAstIndex, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 506:41]
-                      node idx_4 = tail(_idx_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 506:41]
-                      node _T_130 = lt(idx_4, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 507:22]
-                      node _T_131 = bits(idx_4, 2, 0)
-                      node _T_132 = and(_T_130, asteroidActive[_T_131]) @[\\src\\main\\scala\\GameLogic.scala 507:39]
-                      when _T_132 : @[\\src\\main\\scala\\GameLogic.scala 507:63]
-                        node _rocketIdx_T_1 = sub(collisionCheckMode, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 511:50]
-                        node rocketIdx_1 = tail(_rocketIdx_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 511:50]
-                        node _T_133 = bits(rocketIdx_1, 1, 0)
-                        when rocketActive[_T_133] : @[\\src\\main\\scala\\GameLogic.scala 512:45]
+                            explosionSize[0] <= asteroidSize[_explosionSize_0_T] @[\\src\\main\\scala\\GameLogic.scala 574:36]
+                            explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 575:37]
+                    node _T_224 = lt(UInt<1>("h1"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 545:20]
+                    when _T_224 : @[\\src\\main\\scala\\GameLogic.scala 545:33]
+                      node _idx_T_4 = add(collisionAstIndex, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 546:41]
+                      node idx_4 = tail(_idx_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 546:41]
+                      node _T_225 = lt(idx_4, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 547:22]
+                      node _T_226 = bits(idx_4, 2, 0)
+                      node _T_227 = and(_T_225, asteroidActive[_T_226]) @[\\src\\main\\scala\\GameLogic.scala 547:39]
+                      when _T_227 : @[\\src\\main\\scala\\GameLogic.scala 547:63]
+                        node _rocketIdx_T_1 = sub(collisionCheckMode, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 551:50]
+                        node rocketIdx_1 = tail(_rocketIdx_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 551:50]
+                        node _T_228 = bits(rocketIdx_1, 1, 0)
+                        when rocketActive[_T_228] : @[\\src\\main\\scala\\GameLogic.scala 552:45]
                           node _asteroidSizePx_T_6 = bits(idx_4, 2, 0)
-                          node _asteroidSizePx_T_7 = eq(UInt<1>("h0"), asteroidSize[_asteroidSizePx_T_6]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_8 = mux(_asteroidSizePx_T_7, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_9 = eq(UInt<1>("h1"), asteroidSize[_asteroidSizePx_T_6]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_10 = mux(_asteroidSizePx_T_9, asSInt(UInt<6>("h10")), _asteroidSizePx_T_8) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_11 = eq(UInt<2>("h2"), asteroidSize[_asteroidSizePx_T_6]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node asteroidSizePx_1 = mux(_asteroidSizePx_T_11, asSInt(UInt<8>("h40")), _asteroidSizePx_T_10) @[\\src\\main\\scala\\GameLogic.scala 333:26]
+                          node _asteroidSizePx_T_7 = eq(UInt<1>("h0"), asteroidSize[_asteroidSizePx_T_6]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_8 = mux(_asteroidSizePx_T_7, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_9 = eq(UInt<1>("h1"), asteroidSize[_asteroidSizePx_T_6]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_10 = mux(_asteroidSizePx_T_9, asSInt(UInt<6>("h10")), _asteroidSizePx_T_8) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_11 = eq(UInt<2>("h2"), asteroidSize[_asteroidSizePx_T_6]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node asteroidSizePx_1 = mux(_asteroidSizePx_T_11, asSInt(UInt<8>("h40")), _asteroidSizePx_T_10) @[\\src\\main\\scala\\GameLogic.scala 340:26]
                           node _asteroidLeft_T_1 = bits(idx_4, 2, 0)
                           node _asteroidRight_T_3 = bits(idx_4, 2, 0)
-                          node _asteroidRight_T_4 = add(asteroidX[_asteroidRight_T_3], asteroidSizePx_1) @[\\src\\main\\scala\\GameLogic.scala 515:52]
-                          node _asteroidRight_T_5 = tail(_asteroidRight_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 515:52]
-                          node asteroidRight_1 = asSInt(_asteroidRight_T_5) @[\\src\\main\\scala\\GameLogic.scala 515:52]
+                          node _asteroidRight_T_4 = add(asteroidX[_asteroidRight_T_3], asteroidSizePx_1) @[\\src\\main\\scala\\GameLogic.scala 555:52]
+                          node _asteroidRight_T_5 = tail(_asteroidRight_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 555:52]
+                          node asteroidRight_1 = asSInt(_asteroidRight_T_5) @[\\src\\main\\scala\\GameLogic.scala 555:52]
                           node _asteroidTop_T_1 = bits(idx_4, 2, 0)
                           node _asteroidBottom_T_3 = bits(idx_4, 2, 0)
-                          node _asteroidBottom_T_4 = add(asteroidY[_asteroidBottom_T_3], asteroidSizePx_1) @[\\src\\main\\scala\\GameLogic.scala 517:53]
-                          node _asteroidBottom_T_5 = tail(_asteroidBottom_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 517:53]
-                          node asteroidBottom_1 = asSInt(_asteroidBottom_T_5) @[\\src\\main\\scala\\GameLogic.scala 517:53]
+                          node _asteroidBottom_T_4 = add(asteroidY[_asteroidBottom_T_3], asteroidSizePx_1) @[\\src\\main\\scala\\GameLogic.scala 557:53]
+                          node _asteroidBottom_T_5 = tail(_asteroidBottom_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 557:53]
+                          node asteroidBottom_1 = asSInt(_asteroidBottom_T_5) @[\\src\\main\\scala\\GameLogic.scala 557:53]
                           node _rocketLeft_T_3 = bits(rocketIdx_1, 1, 0)
-                          node _rocketLeft_T_4 = add(rocketX[_rocketLeft_T_3], asSInt(UInt<3>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 520:53]
-                          node _rocketLeft_T_5 = tail(_rocketLeft_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 520:53]
-                          node rocketLeft_1 = asSInt(_rocketLeft_T_5) @[\\src\\main\\scala\\GameLogic.scala 520:53]
+                          node _rocketLeft_T_4 = add(rocketX[_rocketLeft_T_3], asSInt(UInt<3>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 560:53]
+                          node _rocketLeft_T_5 = tail(_rocketLeft_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 560:53]
+                          node rocketLeft_1 = asSInt(_rocketLeft_T_5) @[\\src\\main\\scala\\GameLogic.scala 560:53]
                           node _rocketRight_T_3 = bits(rocketIdx_1, 1, 0)
-                          node _rocketRight_T_4 = add(rocketX[_rocketRight_T_3], asSInt(UInt<6>("h1e"))) @[\\src\\main\\scala\\GameLogic.scala 521:54]
-                          node _rocketRight_T_5 = tail(_rocketRight_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 521:54]
-                          node rocketRight_1 = asSInt(_rocketRight_T_5) @[\\src\\main\\scala\\GameLogic.scala 521:54]
+                          node _rocketRight_T_4 = add(rocketX[_rocketRight_T_3], asSInt(UInt<6>("h1e"))) @[\\src\\main\\scala\\GameLogic.scala 561:54]
+                          node _rocketRight_T_5 = tail(_rocketRight_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 561:54]
+                          node rocketRight_1 = asSInt(_rocketRight_T_5) @[\\src\\main\\scala\\GameLogic.scala 561:54]
                           node _rocketTop_T_3 = bits(rocketIdx_1, 1, 0)
-                          node _rocketTop_T_4 = add(rocketY[_rocketTop_T_3], asSInt(UInt<4>("h5"))) @[\\src\\main\\scala\\GameLogic.scala 522:52]
-                          node _rocketTop_T_5 = tail(_rocketTop_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 522:52]
-                          node rocketTop_1 = asSInt(_rocketTop_T_5) @[\\src\\main\\scala\\GameLogic.scala 522:52]
+                          node _rocketTop_T_4 = add(rocketY[_rocketTop_T_3], asSInt(UInt<4>("h5"))) @[\\src\\main\\scala\\GameLogic.scala 562:52]
+                          node _rocketTop_T_5 = tail(_rocketTop_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 562:52]
+                          node rocketTop_1 = asSInt(_rocketTop_T_5) @[\\src\\main\\scala\\GameLogic.scala 562:52]
                           node _rocketBottom_T_3 = bits(rocketIdx_1, 1, 0)
-                          node _rocketBottom_T_4 = add(rocketY[_rocketBottom_T_3], asSInt(UInt<5>("hc"))) @[\\src\\main\\scala\\GameLogic.scala 523:55]
-                          node _rocketBottom_T_5 = tail(_rocketBottom_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 523:55]
-                          node rocketBottom_1 = asSInt(_rocketBottom_T_5) @[\\src\\main\\scala\\GameLogic.scala 523:55]
-                          node _T_134 = gt(rocketRight_1, asteroidX[_asteroidLeft_T_1]) @[\\src\\main\\scala\\GameLogic.scala 525:34]
-                          node _T_135 = lt(rocketLeft_1, asteroidRight_1) @[\\src\\main\\scala\\GameLogic.scala 525:63]
-                          node _T_136 = and(_T_134, _T_135) @[\\src\\main\\scala\\GameLogic.scala 525:49]
-                          node _T_137 = gt(rocketBottom_1, asteroidY[_asteroidTop_T_1]) @[\\src\\main\\scala\\GameLogic.scala 526:32]
-                          node _T_138 = and(_T_136, _T_137) @[\\src\\main\\scala\\GameLogic.scala 525:79]
-                          node _T_139 = lt(rocketTop_1, asteroidBottom_1) @[\\src\\main\\scala\\GameLogic.scala 526:59]
-                          node _T_140 = and(_T_138, _T_139) @[\\src\\main\\scala\\GameLogic.scala 526:46]
-                          when _T_140 : @[\\src\\main\\scala\\GameLogic.scala 526:77]
-                            node _T_141 = bits(rocketIdx_1, 1, 0)
-                            rocketActive[_T_141] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 527:43]
-                            node _T_142 = bits(idx_4, 2, 0)
-                            asteroidActive[_T_142] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 528:39]
-                            explosionActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 531:38]
+                          node _rocketBottom_T_4 = add(rocketY[_rocketBottom_T_3], asSInt(UInt<5>("hc"))) @[\\src\\main\\scala\\GameLogic.scala 563:55]
+                          node _rocketBottom_T_5 = tail(_rocketBottom_T_4, 1) @[\\src\\main\\scala\\GameLogic.scala 563:55]
+                          node rocketBottom_1 = asSInt(_rocketBottom_T_5) @[\\src\\main\\scala\\GameLogic.scala 563:55]
+                          node _T_229 = gt(rocketRight_1, asteroidX[_asteroidLeft_T_1]) @[\\src\\main\\scala\\GameLogic.scala 565:34]
+                          node _T_230 = lt(rocketLeft_1, asteroidRight_1) @[\\src\\main\\scala\\GameLogic.scala 565:63]
+                          node _T_231 = and(_T_229, _T_230) @[\\src\\main\\scala\\GameLogic.scala 565:49]
+                          node _T_232 = gt(rocketBottom_1, asteroidY[_asteroidTop_T_1]) @[\\src\\main\\scala\\GameLogic.scala 566:32]
+                          node _T_233 = and(_T_231, _T_232) @[\\src\\main\\scala\\GameLogic.scala 565:79]
+                          node _T_234 = lt(rocketTop_1, asteroidBottom_1) @[\\src\\main\\scala\\GameLogic.scala 566:59]
+                          node _T_235 = and(_T_233, _T_234) @[\\src\\main\\scala\\GameLogic.scala 566:46]
+                          when _T_235 : @[\\src\\main\\scala\\GameLogic.scala 566:77]
+                            node _T_236 = bits(rocketIdx_1, 1, 0)
+                            rocketActive[_T_236] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 567:43]
+                            node _T_237 = bits(idx_4, 2, 0)
+                            asteroidActive[_T_237] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 568:39]
+                            explosionActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 571:38]
                             node _explosionX_0_T_1 = bits(idx_4, 2, 0)
-                            explosionX[0] <= asteroidX[_explosionX_0_T_1] @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                            explosionX[0] <= asteroidX[_explosionX_0_T_1] @[\\src\\main\\scala\\GameLogic.scala 572:33]
                             node _explosionY_0_T_1 = bits(idx_4, 2, 0)
-                            explosionY[0] <= asteroidY[_explosionY_0_T_1] @[\\src\\main\\scala\\GameLogic.scala 533:33]
+                            explosionY[0] <= asteroidY[_explosionY_0_T_1] @[\\src\\main\\scala\\GameLogic.scala 573:33]
                             node _explosionSize_0_T_1 = bits(idx_4, 2, 0)
-                            explosionSize[0] <= asteroidSize[_explosionSize_0_T_1] @[\\src\\main\\scala\\GameLogic.scala 534:36]
-                            explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 535:37]
-                    node _T_143 = lt(UInt<2>("h2"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 505:20]
-                    when _T_143 : @[\\src\\main\\scala\\GameLogic.scala 505:33]
-                      node _idx_T_5 = add(collisionAstIndex, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 506:41]
-                      node idx_5 = tail(_idx_T_5, 1) @[\\src\\main\\scala\\GameLogic.scala 506:41]
-                      node _T_144 = lt(idx_5, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 507:22]
-                      node _T_145 = bits(idx_5, 2, 0)
-                      node _T_146 = and(_T_144, asteroidActive[_T_145]) @[\\src\\main\\scala\\GameLogic.scala 507:39]
-                      when _T_146 : @[\\src\\main\\scala\\GameLogic.scala 507:63]
-                        node _rocketIdx_T_2 = sub(collisionCheckMode, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 511:50]
-                        node rocketIdx_2 = tail(_rocketIdx_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 511:50]
-                        node _T_147 = bits(rocketIdx_2, 1, 0)
-                        when rocketActive[_T_147] : @[\\src\\main\\scala\\GameLogic.scala 512:45]
+                            explosionSize[0] <= asteroidSize[_explosionSize_0_T_1] @[\\src\\main\\scala\\GameLogic.scala 574:36]
+                            explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 575:37]
+                    node _T_238 = lt(UInt<2>("h2"), numChecks) @[\\src\\main\\scala\\GameLogic.scala 545:20]
+                    when _T_238 : @[\\src\\main\\scala\\GameLogic.scala 545:33]
+                      node _idx_T_5 = add(collisionAstIndex, UInt<2>("h2")) @[\\src\\main\\scala\\GameLogic.scala 546:41]
+                      node idx_5 = tail(_idx_T_5, 1) @[\\src\\main\\scala\\GameLogic.scala 546:41]
+                      node _T_239 = lt(idx_5, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 547:22]
+                      node _T_240 = bits(idx_5, 2, 0)
+                      node _T_241 = and(_T_239, asteroidActive[_T_240]) @[\\src\\main\\scala\\GameLogic.scala 547:39]
+                      when _T_241 : @[\\src\\main\\scala\\GameLogic.scala 547:63]
+                        node _rocketIdx_T_2 = sub(collisionCheckMode, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 551:50]
+                        node rocketIdx_2 = tail(_rocketIdx_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 551:50]
+                        node _T_242 = bits(rocketIdx_2, 1, 0)
+                        when rocketActive[_T_242] : @[\\src\\main\\scala\\GameLogic.scala 552:45]
                           node _asteroidSizePx_T_12 = bits(idx_5, 2, 0)
-                          node _asteroidSizePx_T_13 = eq(UInt<1>("h0"), asteroidSize[_asteroidSizePx_T_12]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_14 = mux(_asteroidSizePx_T_13, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_15 = eq(UInt<1>("h1"), asteroidSize[_asteroidSizePx_T_12]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_16 = mux(_asteroidSizePx_T_15, asSInt(UInt<6>("h10")), _asteroidSizePx_T_14) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node _asteroidSizePx_T_17 = eq(UInt<2>("h2"), asteroidSize[_asteroidSizePx_T_12]) @[\\src\\main\\scala\\GameLogic.scala 333:26]
-                          node asteroidSizePx_2 = mux(_asteroidSizePx_T_17, asSInt(UInt<8>("h40")), _asteroidSizePx_T_16) @[\\src\\main\\scala\\GameLogic.scala 333:26]
+                          node _asteroidSizePx_T_13 = eq(UInt<1>("h0"), asteroidSize[_asteroidSizePx_T_12]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_14 = mux(_asteroidSizePx_T_13, asSInt(UInt<7>("h20")), asSInt(UInt<6>("h10"))) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_15 = eq(UInt<1>("h1"), asteroidSize[_asteroidSizePx_T_12]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_16 = mux(_asteroidSizePx_T_15, asSInt(UInt<6>("h10")), _asteroidSizePx_T_14) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node _asteroidSizePx_T_17 = eq(UInt<2>("h2"), asteroidSize[_asteroidSizePx_T_12]) @[\\src\\main\\scala\\GameLogic.scala 340:26]
+                          node asteroidSizePx_2 = mux(_asteroidSizePx_T_17, asSInt(UInt<8>("h40")), _asteroidSizePx_T_16) @[\\src\\main\\scala\\GameLogic.scala 340:26]
                           node _asteroidLeft_T_2 = bits(idx_5, 2, 0)
                           node _asteroidRight_T_6 = bits(idx_5, 2, 0)
-                          node _asteroidRight_T_7 = add(asteroidX[_asteroidRight_T_6], asteroidSizePx_2) @[\\src\\main\\scala\\GameLogic.scala 515:52]
-                          node _asteroidRight_T_8 = tail(_asteroidRight_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 515:52]
-                          node asteroidRight_2 = asSInt(_asteroidRight_T_8) @[\\src\\main\\scala\\GameLogic.scala 515:52]
+                          node _asteroidRight_T_7 = add(asteroidX[_asteroidRight_T_6], asteroidSizePx_2) @[\\src\\main\\scala\\GameLogic.scala 555:52]
+                          node _asteroidRight_T_8 = tail(_asteroidRight_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 555:52]
+                          node asteroidRight_2 = asSInt(_asteroidRight_T_8) @[\\src\\main\\scala\\GameLogic.scala 555:52]
                           node _asteroidTop_T_2 = bits(idx_5, 2, 0)
                           node _asteroidBottom_T_6 = bits(idx_5, 2, 0)
-                          node _asteroidBottom_T_7 = add(asteroidY[_asteroidBottom_T_6], asteroidSizePx_2) @[\\src\\main\\scala\\GameLogic.scala 517:53]
-                          node _asteroidBottom_T_8 = tail(_asteroidBottom_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 517:53]
-                          node asteroidBottom_2 = asSInt(_asteroidBottom_T_8) @[\\src\\main\\scala\\GameLogic.scala 517:53]
+                          node _asteroidBottom_T_7 = add(asteroidY[_asteroidBottom_T_6], asteroidSizePx_2) @[\\src\\main\\scala\\GameLogic.scala 557:53]
+                          node _asteroidBottom_T_8 = tail(_asteroidBottom_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 557:53]
+                          node asteroidBottom_2 = asSInt(_asteroidBottom_T_8) @[\\src\\main\\scala\\GameLogic.scala 557:53]
                           node _rocketLeft_T_6 = bits(rocketIdx_2, 1, 0)
-                          node _rocketLeft_T_7 = add(rocketX[_rocketLeft_T_6], asSInt(UInt<3>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 520:53]
-                          node _rocketLeft_T_8 = tail(_rocketLeft_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 520:53]
-                          node rocketLeft_2 = asSInt(_rocketLeft_T_8) @[\\src\\main\\scala\\GameLogic.scala 520:53]
+                          node _rocketLeft_T_7 = add(rocketX[_rocketLeft_T_6], asSInt(UInt<3>("h2"))) @[\\src\\main\\scala\\GameLogic.scala 560:53]
+                          node _rocketLeft_T_8 = tail(_rocketLeft_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 560:53]
+                          node rocketLeft_2 = asSInt(_rocketLeft_T_8) @[\\src\\main\\scala\\GameLogic.scala 560:53]
                           node _rocketRight_T_6 = bits(rocketIdx_2, 1, 0)
-                          node _rocketRight_T_7 = add(rocketX[_rocketRight_T_6], asSInt(UInt<6>("h1e"))) @[\\src\\main\\scala\\GameLogic.scala 521:54]
-                          node _rocketRight_T_8 = tail(_rocketRight_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 521:54]
-                          node rocketRight_2 = asSInt(_rocketRight_T_8) @[\\src\\main\\scala\\GameLogic.scala 521:54]
+                          node _rocketRight_T_7 = add(rocketX[_rocketRight_T_6], asSInt(UInt<6>("h1e"))) @[\\src\\main\\scala\\GameLogic.scala 561:54]
+                          node _rocketRight_T_8 = tail(_rocketRight_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 561:54]
+                          node rocketRight_2 = asSInt(_rocketRight_T_8) @[\\src\\main\\scala\\GameLogic.scala 561:54]
                           node _rocketTop_T_6 = bits(rocketIdx_2, 1, 0)
-                          node _rocketTop_T_7 = add(rocketY[_rocketTop_T_6], asSInt(UInt<4>("h5"))) @[\\src\\main\\scala\\GameLogic.scala 522:52]
-                          node _rocketTop_T_8 = tail(_rocketTop_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 522:52]
-                          node rocketTop_2 = asSInt(_rocketTop_T_8) @[\\src\\main\\scala\\GameLogic.scala 522:52]
+                          node _rocketTop_T_7 = add(rocketY[_rocketTop_T_6], asSInt(UInt<4>("h5"))) @[\\src\\main\\scala\\GameLogic.scala 562:52]
+                          node _rocketTop_T_8 = tail(_rocketTop_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 562:52]
+                          node rocketTop_2 = asSInt(_rocketTop_T_8) @[\\src\\main\\scala\\GameLogic.scala 562:52]
                           node _rocketBottom_T_6 = bits(rocketIdx_2, 1, 0)
-                          node _rocketBottom_T_7 = add(rocketY[_rocketBottom_T_6], asSInt(UInt<5>("hc"))) @[\\src\\main\\scala\\GameLogic.scala 523:55]
-                          node _rocketBottom_T_8 = tail(_rocketBottom_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 523:55]
-                          node rocketBottom_2 = asSInt(_rocketBottom_T_8) @[\\src\\main\\scala\\GameLogic.scala 523:55]
-                          node _T_148 = gt(rocketRight_2, asteroidX[_asteroidLeft_T_2]) @[\\src\\main\\scala\\GameLogic.scala 525:34]
-                          node _T_149 = lt(rocketLeft_2, asteroidRight_2) @[\\src\\main\\scala\\GameLogic.scala 525:63]
-                          node _T_150 = and(_T_148, _T_149) @[\\src\\main\\scala\\GameLogic.scala 525:49]
-                          node _T_151 = gt(rocketBottom_2, asteroidY[_asteroidTop_T_2]) @[\\src\\main\\scala\\GameLogic.scala 526:32]
-                          node _T_152 = and(_T_150, _T_151) @[\\src\\main\\scala\\GameLogic.scala 525:79]
-                          node _T_153 = lt(rocketTop_2, asteroidBottom_2) @[\\src\\main\\scala\\GameLogic.scala 526:59]
-                          node _T_154 = and(_T_152, _T_153) @[\\src\\main\\scala\\GameLogic.scala 526:46]
-                          when _T_154 : @[\\src\\main\\scala\\GameLogic.scala 526:77]
-                            node _T_155 = bits(rocketIdx_2, 1, 0)
-                            rocketActive[_T_155] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 527:43]
-                            node _T_156 = bits(idx_5, 2, 0)
-                            asteroidActive[_T_156] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 528:39]
-                            explosionActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 531:38]
+                          node _rocketBottom_T_7 = add(rocketY[_rocketBottom_T_6], asSInt(UInt<5>("hc"))) @[\\src\\main\\scala\\GameLogic.scala 563:55]
+                          node _rocketBottom_T_8 = tail(_rocketBottom_T_7, 1) @[\\src\\main\\scala\\GameLogic.scala 563:55]
+                          node rocketBottom_2 = asSInt(_rocketBottom_T_8) @[\\src\\main\\scala\\GameLogic.scala 563:55]
+                          node _T_243 = gt(rocketRight_2, asteroidX[_asteroidLeft_T_2]) @[\\src\\main\\scala\\GameLogic.scala 565:34]
+                          node _T_244 = lt(rocketLeft_2, asteroidRight_2) @[\\src\\main\\scala\\GameLogic.scala 565:63]
+                          node _T_245 = and(_T_243, _T_244) @[\\src\\main\\scala\\GameLogic.scala 565:49]
+                          node _T_246 = gt(rocketBottom_2, asteroidY[_asteroidTop_T_2]) @[\\src\\main\\scala\\GameLogic.scala 566:32]
+                          node _T_247 = and(_T_245, _T_246) @[\\src\\main\\scala\\GameLogic.scala 565:79]
+                          node _T_248 = lt(rocketTop_2, asteroidBottom_2) @[\\src\\main\\scala\\GameLogic.scala 566:59]
+                          node _T_249 = and(_T_247, _T_248) @[\\src\\main\\scala\\GameLogic.scala 566:46]
+                          when _T_249 : @[\\src\\main\\scala\\GameLogic.scala 566:77]
+                            node _T_250 = bits(rocketIdx_2, 1, 0)
+                            rocketActive[_T_250] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 567:43]
+                            node _T_251 = bits(idx_5, 2, 0)
+                            asteroidActive[_T_251] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 568:39]
+                            explosionActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 571:38]
                             node _explosionX_0_T_2 = bits(idx_5, 2, 0)
-                            explosionX[0] <= asteroidX[_explosionX_0_T_2] @[\\src\\main\\scala\\GameLogic.scala 532:33]
+                            explosionX[0] <= asteroidX[_explosionX_0_T_2] @[\\src\\main\\scala\\GameLogic.scala 572:33]
                             node _explosionY_0_T_2 = bits(idx_5, 2, 0)
-                            explosionY[0] <= asteroidY[_explosionY_0_T_2] @[\\src\\main\\scala\\GameLogic.scala 533:33]
+                            explosionY[0] <= asteroidY[_explosionY_0_T_2] @[\\src\\main\\scala\\GameLogic.scala 573:33]
                             node _explosionSize_0_T_2 = bits(idx_5, 2, 0)
-                            explosionSize[0] <= asteroidSize[_explosionSize_0_T_2] @[\\src\\main\\scala\\GameLogic.scala 534:36]
-                            explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 535:37]
-                node _collisionAstIndex_T = add(collisionAstIndex, numChecks) @[\\src\\main\\scala\\GameLogic.scala 543:46]
-                node _collisionAstIndex_T_1 = tail(_collisionAstIndex_T, 1) @[\\src\\main\\scala\\GameLogic.scala 543:46]
-                collisionAstIndex <= _collisionAstIndex_T_1 @[\\src\\main\\scala\\GameLogic.scala 543:25]
-                node _T_157 = add(collisionAstIndex, numChecks) @[\\src\\main\\scala\\GameLogic.scala 544:30]
-                node _T_158 = tail(_T_157, 1) @[\\src\\main\\scala\\GameLogic.scala 544:30]
-                node _T_159 = geq(_T_158, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 544:42]
-                when _T_159 : @[\\src\\main\\scala\\GameLogic.scala 544:61]
-                  collisionAstIndex <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 545:27]
-                  node _collisionCheckMode_T = eq(collisionCheckMode, UInt<3>("h4")) @[\\src\\main\\scala\\GameLogic.scala 546:54]
-                  node _collisionCheckMode_T_1 = add(collisionCheckMode, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 546:96]
-                  node _collisionCheckMode_T_2 = tail(_collisionCheckMode_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 546:96]
-                  node _collisionCheckMode_T_3 = mux(_collisionCheckMode_T, UInt<1>("h0"), _collisionCheckMode_T_2) @[\\src\\main\\scala\\GameLogic.scala 546:34]
-                  collisionCheckMode <= _collisionCheckMode_T_3 @[\\src\\main\\scala\\GameLogic.scala 546:28]
-                  node _stateReg_T = mux(pendingCircleCheck, UInt<4>("h6"), UInt<4>("h7")) @[\\src\\main\\scala\\GameLogic.scala 547:24]
-                  stateReg <= _stateReg_T @[\\src\\main\\scala\\GameLogic.scala 547:18]
+                            explosionSize[0] <= asteroidSize[_explosionSize_0_T_2] @[\\src\\main\\scala\\GameLogic.scala 574:36]
+                            explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 575:37]
+                node _collisionAstIndex_T = add(collisionAstIndex, numChecks) @[\\src\\main\\scala\\GameLogic.scala 583:46]
+                node _collisionAstIndex_T_1 = tail(_collisionAstIndex_T, 1) @[\\src\\main\\scala\\GameLogic.scala 583:46]
+                collisionAstIndex <= _collisionAstIndex_T_1 @[\\src\\main\\scala\\GameLogic.scala 583:25]
+                node _T_252 = add(collisionAstIndex, numChecks) @[\\src\\main\\scala\\GameLogic.scala 584:30]
+                node _T_253 = tail(_T_252, 1) @[\\src\\main\\scala\\GameLogic.scala 584:30]
+                node _T_254 = geq(_T_253, UInt<3>("h6")) @[\\src\\main\\scala\\GameLogic.scala 584:42]
+                when _T_254 : @[\\src\\main\\scala\\GameLogic.scala 584:61]
+                  collisionAstIndex <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 585:27]
+                  node _collisionCheckMode_T = eq(collisionCheckMode, UInt<3>("h4")) @[\\src\\main\\scala\\GameLogic.scala 586:54]
+                  node _collisionCheckMode_T_1 = add(collisionCheckMode, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 586:96]
+                  node _collisionCheckMode_T_2 = tail(_collisionCheckMode_T_1, 1) @[\\src\\main\\scala\\GameLogic.scala 586:96]
+                  node _collisionCheckMode_T_3 = mux(_collisionCheckMode_T, UInt<1>("h0"), _collisionCheckMode_T_2) @[\\src\\main\\scala\\GameLogic.scala 586:34]
+                  collisionCheckMode <= _collisionCheckMode_T_3 @[\\src\\main\\scala\\GameLogic.scala 586:28]
+                  node _stateReg_T = mux(pendingCircleCheck, UInt<4>("h6"), UInt<4>("h7")) @[\\src\\main\\scala\\GameLogic.scala 587:24]
+                  stateReg <= _stateReg_T @[\\src\\main\\scala\\GameLogic.scala 587:18]
               else :
-                node _T_160 = eq(UInt<4>("h6"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 344:20]
-                when _T_160 : @[\\src\\main\\scala\\GameLogic.scala 344:20]
-                  pendingCircleCheck <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 552:26]
-                  node _distSq_T = mul(pendingDX, pendingDX) @[\\src\\main\\scala\\GameLogic.scala 553:30]
-                  node _distSq_T_1 = mul(pendingDY, pendingDY) @[\\src\\main\\scala\\GameLogic.scala 553:54]
-                  node _distSq_T_2 = add(_distSq_T, _distSq_T_1) @[\\src\\main\\scala\\GameLogic.scala 553:42]
-                  node _distSq_T_3 = tail(_distSq_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 553:42]
-                  node distSq = asSInt(_distSq_T_3) @[\\src\\main\\scala\\GameLogic.scala 553:42]
-                  node _T_161 = lt(distSq, pendingRadiusSq) @[\\src\\main\\scala\\GameLogic.scala 554:19]
-                  node _T_162 = eq(heartRemovalActive, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 554:40]
-                  node _T_163 = and(_T_161, _T_162) @[\\src\\main\\scala\\GameLogic.scala 554:37]
-                  when _T_163 : @[\\src\\main\\scala\\GameLogic.scala 554:61]
-                    node _T_164 = eq(heartRemovalActive, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 556:36]
-                    node _T_165 = and(heartsVisible[0], _T_164) @[\\src\\main\\scala\\GameLogic.scala 556:33]
-                    when _T_165 : @[\\src\\main\\scala\\GameLogic.scala 556:57]
-                      heartRemovalActive <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 557:32]
-                      heartRemovalIndex <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 558:31]
-                      heartFlashTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 559:29]
-                      heartFlashCount <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 560:29]
-                    node _T_166 = eq(heartRemovalActive, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 556:36]
-                    node _T_167 = and(heartsVisible[1], _T_166) @[\\src\\main\\scala\\GameLogic.scala 556:33]
-                    when _T_167 : @[\\src\\main\\scala\\GameLogic.scala 556:57]
-                      heartRemovalActive <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 557:32]
-                      heartRemovalIndex <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 558:31]
-                      heartFlashTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 559:29]
-                      heartFlashCount <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 560:29]
-                    node _T_168 = eq(heartRemovalActive, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 556:36]
-                    node _T_169 = and(heartsVisible[2], _T_168) @[\\src\\main\\scala\\GameLogic.scala 556:33]
-                    when _T_169 : @[\\src\\main\\scala\\GameLogic.scala 556:57]
-                      heartRemovalActive <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 557:32]
-                      heartRemovalIndex <= UInt<2>("h2") @[\\src\\main\\scala\\GameLogic.scala 558:31]
-                      heartFlashTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 559:29]
-                      heartFlashCount <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 560:29]
-                  stateReg <= UInt<4>("h7") @[\\src\\main\\scala\\GameLogic.scala 564:16]
+                node _T_255 = eq(UInt<4>("h6"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 351:20]
+                when _T_255 : @[\\src\\main\\scala\\GameLogic.scala 351:20]
+                  pendingCircleCheck <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 592:26]
+                  node _distSq_T = mul(pendingDX, pendingDX) @[\\src\\main\\scala\\GameLogic.scala 593:30]
+                  node _distSq_T_1 = mul(pendingDY, pendingDY) @[\\src\\main\\scala\\GameLogic.scala 593:54]
+                  node _distSq_T_2 = add(_distSq_T, _distSq_T_1) @[\\src\\main\\scala\\GameLogic.scala 593:42]
+                  node _distSq_T_3 = tail(_distSq_T_2, 1) @[\\src\\main\\scala\\GameLogic.scala 593:42]
+                  node distSq = asSInt(_distSq_T_3) @[\\src\\main\\scala\\GameLogic.scala 593:42]
+                  node _T_256 = lt(distSq, pendingRadiusSq) @[\\src\\main\\scala\\GameLogic.scala 594:19]
+                  node _T_257 = eq(heartRemovalActive, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 594:40]
+                  node _T_258 = and(_T_256, _T_257) @[\\src\\main\\scala\\GameLogic.scala 594:37]
+                  when _T_258 : @[\\src\\main\\scala\\GameLogic.scala 594:61]
+                    node _T_259 = eq(heartRemovalActive, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 596:36]
+                    node _T_260 = and(heartsVisible[0], _T_259) @[\\src\\main\\scala\\GameLogic.scala 596:33]
+                    when _T_260 : @[\\src\\main\\scala\\GameLogic.scala 596:57]
+                      heartRemovalActive <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 597:32]
+                      heartRemovalIndex <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 598:31]
+                      heartFlashTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 599:29]
+                      heartFlashCount <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 600:29]
+                      io.startTune[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 603:29]
+                      io.tuneId <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 604:23]
+                      explosionActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 607:32]
+                      explosionX[0] <= sprite0XReg @[\\src\\main\\scala\\GameLogic.scala 608:27]
+                      explosionY[0] <= sprite0YReg @[\\src\\main\\scala\\GameLogic.scala 609:27]
+                      explosionSize[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 610:30]
+                      explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 611:31]
+                    node _T_261 = eq(heartRemovalActive, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 596:36]
+                    node _T_262 = and(heartsVisible[1], _T_261) @[\\src\\main\\scala\\GameLogic.scala 596:33]
+                    when _T_262 : @[\\src\\main\\scala\\GameLogic.scala 596:57]
+                      heartRemovalActive <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 597:32]
+                      heartRemovalIndex <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 598:31]
+                      heartFlashTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 599:29]
+                      heartFlashCount <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 600:29]
+                      io.startTune[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 603:29]
+                      io.tuneId <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 604:23]
+                      explosionActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 607:32]
+                      explosionX[0] <= sprite0XReg @[\\src\\main\\scala\\GameLogic.scala 608:27]
+                      explosionY[0] <= sprite0YReg @[\\src\\main\\scala\\GameLogic.scala 609:27]
+                      explosionSize[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 610:30]
+                      explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 611:31]
+                    node _T_263 = eq(heartRemovalActive, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 596:36]
+                    node _T_264 = and(heartsVisible[2], _T_263) @[\\src\\main\\scala\\GameLogic.scala 596:33]
+                    when _T_264 : @[\\src\\main\\scala\\GameLogic.scala 596:57]
+                      heartRemovalActive <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 597:32]
+                      heartRemovalIndex <= UInt<2>("h2") @[\\src\\main\\scala\\GameLogic.scala 598:31]
+                      heartFlashTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 599:29]
+                      heartFlashCount <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 600:29]
+                      io.startTune[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 603:29]
+                      io.tuneId <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 604:23]
+                      explosionActive[0] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 607:32]
+                      explosionX[0] <= sprite0XReg @[\\src\\main\\scala\\GameLogic.scala 608:27]
+                      explosionY[0] <= sprite0YReg @[\\src\\main\\scala\\GameLogic.scala 609:27]
+                      explosionSize[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 610:30]
+                      explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 611:31]
+                  stateReg <= UInt<4>("h7") @[\\src\\main\\scala\\GameLogic.scala 615:16]
                 else :
-                  node _T_170 = eq(UInt<4>("h7"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 344:20]
-                  when _T_170 : @[\\src\\main\\scala\\GameLogic.scala 344:20]
-                    node _T_171 = bits(explosionTimer[0], 3, 3) @[\\src\\main\\scala\\GameLogic.scala 571:29]
-                    when _T_171 : @[\\src\\main\\scala\\GameLogic.scala 571:34]
-                      explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 572:27]
-                      explosionActive[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 573:28]
-                      explosionTimer[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 575:27]
-                      explosionActive[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 576:28]
-                      explosionX[1] <= explosionX[0] @[\\src\\main\\scala\\GameLogic.scala 577:23]
-                      explosionY[1] <= explosionY[0] @[\\src\\main\\scala\\GameLogic.scala 578:23]
-                      explosionSize[1] <= explosionSize[0] @[\\src\\main\\scala\\GameLogic.scala 579:26]
+                  node _T_265 = eq(UInt<4>("h7"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 351:20]
+                  when _T_265 : @[\\src\\main\\scala\\GameLogic.scala 351:20]
+                    node _T_266 = bits(explosionTimer[0], 3, 3) @[\\src\\main\\scala\\GameLogic.scala 622:29]
+                    when _T_266 : @[\\src\\main\\scala\\GameLogic.scala 622:34]
+                      explosionTimer[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 623:27]
+                      explosionActive[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 624:28]
+                      explosionTimer[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 626:27]
+                      explosionActive[1] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 627:28]
+                      explosionX[1] <= explosionX[0] @[\\src\\main\\scala\\GameLogic.scala 628:23]
+                      explosionY[1] <= explosionY[0] @[\\src\\main\\scala\\GameLogic.scala 629:23]
+                      explosionSize[1] <= explosionSize[0] @[\\src\\main\\scala\\GameLogic.scala 630:26]
                     else :
-                      node _T_172 = bits(explosionTimer[1], 3, 3) @[\\src\\main\\scala\\GameLogic.scala 581:35]
-                      when _T_172 : @[\\src\\main\\scala\\GameLogic.scala 581:40]
-                        explosionTimer[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 583:27]
-                        explosionActive[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 584:28]
-                        explosionTimer[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 586:27]
-                        explosionActive[2] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 587:28]
-                        explosionX[2] <= explosionX[1] @[\\src\\main\\scala\\GameLogic.scala 588:23]
-                        explosionY[2] <= explosionY[1] @[\\src\\main\\scala\\GameLogic.scala 589:23]
-                        explosionSize[2] <= explosionSize[1] @[\\src\\main\\scala\\GameLogic.scala 590:26]
+                      node _T_267 = bits(explosionTimer[1], 3, 3) @[\\src\\main\\scala\\GameLogic.scala 632:35]
+                      when _T_267 : @[\\src\\main\\scala\\GameLogic.scala 632:40]
+                        explosionTimer[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 634:27]
+                        explosionActive[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 635:28]
+                        explosionTimer[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 637:27]
+                        explosionActive[2] <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 638:28]
+                        explosionX[2] <= explosionX[1] @[\\src\\main\\scala\\GameLogic.scala 639:23]
+                        explosionY[2] <= explosionY[1] @[\\src\\main\\scala\\GameLogic.scala 640:23]
+                        explosionSize[2] <= explosionSize[1] @[\\src\\main\\scala\\GameLogic.scala 641:26]
                       else :
-                        node _T_173 = bits(explosionTimer[2], 3, 3) @[\\src\\main\\scala\\GameLogic.scala 592:35]
-                        when _T_173 : @[\\src\\main\\scala\\GameLogic.scala 592:40]
-                          explosionTimer[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 594:27]
-                          explosionActive[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 595:28]
-                    when heartRemovalActive : @[\\src\\main\\scala\\GameLogic.scala 599:32]
-                      node _T_174 = bits(heartFlashTimer, 2, 2) @[\\src\\main\\scala\\GameLogic.scala 601:29]
-                      when _T_174 : @[\\src\\main\\scala\\GameLogic.scala 601:34]
-                        heartFlashTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 602:27]
-                        node _heartsVisible_T = eq(heartsVisible[heartRemovalIndex], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 603:47]
-                        heartsVisible[heartRemovalIndex] <= _heartsVisible_T @[\\src\\main\\scala\\GameLogic.scala 603:44]
-                        node _heartFlashCount_T = add(heartFlashCount, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 604:46]
-                        node _heartFlashCount_T_1 = tail(_heartFlashCount_T, 1) @[\\src\\main\\scala\\GameLogic.scala 604:46]
-                        heartFlashCount <= _heartFlashCount_T_1 @[\\src\\main\\scala\\GameLogic.scala 604:27]
-                        node _T_175 = bits(heartFlashCount, 3, 3) @[\\src\\main\\scala\\GameLogic.scala 606:31]
-                        when _T_175 : @[\\src\\main\\scala\\GameLogic.scala 606:36]
-                          heartsVisible[heartRemovalIndex] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 607:46]
-                          heartFlashCount <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 608:29]
-                          heartRemovalActive <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 609:32]
-                    stateReg <= UInt<4>("h8") @[\\src\\main\\scala\\GameLogic.scala 614:16]
+                        node _T_268 = bits(explosionTimer[2], 3, 3) @[\\src\\main\\scala\\GameLogic.scala 643:35]
+                        when _T_268 : @[\\src\\main\\scala\\GameLogic.scala 643:40]
+                          explosionTimer[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 645:27]
+                          explosionActive[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 646:28]
+                    when heartRemovalActive : @[\\src\\main\\scala\\GameLogic.scala 650:32]
+                      node _T_269 = bits(heartFlashTimer, 2, 2) @[\\src\\main\\scala\\GameLogic.scala 652:29]
+                      when _T_269 : @[\\src\\main\\scala\\GameLogic.scala 652:34]
+                        heartFlashTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 653:27]
+                        node _heartsVisible_T = eq(heartsVisible[heartRemovalIndex], UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 654:47]
+                        heartsVisible[heartRemovalIndex] <= _heartsVisible_T @[\\src\\main\\scala\\GameLogic.scala 654:44]
+                        node _heartFlashCount_T = add(heartFlashCount, UInt<1>("h1")) @[\\src\\main\\scala\\GameLogic.scala 655:46]
+                        node _heartFlashCount_T_1 = tail(_heartFlashCount_T, 1) @[\\src\\main\\scala\\GameLogic.scala 655:46]
+                        heartFlashCount <= _heartFlashCount_T_1 @[\\src\\main\\scala\\GameLogic.scala 655:27]
+                        node _T_270 = bits(heartFlashCount, 3, 3) @[\\src\\main\\scala\\GameLogic.scala 657:31]
+                        when _T_270 : @[\\src\\main\\scala\\GameLogic.scala 657:36]
+                          heartsVisible[heartRemovalIndex] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 658:46]
+                          heartFlashCount <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 659:29]
+                          heartRemovalActive <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 660:32]
+                          node _T_271 = eq(heartRemovalIndex, UInt<1>("h0")) @[\\src\\main\\scala\\GameLogic.scala 661:36]
+                          when _T_271 : @[\\src\\main\\scala\\GameLogic.scala 661:45]
+                            seeded <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 662:22]
+                            seedingTimer <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 663:28]
+                            viewBoxXReg <= UInt<10>("h280") @[\\src\\main\\scala\\GameLogic.scala 664:27]
+                            viewBoxYReg <= UInt<9>("h1e0") @[\\src\\main\\scala\\GameLogic.scala 665:27]
+                            asteroidActive[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 667:35]
+                            asteroidActive[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 667:35]
+                            asteroidActive[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 667:35]
+                            asteroidActive[3] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 667:35]
+                            asteroidActive[4] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 667:35]
+                            asteroidActive[5] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 667:35]
+                            rocketActive[0] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 670:33]
+                            rocketActive[1] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 670:33]
+                            rocketActive[2] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 670:33]
+                            rocketActive[3] <= UInt<1>("h0") @[\\src\\main\\scala\\GameLogic.scala 670:33]
+                    stateReg <= UInt<4>("h8") @[\\src\\main\\scala\\GameLogic.scala 677:16]
                   else :
-                    node _T_176 = eq(UInt<4>("h8"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 344:20]
-                    when _T_176 : @[\\src\\main\\scala\\GameLogic.scala 344:20]
-                      io.frameUpdateDone <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 621:26]
-                      stateReg <= UInt<4>("h0") @[\\src\\main\\scala\\GameLogic.scala 622:16]
+                    node _T_272 = eq(UInt<4>("h8"), stateReg) @[\\src\\main\\scala\\GameLogic.scala 351:20]
+                    when _T_272 : @[\\src\\main\\scala\\GameLogic.scala 351:20]
+                      io.frameUpdateDone <= UInt<1>("h1") @[\\src\\main\\scala\\GameLogic.scala 684:26]
+                      stateReg <= UInt<4>("h0") @[\\src\\main\\scala\\GameLogic.scala 685:16]
 
 
   module GameTop :

@@ -42,7 +42,7 @@ class GameTop extends Module {
   })
 
   val SPRITE_NUMBER = 32
-  val BACK_TILE_NUMBER = 16
+  val BACK_TILE_NUMBER = 32
   val graphicEngineVGA = Module(new GraphicEngineVGA(SPRITE_NUMBER, BACK_TILE_NUMBER))
 
   val TUNE_NUMBER = 2

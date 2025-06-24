@@ -353,16 +353,6 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
   switch(stateReg) {
     is(idle) {
-      when(tunePlayRequest) {
-        io.startTune(1) := true.B
-        io.tuneId := 1.U
-        tunePlayTimer := tunePlayTimer + 1.U
-        when(tunePlayTimer === 15.U) {  // Hold for multiple cycles
-          tunePlayRequest := false.B
-          io.startTune(1) := false.B    // Explicitly reset
-        }
-      }
-
       when(io.newFrame) {
         when(seeded) {
           stateReg := movePlayer

@@ -104,6 +104,9 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   io.stopTune := Seq.fill(TuneNumber)(false.B)
   io.pauseTune := Seq.fill(TuneNumber)(false.B)
   io.tuneId := 0.U
+  val tunePlayRequest = RegInit(false.B)
+  val tunePlayTimer = RegInit(0.U(4.W))
+
 
   /////////////////////////////////////////////////////////////
   // Write here your game logic
@@ -350,6 +353,16 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
   switch(stateReg) {
     is(idle) {
+      when(tunePlayRequest) {
+        io.startTune(1) := true.B
+        io.tuneId := 1.U
+        tunePlayTimer := tunePlayTimer + 1.U
+        when(tunePlayTimer === 15.U) {  // Hold for multiple cycles
+          tunePlayRequest := false.B
+          io.startTune(1) := false.B    // Explicitly reset
+        }
+      }
+
       when(io.newFrame) {
         when(seeded) {
           stateReg := movePlayer
@@ -599,9 +612,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
             heartFlashTimer := 0.U
             heartFlashCount := 0.U
 
-            // Play explosion tune
-            io.startTune(1) := true.B
-            io.tuneId := 1.U
+            tunePlayRequest := true.B
+            tunePlayTimer := 0.U
 
             // Spawn explosion
             explosionActive(0) := true.B

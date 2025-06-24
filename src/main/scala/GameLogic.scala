@@ -161,6 +161,8 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val asteroidVX = RegInit(VecInit(Seq.fill(numAsteroids)(baseAsteroidVX)))
   val asteroidVY = RegInit(VecInit(Seq.fill(numAsteroids)(baseAsteroidVY)))
   val asteroidSize = RegInit(VecInit(Seq.fill(numAsteroids)(0.U(2.W))))
+  val asteroidRotationTimer = RegInit(VecInit(Seq.fill(numAsteroids)(0.U(6.W))))
+  val asteroidRotationState = RegInit(VecInit(Seq.fill(numAsteroids)(0.U(2.W))))
 
   for (i <- 0 until numAsteroids) {
     val idx = asteroidStartIndex + i
@@ -173,6 +175,9 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     io.spriteScaleDownHorizontal(idx) := (asteroidSize(i) === 1.U)
     io.spriteScaleUpVertical(idx)     := (asteroidSize(i) === 2.U)
     io.spriteScaleDownVertical(idx)   := (asteroidSize(i) === 1.U)
+
+    io.spriteFlipHorizontal(idx) := (asteroidRotationState(i)(0) === 1.U)
+    io.spriteFlipVertical(idx) := (asteroidRotationState(i)(1) === 1.U)
   }
 
   // --- Asteroid spawn ---
@@ -206,7 +211,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
 
   // =================== Sprite 26-29 - Hearts ===================
   val numHearts = 3
-  val hearthStartIndex = 28
+  val hearthStartIndex = 26
   val heartsVisible = RegInit(VecInit(Seq.fill(numHearts)(true.B)))
   val heartsX = RegInit(VecInit(Seq.tabulate(numHearts)(i => (32 + i * 48).S(11.W))))  // 48px spacing
   val heartsY = RegInit(VecInit(Seq.fill(numHearts)(32.S(10.W))))  // Position at top of screen
@@ -217,7 +222,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
   val heartFlashCount = RegInit(0.U(4.W))    // How many times the heart has flashed
 
   for (i <- 0 until numHearts) {
-    val spriteIndex = hearthStartIndex - i
+    val spriteIndex = hearthStartIndex + i
     io.spriteVisible(spriteIndex) := heartsVisible(i)
     io.spriteXPosition(spriteIndex) := heartsX(i)
     io.spriteYPosition(spriteIndex) := heartsY(i)
@@ -311,6 +316,13 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     for (i <- 0 until explosionSprites) {
       when(explosionActive(i)) {
         explosionTimer(i) := explosionTimer(i) + 1.U
+      }
+    }
+
+    // asteroid rotation timers
+    for (i <- 0 until numAsteroids) {
+      when(asteroidActive(i)) {
+        asteroidRotationTimer(i) := asteroidRotationTimer(i) + 1.U
       }
     }
 
@@ -466,7 +478,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
           when(shouldLaunch) {
             rocketActive(i) := true.B
             rocketX(i) := sprite0XReg + 16.S // position of the rocket
-            rocketY(i) := sprite0YReg + 10.S
+            rocketY(i) := sprite0YReg + 8.S
             rocketVX(i) := baseRocketVX
           }
           launched = launched || shouldLaunch
@@ -646,6 +658,14 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
         // Final stage — end explosion
         explosionTimer(2) := 0.U
         explosionActive(2) := false.B
+      }
+
+      // --- Rotate asteroids ---
+      for (i <- 0 until numAsteroids) {
+        when(asteroidActive(i) && asteroidRotationTimer(i)(5)) {
+          asteroidRotationState(i) := (asteroidRotationState(i) + 1.U) % 4.U
+          asteroidRotationTimer(i) := 0.U
+        }
       }
 
       // --- Hearts animation ---

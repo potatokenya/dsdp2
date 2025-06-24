@@ -54,6 +54,11 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     val pauseTune = Output(Vec(TuneNumber, Bool()))
     val playingTune = Input(Vec(TuneNumber, Bool()))
     val tuneId = Output(UInt(log2Up(TuneNumber).W))
+
+    //for score tracking
+    val seg = Output(UInt(7.W))
+    val an = Output(UInt(4.W))
+
   })
 
   // Setting all led outputs to zero
@@ -156,6 +161,7 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     io.led(idx) := ledActive(i)
   }
 
+  val scoreCounter = RegInit(0.U(16.W))
 
   // =================== Sprite 0 - Player ===================
   val sprite0XReg = RegInit(32.S(11.W))
@@ -374,6 +380,67 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
     ))
   }
 
+  class SevenSegDecoder extends Module {
+    val io = IO(new Bundle {
+      val in = Input(UInt(4.W))
+      val out = Output(UInt(7.W))
+    })
+
+    val sevSeg = WireDefault("b1111111".U)
+
+    switch(io.in) {
+      is(0.U)  { sevSeg := "b1000000".U }
+      is(1.U)  { sevSeg := "b1111001".U }
+      is(2.U)  { sevSeg := "b0100100".U }
+      is(3.U)  { sevSeg := "b0110000".U }
+      is(4.U)  { sevSeg := "b0011001".U }
+      is(5.U)  { sevSeg := "b0010010".U }
+      is(6.U)  { sevSeg := "b0000010".U }
+      is(7.U)  { sevSeg := "b1111000".U }
+      is(8.U)  { sevSeg := "b0000000".U }
+      is(9.U)  { sevSeg := "b0010000".U }
+    }
+
+    io.out := sevSeg
+  }
+
+  class ScoreDisplay extends Module {
+    val io = IO(new Bundle {
+      val score = Input(UInt(16.W))
+      val seg = Output(UInt(7.W))
+      val an = Output(UInt(4.W))
+    })
+
+    // Convert score to decimal digits
+    val ones      = (io.score % 10.U)(3,0)
+    val tens      = ((io.score / 10.U) % 10.U)(3,0)
+    val hundreds  = ((io.score / 100.U) % 10.U)(3,0)
+    val thousands = ((io.score / 1000.U) % 10.U)(3,0)
+
+    // Create decoder modules
+    val decoders = Seq.fill(4)(Module(new SevenSegDecoder))
+    decoders(0).io.in := ones
+    decoders(1).io.in := tens
+    decoders(2).io.in := hundreds
+    decoders(3).io.in := thousands
+
+    // Create a Vec of the decoder outputs for hardware indexing
+    val decoderOutputs = VecInit(decoders.map(_.io.out))
+
+    val refreshCounter = RegInit(0.U(20.W))
+    refreshCounter := refreshCounter + 1.U
+    val digit = refreshCounter(18,17)
+
+    io.an := ~(1.U(4.W) << digit)
+    // Use the Vec for indexing with UInt
+    io.seg := decoderOutputs(digit)
+  }
+
+  // Instantiate the score display module and connect it
+  val scoreDisplay = Module(new ScoreDisplay)
+  scoreDisplay.io.score := scoreCounter
+  io.seg := scoreDisplay.io.seg
+  io.an := scoreDisplay.io.an
 
   // =================== FSM ===================
   io.frameUpdateDone := false.B
@@ -582,6 +649,9 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
                   rocketActive(rocketIdx) := false.B
                   asteroidActive(idx) := false.B
 
+                  // Add score based on asteroid size
+                  scoreCounter := scoreCounter + (asteroidSize(idx) + 1.U) * 10.U
+
                   // Spawn explosion
                   explosionActive(0) := true.B
                   explosionX(0) := asteroidX(idx)
@@ -625,6 +695,10 @@ class GameLogic(SpriteNumber: Int, BackTileNumber: Int, TuneNumber: Int) extends
         distSq := dxReg * dxReg + dyReg * dyReg
 
         when(distSq < radiusSqReg && !heartRemovalActive) {
+          // Play tune_init_1 when collision occurs
+          io.startTune(1) := true.B
+          io.tuneId := 1.U
+
           for (h <- 0 to 2) {
             when(heartsVisible(h) && !heartRemovalActive) {
               heartRemovalActive := true.B

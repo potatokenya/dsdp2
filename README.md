@@ -1,3 +1,7 @@
+Blasteriods
+
+By Ben Yin, Enya Lin and Vojtech Málek 
+
 This is instructions on how to set up Blasteriods up on a FPGA board (Basys3 or Nexys A7). 
 1.	Open the project on IntelliJ
 2.	Make sure you have Vivado, Java OpenJDK 8 or later and sbt downloaded

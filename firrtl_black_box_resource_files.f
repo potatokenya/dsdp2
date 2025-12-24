@@ -1,2 +1,2 @@
-C:\Users\Lukas\OneDrive - esk vysok uen technick v Praze\Dokumenty\Plocha\dsdp2\RamInitSpWf.v
-C:\Users\Lukas\OneDrive - esk vysok uen technick v Praze\Dokumenty\Plocha\dsdp2\RamSpWf.v
+/Users/benyin/Desktop/dsbp2/RamInitSpWf.v
+/Users/benyin/Desktop/dsbp2/RamSpWf.v

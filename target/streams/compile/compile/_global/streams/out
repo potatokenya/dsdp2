@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\Lukas\OneDrive - esk vysok uen technick v Praze\Dokumenty\Plocha\dsdp2\src\main\scala\GameTop.scala:53:30: not found: type GameLogic[0m
-[0m[[0m[31merror[0m] [0m[0m  val gameLogic = Module(new GameLogic(SPRITE_NUMBER, BACK_TILE_NUMBER, TUNE_NUMBER))[0m
-[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/benyin/Desktop/dsbp2/src/main/scala/GameLogic.scala:441:15: ';' expected but 'val' found.[0m
+[0m[[0m[31merror[0m] [0m[0m            v val collisionX = (asteroidLeft + asteroidRight) / 2.S[0m
+[0m[[0m[31merror[0m] [0m[0m              ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
